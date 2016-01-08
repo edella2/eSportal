@@ -36,7 +36,7 @@ User can filter by categories
 User can have game preferences to be displayed
 User can have times for their own time zone
 User can favorite a upcoming tournament to get updates
-Filtering by players/teams that you like
+Filtering by players/competitors that you like
 Tournament admins can submit their own tournament
 Convert to a user’s timezone (from ip address?)
 

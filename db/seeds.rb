@@ -1,68 +1,49 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-past_tournaments = 20
-current_tournaments = 5
-future_tournaments = 20
-total_tournaments = past_tournaments + current_tournaments + future_tournaments
+require "pp"
 
-require 'factory_girl_rails'
-
-FactoryGirl.define do
-
-  factory :tournament do
-    name          Faker::Lorem.word
-    image         Faker::Avatar.image
-
-    trait :past do
-      start_date  Faker::Date.between(10.days.ago, 5.days.ago)
-      end_date    Faker::Date.between(4.days.ago, 1.days.ago)
-    end
-
-    trait :current do
-      start_date  Faker::Date.between(3.days.ago, 2.days.ago)
-      end_date    Faker::Date.between(1.days.since, 7.days.since)
-    end
-
-    trait :future do
-      start_date  Faker::Date.between(3.days.since, 6.days.since)
-      end_date    Faker::Date.between(7.days.since, 10.days.since)
-    end
+class Abios
+  def initialize
+    @api_key          = ENV["ABIOS_API_KEY"]
+    @games_root       = "https://api.abiosgaming.com/v1/games?access_token="
+    @matches_root     = "https://api.abiosgaming.com/v1/matches?access_token="
+    @competitors_root = "https://api.abiosgaming.com/v1/competitors?access_token="
+    @tournaments_root = "https://api.abiosgaming.com/v1/tournaments?access_token="
+    @streams_root     = "" #TBD
   end
 
-  factory :stream do
-    title         Faker::Hipster.word
-    link          Faker::Internet.url
-    language      Faker::Lorem.word
-    tournament_id Faker::Number.between(1, total_tournaments)
+  def get_games
+    HTTParty.get(@games_root + @api_key)
   end
 
-  factory :team do
-    name          Faker::Team.name
-    tournament_id Faker::Number.between(1, total_tournaments)
+  def get_tournaments
+    HTTParty.get(@tournaments_root + @api_key)
   end
 
+  def get_competitors
+  end
 
+  def get_competitors_by_tournament(tournament_id)
+    filter = "&tournament[]=" + tournament_id.to_s
+    HTTParty.get(@competitors_root + @api_key + filter)
+  end
+
+  def get_streams_by_tournament(tournament_id)
+  end
+
+  # not working yet
+  def get_tournaments_by_game(game_id)
+    filter = "&games[]=" + game_id.to_s
+    HTTParty.get(@tournaments_root + @api_key + filter)
+  end
+
+  private
+
+  def get_matches
+  end
+
+  def get_matches_by_tournament(tournament_id)
+    filter = "&tournament[]=" + tournament_id.to_s
+    HTTParty.get(@matches_root + @api_key + filter)
+  end
 end
 
-
-
-# past_tournaments.times { FactoryGirl.create(:tournament, :past) }
-# current_tournaments.times { FactoryGirl.create(:tournament, :current) }
-# future_tournaments.times { FactoryGirl.create(:tournament, :future) }
-
-# total_tournaments.times { FactoryGirl.create(:stream) }
-# (total_tournaments * 6).times { FactoryGirl.create(:team) }
-
-# FactoryGirl.create_list(:tournament, past_tournaments, :past)
-# FactoryGirl.create_list(:tournament, current_tournaments, :current)
-# FactoryGirl.create_list(:tournament, future_tournaments, :future)
-# FactoryGirl.create_list(:stream, total_tournaments)
-# FactoryGirl.create_list(:team, total_tournaments * 6)
-
-p response = HTTParty.get('https://api.abiosgaming.com/v1/tournaments?access_token='+ENV["API_KEY"])
-p json = JSON.parse(response.body)
+binding.pry
