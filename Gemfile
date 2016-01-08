@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'dotenv'
 gem 'pry-rails'
 gem 'factory_girl_rails'
+gem 'faker'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -37,7 +38,7 @@ gem 'factory_girl_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'faker'
+
   gem 'byebug'
 end
 
