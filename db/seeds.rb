@@ -58,9 +58,11 @@ end
 # total_tournaments.times { FactoryGirl.create(:stream) }
 # (total_tournaments * 6).times { FactoryGirl.create(:team) }
 
-FactoryGirl.create_list(:tournament, past_tournaments, :past)
-FactoryGirl.create_list(:tournament, current_tournaments, :current)
-FactoryGirl.create_list(:tournament, future_tournaments, :future)
-FactoryGirl.create_list(:stream, total_tournaments)
-FactoryGirl.create_list(:team, total_tournaments * 6)
+# FactoryGirl.create_list(:tournament, past_tournaments, :past)
+# FactoryGirl.create_list(:tournament, current_tournaments, :current)
+# FactoryGirl.create_list(:tournament, future_tournaments, :future)
+# FactoryGirl.create_list(:stream, total_tournaments)
+# FactoryGirl.create_list(:team, total_tournaments * 6)
 
+p response = HTTParty.get('https://api.abiosgaming.com/v1/tournaments?access_token='+ENV["ABIOS_API_KEY"])
+p json = JSON.parse(response.body)
