@@ -64,5 +64,5 @@ end
 # FactoryGirl.create_list(:stream, total_tournaments)
 # FactoryGirl.create_list(:team, total_tournaments * 6)
 
-p response = HTTParty.get('https://api.abiosgaming.com/v1/tournaments?access_token='+ENV["SECRET"])
+p response = HTTParty.get('https://api.abiosgaming.com/v1/tournaments?access_token='+ENV["API_KEY"])
 p json = JSON.parse(response.body)
