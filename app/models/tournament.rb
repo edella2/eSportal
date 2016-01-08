@@ -15,14 +15,14 @@ class Tournament < ActiveRecord::Base
     p tournaments[0]
     tournaments.each do |tournament|
       Tournament.find_or_initialize_by(
-        id: tournament["id"],
+        id: tournament["id"].to_i,
         name: tournament["title"],
         start_date: DateTime.parse(tournament["start"]),
         end_date: DateTime.parse(tournament["end"]),
         image: tournament["images"]["default"]
 
         ).update_attributes!(
-        id: tournament["id"],
+        id: tournament["id"].to_i,
         name: tournament["title"],
         start_date: DateTime.parse(tournament["start"]),
         end_date: DateTime.parse(tournament["end"]),
