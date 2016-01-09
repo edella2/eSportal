@@ -48,6 +48,12 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.2)
     byebug (8.2.1)
+    capybara (2.5.0)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     coderay (1.1.0)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -66,6 +72,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    diff-lcs (1.2.5)
     dotenv (2.0.2)
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
@@ -159,6 +166,23 @@ GEM
     ref (2.0.0)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
+    rspec-core (3.4.1)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-rails (3.4.0)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     sass (3.4.20)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -205,6 +229,8 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -212,6 +238,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   byebug
+  capybara
   coffee-rails (~> 4.1.0)
   devise
   dotenv-rails
@@ -225,6 +252,7 @@ DEPENDENCIES
   pg (~> 0.15)
   pry-rails
   rails (= 4.2.5)
+  rspec-rails
   sass-rails (>= 3.2)
   sdoc (~> 0.4.0)
   simple_calendar (~> 2.0)
