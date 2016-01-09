@@ -1,6 +1,24 @@
 <h1>Tournaments</h1><br>
 
 <div class="row">
+  <div class="col-md-12">
+
+    <div class="btn pull-right">
+       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"> Game <span class="caret"></span>
+    </button>
+    </div>
+    <div class="btn-group btn pull-right" role="group" aria-label="...">
+    <button type="button" class="btn btn-default">Year</button>
+    <button type="button" class="btn btn-default">Month</button>
+    <button type="button" class="btn btn-default">Week</button>
+    <button type="button" class="btn btn-default">Day</button>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="row">
   <% @tournaments.each do |tournament| %>
   <% if tournament.start_date == DateTime.now.to_date || tournament.end_date = (DateTime.now).to_date %>
   <div class="col-md-3 col-sm-6 col-xs-12 portfolio-item">
