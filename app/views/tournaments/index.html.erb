@@ -8,10 +8,10 @@
     </button>
     </div>
     <div class="btn-group btn pull-right" role="group" aria-label="...">
-    <button type="button" class="btn btn-default">Year</button>
-    <button type="button" class="btn btn-default">Month</button>
-    <button type="button" class="btn btn-default">Week</button>
-    <button type="button" class="btn btn-default">Day</button>
+    <%= link_to "Year", tournaments_path(sort_option: "year"), class: "btn btn-default" %>
+    <%= link_to "Month", tournaments_path(sort_option: "month"), class: "btn btn-default" %>
+    <%= link_to "Week", tournaments_path(sort_option: "week"), class: "btn btn-default" %>
+    <%= link_to "Day", tournaments_path(sort_option: "day"), class: "btn btn-default" %>
     </div>
   </div>
 </div>

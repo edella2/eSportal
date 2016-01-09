@@ -1,7 +1,24 @@
 class TournamentsController < ApplicationController
 
   def index
-    @tournaments = Tournament.order("")
+    p params
+    case params[:sort_option]
+    when "year"
+      p "In year"
+      @tournaments = sort_tournaments_by_year
+    when "month"
+      p "In month"
+      @tournaments = sort_tournaments_by_month
+    when "week"
+      p "In week"
+      @tournaments = sort_tournaments_by_week
+    when "day"
+      p "In day"
+      @tournaments = sort_tournaments_by_day
+    else
+      p "In Default"
+      @tournaments = Tournament.order('created_at DESC')
+    end
   end
 
   def show
@@ -24,4 +41,26 @@ class TournamentsController < ApplicationController
   def tournament_params
     params.require(:tournament).permit(:name, :start_time, :end_date, :game_id, :image)
   end
+
+  def sort_tournaments_by_year
+    @tournaments = Tournament.all
+
+    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 365}
+  end
+  def sort_tournaments_by_month
+    @tournaments = Tournament.all
+
+    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 30}
+  end
+  def sort_tournaments_by_week
+    @tournaments = Tournament.all
+
+    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 7}
+  end
+  def sort_tournaments_by_day
+    @tournaments = Tournament.all
+
+    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 1}
+  end
 end
+
