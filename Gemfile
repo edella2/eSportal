@@ -34,6 +34,7 @@ gem 'factory_girl_rails'
 gem 'faker'
 
 gem 'httparty'
+gem 'devise'
 
 
 # Use ActiveModel has_secure_password
