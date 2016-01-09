@@ -100,7 +100,7 @@ TOURNAMENTS.each do |tournament|
     id:         tournament["id"],
     name:       tournament["title"],
     image:      tournament["images"]["default"],
-    start_date: tournament["start"],
+    start_time: tournament["start"],
     end_date:   tournament["end"],
     game_id:    tournament["game"]["id"]
     )
