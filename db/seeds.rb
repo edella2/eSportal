@@ -1,10 +1,11 @@
 class Abios
   def initialize
-    @api_key          = "?access_token=#{ENV['ABIOS_API_KEY']}"
     @games_root       = "https://api.abiosgaming.com/v1/games"
     @matches_root     = "https://api.abiosgaming.com/v1/matches"
     @competitors_root = "https://api.abiosgaming.com/v1/competitors"
     @tournaments_root = "https://api.abiosgaming.com/v1/tournaments"
+
+    @api_key          = "?access_token=#{ENV['ABIOS_API_KEY']}"
   end
 
   def get_games
@@ -17,13 +18,6 @@ class Abios
     puts "fetching all tournaments"
 
     HTTParty.get(@tournaments_root + @api_key)
-  end
-
-  def get_matches_by_tournament
-  end
-
-  def get_competitors
-    # TODO
   end
 
   def get_competitors_by_tournament(tournament_id)
@@ -68,6 +62,25 @@ class Abios
     matchups = matchups.map {|matchup| matchup["competitors"]}.flatten
     matchups.each {|matchup| matchup["tournament_id"] = tournament_id if matchup}
   end
+
+  # these can only fetch 3 pages of 15 records due to API constraints
+
+  # def get_tournaments_by_game(game_id)
+  #   puts "fetching tournaments by game_id: #{game_id}"
+
+  #   filter = "&games[]=" + game_id.to_s
+  #   HTTParty.get(@tournaments_root + @api_key + filter)
+  # end
+
+  # def get_tournaments_with_matches_by_game(game_id)
+  #   puts "fetching tournaments by game_id: #{game_id}"
+
+  #   filter = "&with[]=matches&game[]=#{game_id}"
+  #   HTTParty.get(@tournaments_root + @api_key + filter)
+  # end
+
+  # def get_matches_with_competitors
+  # end
 end
 
 a = Abios.new
@@ -77,7 +90,7 @@ GAMES       = a.get_games
 # TEMPORARY: get only counterstrike tournaments
 TOURNAMENTS = [GAMES[4]].map       {|game| a.get_tournaments_by_game(game["id"])}.flatten
 
-# TEMPORARY: throttle the number of tournaments returned
+# TEMPORARY: limit the number of tournaments fetched
 TOURNAMENTS = TOURNAMENTS.first(8)
 
 COMPETITORS = TOURNAMENTS.map {|tournament| a.get_competitors_by_tournament(tournament["id"])}.flatten
@@ -127,5 +140,3 @@ COMPETITORS.each do |competitor|
     end
   end
 end
-
-binding.pry
