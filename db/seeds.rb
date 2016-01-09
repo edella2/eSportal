@@ -8,12 +8,12 @@ class Abios
   end
 
   def get_games
-    puts "getting all games"
+    puts "pulling all games"
     HTTParty.get(@games_root + @api_key)
   end
 
   def get_tournaments
-    puts "getting all tournaments"
+    puts "pulling all tournaments"
     HTTParty.get(@tournaments_root + @api_key)
   end
 
@@ -25,18 +25,18 @@ class Abios
   end
 
   def get_competitors_by_tournament(tournament_id)
-    puts "tournament_id: #{tournament_id}"
+    puts "pulling tournament_id: #{tournament_id}"
     filter = "&tournaments[]=" + tournament_id.to_s
     HTTParty.get(@competitors_root + @api_key + filter)
   end
 
   def get_stream_by_tournament(tournament_id)
-    puts "tournament_id: #{tournament_id}"
+    puts "pulling tournament_id: #{tournament_id}"
     HTTParty.get(@tournaments_root + "/" + tournament_id.to_s + @api_key).fetch("url")
   end
 
   def get_tournaments_by_game(game_id)
-    puts "game_id: #{game_id}"
+    puts "pulling game_id: #{game_id}"
     filter = "&games[]=" + game_id.to_s
     HTTParty.get(@tournaments_root + @api_key + filter)
   end
@@ -44,11 +44,12 @@ class Abios
   private
 
   def get_matches
-    "getting matches"
+    puts "pulling matches"
     HTTParty.get(@matches + @api_key)
   end
 
   def get_matches_by_tournament(tournament_id)
+    puts "pulling tournament_id: #{tournament_id}"
     filter = "&tournaments[]=" + tournament_id.to_s
     HTTParty.get(@matches_root + @api_key + filter)
   end
@@ -56,22 +57,23 @@ end
 
 a = Abios.new
 
-GAMES       = a.get_games
-TOURNAMENTS = GAMES.map       {|game| a.get_tournaments_by_game(game["id"])}.flatten
-COMPETITORS = TOURNAMENTS.map {|tournament| a.get_competitors_by_tournament(tournament["id"])}
-STREAMS     = TOURNAMENTS.map {|tournament| a.get_stream_by_tournament(tournament["id"])}
+# GAMES       = a.get_games
+# TOURNAMENTS = GAMES.map       {|game| a.get_tournaments_by_game(game["id"])}.flatten
+# COMPETITORS = TOURNAMENTS.map {|tournament| a.get_competitors_by_tournament(tournament["id"])}
+# STREAMS     = TOURNAMENTS.map {|tournament| a.get_stream_by_tournament(tournament["id"])}
 
-GAMES.each do |game|
+# GAMES.each do |game|
+#   puts "Adding #{game["title"]} to database"
 
-  Game.create(
-    id:   game["id"],
-    name: game["title"]
-    )
-end
-
-binding-pry
+#   Game.create(
+#     id:   game["id"],
+#     name: game["title"]
+#     )
+# end
 
 # TOURNAMENTS.each do |tournament|
+#   puts "Adding #{tournament['title']} to database"
+
 #   Tournament.create(
 #     id:         tournament["id"],
 #     name:       tournament["title"],
@@ -79,16 +81,23 @@ binding-pry
 #     end_date:   tournament["end"],
 #     game_id:    tournament["game"]["id"]
 #     )
+
+  # puts "Adding #{tournament['title']}'s stream to database"
+
+  # Stream.create(
+  #   tournament_id: tournament['id'],
+  #   link: tournament['url']
+  #   )
 # end
 
+
 # COMPETITORS.each do |competitor|
+#   puts "Adding #{competitor['name']} to database"
+
 #   Competitor.create(
 #     id:            competitor["id"],
-#     name:
-#     tournament_id:
+#     name:          competitor["name"]
 #     )
 # end
 
-# STREAMS.each do |stream|
-
-# end
+# binding.pry
