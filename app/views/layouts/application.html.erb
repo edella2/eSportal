@@ -12,10 +12,11 @@
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">eSportal</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+        <%= link_to "log in", new_user_session_path, class: "btn btn-primary" %>
         <li><a href="#">Grid</a></li>
         <li><a href="#">Calendar</a></li>
       </ul>
@@ -26,10 +27,6 @@
 <div class="container">
   <%= yield %>
 </div>
-
-<%= link_to "log in", new_user_session_path, class: "btn btn-primary" %>
-<%= yield %>
-
 
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
