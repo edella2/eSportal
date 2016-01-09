@@ -1,7 +1,10 @@
 
 class Tournament < ActiveRecord::Base
+
+  has_many :competitors
+  has_and_belongs_to_many :games
   include HTTParty
-  has_and_belongs_to_many :teams
+
   has_many :streams
 
   def self.update_data
