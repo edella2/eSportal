@@ -1,7 +1,7 @@
 class TournamentsController < ApplicationController
 
   def index
-    @tournaments = Tournament.order("created_at DESC")
+    @tournaments = Tournament.order("")
   end
 
   def show

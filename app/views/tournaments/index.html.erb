@@ -2,13 +2,22 @@
 
 <div class="row">
   <% @tournaments.each do |tournament| %>
+  <% if tournament.start_date == DateTime.now.to_date || tournament.end_date = (DateTime.now).to_date %>
   <div class="col-md-3 col-sm-6 col-xs-12 portfolio-item">
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img src="http://goo.gl/JrWrnz">
-    </a>
+  <% else %>
+  <div class="col-md-3 col-sm-6 col-xs-12 portfolio-item">
+  <% end %>
+  <% if tournament.image %>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img src="<%= tournament.image %>"></a>
+  <% else %>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
+  <% end %>
+    <div class="info">
     <h4>
       <a href="#"><%= tournament.name%></a>
     </h4>
-    <p>Description</p>
+    <p><%= tournament.start_date %> – <%= tournament.end_date %></p>
+  </div>
   </div>
   <% end %>
 </div>
