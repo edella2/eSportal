@@ -12,6 +12,10 @@ class Tournament < ActiveRecord::Base
     update_or_create(tournament_data)
   end
 
+    def start_time
+        self.start_date ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+    end
+
   private
 
   def self.update_or_create(tournaments)
@@ -20,14 +24,14 @@ class Tournament < ActiveRecord::Base
       Tournament.find_or_initialize_by(
         id: tournament["id"],
         name: tournament["title"],
-        start_date: DateTime.parse(tournament["start"]),
+        start_time: DateTime.parse(tournament["start"]),
         end_date: DateTime.parse(tournament["end"]),
         image: tournament["images"]["default"]
 
         ).update_attributes!(
         id: tournament["id"],
         name: tournament["title"],
-        start_date: DateTime.parse(tournament["start"]),
+        start_time: DateTime.parse(tournament["start"]),
         end_date: DateTime.parse(tournament["end"]),
         image: tournament["images"]["default"]
         )
