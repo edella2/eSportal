@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160109014356) do
 
   create_table "tournaments", force: :cascade do |t|
     t.string   "name"
-    t.date     "start_time"
+    t.date     "start_date"
     t.date     "end_date"
     t.integer  "game_id"
     t.string   "image"
