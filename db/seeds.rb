@@ -116,15 +116,16 @@ end
 COMPETITORS.each do |competitor|
   print "."
 
-  p competitor
-
   if competitor
     puts "Adding #{competitor['name']} to database"
 
-    Competitor.find_or_create_by(
-      id:            competitor["id"],
-      name:          competitor["name"],
-      tournament_id: competitor["tournament_id"]
-      )
+    begin
+      tournament = Tournament.find(competitor["tournament_id"])
+      tournament.competitors.find_or_create_by(id: competitor["id"], name: competitor["name"])
+    rescue
+      next
+    end
   end
 end
+
+binding.pry

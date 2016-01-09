@@ -1,11 +1,9 @@
-
 class Tournament < ActiveRecord::Base
-
-  has_many :competitors
-  has_and_belongs_to_many :games
-  include HTTParty
-
   has_many :streams
+  has_and_belongs_to_many :competitors
+  has_and_belongs_to_many :games
+
+  include HTTParty
 
   def self.update_data
     tournament_data = HTTParty.get("https://api.abiosgaming.com/v1/tournaments?access_token=#{ENV['ABIOS_API_KEY']}")
