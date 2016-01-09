@@ -1,13 +1,10 @@
 <h1>Tons of tournaments</h1><br>
 
 
-<!-- This row is hidden! -->
-<div class="row hidden">
-
+<div class="row">
   <% @tournaments.each do |tournament| %>
   <div class="col-md-3"><a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img src="http://goo.gl/JrWrnz"><div class="info"><%= tournament.name %></div></a></div>
   <% end %>
-
 </div>
 
 <%= month_calendar events: @tournaments do |date, tournaments| %>
