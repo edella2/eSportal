@@ -20,9 +20,4 @@ class User < ActiveRecord::Base
 	    end
 	    user
 	end
-
-
-  #Can favorite models that are favorable
-
-
 end
