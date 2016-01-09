@@ -114,8 +114,6 @@ TOURNAMENTS.each do |tournament|
 end
 
 COMPETITORS.each do |competitor|
-  print "."
-
   if competitor
     puts "Adding #{competitor['name']} to database"
 
