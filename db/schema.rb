@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20160109214534) do
     t.integer "tournament_id"
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "favoritable_id"
+    t.integer  "user_id"
+    t.string   "favoritable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "games", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false

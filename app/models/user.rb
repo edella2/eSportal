@@ -1,8 +1,12 @@
+
 class User < ActiveRecord::Base
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
+  #Can favorite models that are favorable
+  has_many :favorites, inverse_of: :user
 
 	def self.from_omniauth(access_token)
 	    data = access_token.info
@@ -16,4 +20,9 @@ class User < ActiveRecord::Base
 	    end
 	    user
 	end
+
+
+  #Can favorite models that are favorable
+
+
 end

@@ -217,6 +217,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_calendar (2.0.3)
+      rails (>= 3.0)
     slop (3.6.0)
     spring (1.6.2)
     sprockets (3.5.2)
@@ -279,6 +281,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (>= 3.2)
   sdoc (~> 0.4.0)
+  simple_calendar (~> 2.0)
   spring
   therubyracer
   turbolinks
