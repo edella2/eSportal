@@ -1,68 +1,129 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-past_tournaments = 20
-current_tournaments = 5
-future_tournaments = 20
-total_tournaments = past_tournaments + current_tournaments + future_tournaments
-
-require 'factory_girl_rails'
-
-FactoryGirl.define do
-
-  factory :tournament do
-    name          Faker::Lorem.word
-    image         Faker::Avatar.image
-
-    trait :past do
-      start_date  Faker::Date.between(10.days.ago, 5.days.ago)
-      end_date    Faker::Date.between(4.days.ago, 1.days.ago)
-    end
-
-    trait :current do
-      start_date  Faker::Date.between(3.days.ago, 2.days.ago)
-      end_date    Faker::Date.between(1.days.since, 7.days.since)
-    end
-
-    trait :future do
-      start_date  Faker::Date.between(3.days.since, 6.days.since)
-      end_date    Faker::Date.between(7.days.since, 10.days.since)
-    end
+class Abios
+  def initialize
+    @api_key          = "?access_token=#{ENV['ABIOS_API_KEY']}"
+    @games_root       = "https://api.abiosgaming.com/v1/games"
+    @matches_root     = "https://api.abiosgaming.com/v1/matches"
+    @competitors_root = "https://api.abiosgaming.com/v1/competitors"
+    @tournaments_root = "https://api.abiosgaming.com/v1/tournaments"
   end
 
-  factory :stream do
-    title         Faker::Hipster.word
-    link          Faker::Internet.url
-    language      Faker::Lorem.word
-    tournament_id Faker::Number.between(1, total_tournaments)
+  def get_games
+    puts "fetching all games"
+
+    HTTParty.get(@games_root + @api_key)
   end
 
-  factory :team do
-    name          Faker::Team.name
-    tournament_id Faker::Number.between(1, total_tournaments)
+  def get_tournaments
+    puts "fetching all tournaments"
+
+    HTTParty.get(@tournaments_root + @api_key)
   end
 
+  def get_matches_by_tournament
+  end
 
+  def get_competitors
+    # TODO
+  end
+
+  def get_competitors_by_tournament(tournament_id)
+    puts "fetching competitors by tournament_id: #{tournament_id}"
+
+    matches = get_matches_by_tournament(tournament_id)
+    matches.map {|match| get_competitors_by_match(match["id"], tournament_id)}
+  end
+
+  def get_stream_by_tournament(tournament_id)
+    puts "fetching stream by tournament_id: #{tournament_id}"
+
+    HTTParty.get(@tournaments_root + "/#{tournament_id.to_s}" + @api_key).fetch("url")
+  end
+
+  def get_tournaments_by_game(game_id)
+    puts "fetching tournaments by game_id: #{game_id}"
+
+    filter = "&games[]=" + game_id.to_s
+    HTTParty.get(@tournaments_root + @api_key + filter)
+  end
+
+  def get_matches
+    puts "fetching matches"
+
+    HTTParty.get(@matches_root + @api_key)
+  end
+
+  def get_matches_by_tournament(tournament_id)
+    puts "fetching matches by tournament_id: #{tournament_id}"
+
+    filter = "&tournaments[]=" + tournament_id.to_s
+    HTTParty.get(@matches_root + @api_key + filter)
+  end
+
+  def get_competitors_by_match(match_id, tournament_id)
+    puts "fetching competitors by match_id: #{match_id}"
+
+    filter = "&with[]=matchups"
+    match = HTTParty.get(@matches_root + "/#{match_id}" + @api_key + filter)
+    matchups = match["matchups"]
+    matchups = matchups.map {|matchup| matchup["competitors"]}.flatten
+    matchups.each {|matchup| matchup["tournament_id"] = tournament_id if matchup}
+  end
 end
 
+a = Abios.new
+
+GAMES       = a.get_games
+
+# TEMPORARY: get only counterstrike tournaments
+TOURNAMENTS = [GAMES[4]].map       {|game| a.get_tournaments_by_game(game["id"])}.flatten
+
+# TEMPORARY: throttle the number of tournaments returned
+TOURNAMENTS = TOURNAMENTS.first(8)
+
+COMPETITORS = TOURNAMENTS.map {|tournament| a.get_competitors_by_tournament(tournament["id"])}.flatten
+STREAMS     = TOURNAMENTS.map {|tournament| a.get_stream_by_tournament(tournament["id"])}
 
 
-# past_tournaments.times { FactoryGirl.create(:tournament, :past) }
-# current_tournaments.times { FactoryGirl.create(:tournament, :current) }
-# future_tournaments.times { FactoryGirl.create(:tournament, :future) }
+GAMES.each do |game|
+  puts "Adding #{game["title"]} to database"
 
-# total_tournaments.times { FactoryGirl.create(:stream) }
-# (total_tournaments * 6).times { FactoryGirl.create(:team) }
+  Game.find_or_create_by(
+    id:   game["id"],
+    name: game["title"]
+    )
+end
 
-# FactoryGirl.create_list(:tournament, past_tournaments, :past)
-# FactoryGirl.create_list(:tournament, current_tournaments, :current)
-# FactoryGirl.create_list(:tournament, future_tournaments, :future)
-# FactoryGirl.create_list(:stream, total_tournaments)
-# FactoryGirl.create_list(:team, total_tournaments * 6)
+TOURNAMENTS.each do |tournament|
+  puts "Adding #{tournament['title']} to database"
 
-p response = HTTParty.get('https://api.abiosgaming.com/v1/tournaments?access_token='+ENV["ABIOS_API_KEY"])
-p json = JSON.parse(response.body)
+  Tournament.find_or_create_by(
+    id:         tournament["id"],
+    name:       tournament["title"],
+    image:      tournament["images"]["default"],
+    start_date: tournament["start"],
+    end_date:   tournament["end"],
+    game_id:    tournament["game"]["id"]
+    )
+
+  puts "Adding #{tournament['title']}'s stream to database"
+
+  Stream.find_or_create_by(
+    tournament_id: tournament['id'],
+    link:          tournament['url']
+    )
+end
+
+COMPETITORS.each do |competitor|
+  print "."
+
+  if competitor
+    puts "Adding #{competitor['name']} to database"
+
+    begin
+      tournament = Tournament.find(competitor["tournament_id"])
+      tournament.competitors.find_or_create_by(id: competitor["id"], name: competitor["name"])
+    rescue
+      next
+    end
+  end
+end

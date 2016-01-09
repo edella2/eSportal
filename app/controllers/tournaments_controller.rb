@@ -17,7 +17,6 @@ class TournamentsController < ApplicationController
       flash.now[:danger] = @tournament.errors.full_messages
       render 'edit'
     end
-
   end
 
   private
