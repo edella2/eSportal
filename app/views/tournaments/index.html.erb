@@ -40,14 +40,9 @@
   <% end %>
 </div>
 
-<br><hr><br>
+<h1>Listing events</h1>
 
-<%= month_calendar events: @tournaments do |date, tournaments| %>
-<%= date %>
-
-<% tournaments.each do |tournament| %>
-<div>
-  <%= tournament.name %>
+<div id="events_calendar">
+  <%= render partial: "/events/calendar", locals: {events: @tournaments} %>
 </div>
-<% end %>
-<% end %>
+<br>
