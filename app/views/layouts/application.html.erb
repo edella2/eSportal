@@ -16,9 +16,10 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <%= link_to "log in", new_user_session_path, class: "btn btn-primary" %>
+
         <li><a href="#">Grid</a></li>
         <li><a href="#">Calendar</a></li>
+        <li><p class="navbar-btn"><%= link_to "log in", new_user_session_path, class: "btn btn-primary" %></p></li>
       </ul>
     </div>
   </div>
@@ -28,6 +29,11 @@
   <%= yield %>
 </div>
 
+<div class="footer">
+  <div class="container">
+    Footer
+  </div>
+</div>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
