@@ -1,4 +1,7 @@
 class Tournament < ActiveRecord::Base
+  # Can be favorited
+  has_many :favorites, as: :favoritable
+
   has_many :streams
   has_and_belongs_to_many :competitors
   has_and_belongs_to_many :games
