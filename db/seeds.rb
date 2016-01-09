@@ -127,5 +127,3 @@ COMPETITORS.each do |competitor|
     end
   end
 end
-
-binding.pry
