@@ -8,8 +8,11 @@
   <script src="jquery-1.11.3.min.js"></script>
 </head>
 <body>
-
+<%= link_to "log in", new_user_session_path, class: "btn btn-primary" %>
 <%= yield %>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 
 </body>
 </html>
