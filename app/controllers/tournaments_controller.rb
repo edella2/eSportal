@@ -1,6 +1,8 @@
 class TournamentsController < ApplicationController
   def index
     p params
+
+    binding.pry
     if params[:search]
       @tournaments = Tournament.search(params[:search]).order("created_at DESC")
     else
