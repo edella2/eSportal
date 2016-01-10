@@ -8,4 +8,5 @@ class Favorite < ActiveRecord::Base
   validates :user_id, uniqueness: {
     scope: [:favoritable_id, :favoritable_type],
     message: 'can only favorite an item once'
+  }
 end
