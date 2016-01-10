@@ -15,21 +15,18 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="/tournaments">eSportal</a>
     </div>
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-
         <% if current_page_is_tournament? || current_page_is_calendar? %>
         <li><a href="/tournaments"><i class="fa fa-th"></i></a></li>
         <li><a href="/calendar"><i class="fa fa-calendar-o"></i></a></li>
         <% end %>
-
         <% if user_signed_in? %>
           <li><%= link_to('Log out', destroy_user_session_path, :method => :delete)%></li>
         <% else %>
           <li><%= link_to "log in", user_omniauth_authorize_path(:google_oauth2)%></li>
         <% end %>
-          <li class="notice"><%= notice %></li>
-          <li class="alert"><%= alert %></li>
       </ul>
     </div>
   </div>
@@ -41,10 +38,9 @@
 
 <div id="footer">
     <div class="container">
-      <p class="footer-block">Place sticky footer content here.</p>
+      <p class="footer-block"><span class="notice"><%= notice %></span>
+          <span class="alert"><%= alert %></span></p>
     </div>
   </div>
-
-
 </body>
 </html>

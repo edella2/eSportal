@@ -1,49 +1,53 @@
 <div class="row">
-<div class="col-md-8 col-sm-12">
-  <h1><%= @tournament.name %></h1>
-</div>
+  <div class="col-md-8 col-sm-12">
+    <h1><%= @tournament.name %></h1>
+  </div>
 
-<div class="col-md-4 col-sm-12">
-<span id="clockdiv" class="pull-right">
-  <h1>
-    <span class="days "></span> days /
-    <span class="hours"></span> :
-    <span class="minutes"></span> :
-    <span class="seconds"></span>
- </h1>
-</span>
-</div>
+  <div class="col-md-4 col-sm-12">
+    <span id="clockdiv" class="pull-right">
+      <h1>
+        <span class="days "></span> days /
+        <span class="hours"></span> :
+        <span class="minutes"></span> :
+        <span class="seconds"></span>
+      </h1>
+    </span>
+  </div>
 </div>
 
 <div class="row">
   <div class="col-md-12 portfolio-item">
-        <a href="#" class="thumbnail"><img src="<%= @tournament.large %>"></a>
+    <a href="#" class=" image_container thumbnail"><img src="<%= @tournament.large %>">
+      <button type="button" class="buttonz btn btn-default" aria-label="Left Align">Follow</button>
+      <button type="button" class="buttony btn btn-default" aria-label="Left Align">Subscribe</button>
+    </a>
   </div>
 </div>
 
-<% if @tournament.competitors.empty? %>
- <p> Competitor list soon </p>
-<% else %>
-<% @tournament.competitors.each do |competitor| %>
-<%= competitor.name %><br>
-<% end %>
-<% end %>
+<div class="row">
 
-<% if @tournament.streams %>
+  <div class="col-md-6">
+    <% if @tournament.competitors.empty? %>
+      <p> Competitor list soon </p>
+    <% else %>
+      <% @tournament.competitors.each do |competitor| %>
+        <%= competitor.name %><br>
+      <% end %>
+    <% end %>
+  </div>
 
-  <% @tournament.streams.each do |tournament_stream| %>
-    <a href="<%=tournament_stream.link %>"> <%= @tournament.name %> </a>
-  <% end %>
-<% else %>
-  <p>no stream</p>
-<% end %>
+  <div class="col-md-6">
+    <% if @tournament.streams %>
+      <% @tournament.streams.each do |tournament_stream| %>
+        <a href="<%=tournament_stream.link %>"> <%= @tournament.name %> </a>
+      <% end %>
+    <% else %>
+        <p>no stream</p>
+    <% end %>
+  </div>
+</div>
 
-
-
-<button type="button" class="btn btn-default" aria-label="Left Align">Follow</button>
-
-<button type="button" class="btn btn-default" aria-label="Left Align">Subscribe</button>
-
+<!-- Use assets for this script asap -->
 
 <% t = @tournament.start_date.to_s  %>
 <% t.gsub!(" UTC", "") %>
