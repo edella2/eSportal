@@ -113,9 +113,8 @@ TOURNAMENTS.each do |tournament|
     id:         tournament["id"],
     name:       tournament["title"],
     image:      tournament["images"]["default"],
-    start_time: tournament["start"],
-    end_date:   tournament["end"],
-    game_id:    tournament["game"]["id"]
+    start_date: tournament["start"],
+    end_date:   tournament["end"]
     )
 
   puts "Adding #{tournament['title']}'s stream to database"
@@ -127,14 +126,14 @@ TOURNAMENTS.each do |tournament|
 end
 
 COMPETITORS.each do |competitor|
-  print "."
-
   if competitor
     puts "Adding #{competitor['name']} to database"
 
     begin
       tournament = Tournament.find(competitor["tournament_id"])
-      tournament.competitors.find_or_create_by(id: competitor["id"], name: competitor["name"])
+      tournament.competitors.find_or_create_by(
+        id:   competitor["id"],
+        name: competitor["name"])
     rescue
       next
     end

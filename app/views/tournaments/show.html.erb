@@ -1,6 +1,4 @@
-<h1>here is a tournament</h1>
+<h1><%= @tournament.name %></h1>
 
-<%= @tournament.name %>
-<%= @tournament.start_time %>
-<%= @tournament.end_date %>
-
+<img src="<%= @tournament.image %>">
+<p><b><%= @tournament.name %></b><%= @tournament.start_date %> – <%= @tournament.end_date %></p>
