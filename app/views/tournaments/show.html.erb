@@ -1,4 +1,8 @@
-<div class="row">
+
+<% t = @tournament.start_date.to_s  %>
+<% t.gsub!(" UTC", "") %>
+<% parsable = t.gsub!(" ", "T") %>
+<%= parsable %><div class="row">
   <div class="col-md-8 col-sm-12">
     <h1><%= @tournament.name %></h1>
   </div>
@@ -49,12 +53,11 @@
 
 <!-- Use assets for this script asap -->
 
-<% t = @tournament.start_date.to_s  %>
-<% t.gsub!(" UTC", "") %>
-<% parsable = t.gsub!(" ", "T") %>
-<%= parsable %>
+
+
 
 <script>
+
 $(document).ready(function(){
   getTimeRemaining(deadline);
   initializeClock('clockdiv', deadline);
@@ -104,3 +107,7 @@ var timeinterval = setInterval(updateClock,1000);
 
 }
 </script>
+<% t = @tournament.start_date.to_s  %>
+<% t.gsub!(" UTC", "") %>
+<% parsable = t.gsub!(" ", "T") %>
+<%= parsable %>
