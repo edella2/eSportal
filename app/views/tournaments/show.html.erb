@@ -3,7 +3,6 @@
 <% t.gsub!(" UTC", "") %>
 <% parsable = t.gsub!(" ", "T") %>
 <script>var deadline = "<%= parsable %>";</script>
-<% javascript_include_tag "timer" %>
 
 <div class="row">
   <div class="col-md-8 col-sm-12">
@@ -21,6 +20,8 @@
     </span>
   </div>
 </div>
+
+<% javascript_include_tag "timer" %>
 
 <div class="row">
   <div class="col-md-12 portfolio-item">
