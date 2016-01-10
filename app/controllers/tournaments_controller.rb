@@ -1,5 +1,4 @@
 class TournamentsController < ApplicationController
-
   def index
     p params
     case params[:sort_option]
