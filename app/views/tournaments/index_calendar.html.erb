@@ -1,7 +1,7 @@
 <div class="row" style="padding-bottom:30px">
 
   <div class="col-md-3">
-    <h1>Tournaments</h1>
+    <h1>Calendar</h1>
   </div>
 
     <div class="col-md-9">
@@ -23,38 +23,15 @@
       <%= text_field_tag :search, params[:search], class: "form-control span2", placeholder: "Search Items" %>
       <span class="input-group-btn"><button class="btn btn-default" type="submit">Go!</button></span>
       <% end %>
-      </div>
     </div>
+
   </div>
 </div>
-
 
 <div class="row">
-
-  <% @tournaments.each do |tournament| %>
-  <% if tournament.is_live? %>
-  <div class="col-md-12 col-sm-12 col-xs-12">
-  <% else %>
-  <div class="col-md-4 col-sm-6 col-lg-3 col-xs-12 portfolio-item">
-  <% end %>
-  <% if tournament.image && tournament.is_live? %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img src="<%= tournament.large %>"></a>
-    <% elsif tournament.image %>
-<a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img src="<%= tournament.image %>"></a>
-  <% else %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
-  <% end %>
-    <div class="info">
-    <% if tournament.is_live? %>
-    <h3><span class="label label-success">Live</span>&nbsp;<%= tournament.name%></h3>
-    <% else %>
-    <h4><%= tournament.name%></h4>
-    <% end %>
-      <p><%= tournament.city %> – <%= tournament.start_date %> – <%= tournament.end_date %></p>
-      </p>
+  <div class="col-md-12">
+    <div id="events_calendar">
+      <%= render partial: "/events/calendar", locals: {events: @tournaments} %>
     </div>
   </div>
-  <% end %>
 </div>
-
-
