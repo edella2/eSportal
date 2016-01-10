@@ -2,3 +2,7 @@
 
 <img src="<%= @tournament.image %>">
 <p><b><%= @tournament.name %></b><%= @tournament.start_date %> – <%= @tournament.end_date %></p>
+
+<% @tournament.competitors.each do |competitor| %>
+<%= competitor.name %><br>
+<% end %>
