@@ -25,8 +25,17 @@
 <div class="row">
   <div class="col-md-12 portfolio-item">
     <a href="#" class=" image_container thumbnail"><img src="<%= @tournament.large %>">
-      <button type="button" class="buttonz btn btn-default" aria-label="Left Align">Follow</button>
-      <button type="button" class="buttony btn btn-default" aria-label="Left Align">Subscribe</button>
+      <%=
+        button_to "Follow", favorites_path(favorite: {
+          user_id: current_user.id,
+          favoritable_id: @tournament.id,
+          favoritable_type: "Tournament"
+          }),
+        action: "create", class: "buttonz btn btn-default"
+      %>
+      <!-- <button type="button" class="buttonz btn btn-default" aria-label="Left Align">Follow</button> -->
+      <%= button_to "Subscribe", class: "buttony btn btn-default" %>
+      <!-- <button type="button" class="buttony btn btn-default" aria-label="Left Align">Subscribe</button> -->
     </a>
   </div>
 </div>
