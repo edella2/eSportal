@@ -3,25 +3,38 @@
 <head>
   <title>ESportal</title>
   <script src="https://code.jquery.com/jquery-git2.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">eSportal</a>
+      <a class="navbar-brand" href="/tournaments">eSportal</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-
-        <%= link_to "log in", user_omniauth_authorize_path(:google_oauth2), class: "btn btn-primary" %>
-
-        <li><a href="#">Grid</a></li>
-        <li><a href="#">Calendar</a></li>
-        <li><p class="navbar-btn"><%= link_to "log in", new_user_session_path, class: "btn btn-primary" %></p></li>
+        <% if current_page_is_home? %>
+        <li>  <%= form_tag(tournaments_path, :method => "get", class: "navbar-form", id: "search-form") do %>
+    <div class="input-append">
+      <%= text_field_tag :search, params[:search], class: "span2", placeholder: "Search Items" %>
+      <!-- In order to have the "search" icon int the button, we need to use plain HTML instead
+           of using a Rails form helper -->
+      <button class="btn" type="submit">Search</button>
+    </div>
+  <% end %></li>
+        <li><a href="#" id="showdiv1"><i class="fa fa-2x fa-th"></i></a></li>
+        <li><a href="#" id="showdiv2"><i class="fa fa-2x fa-calendar"></i></a></li>
+        <% end %>
+        <% if user_signed_in? %>
+          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete)%></li>
+        <% else %>
+          <li><%= link_to "log in", user_omniauth_authorize_path(:google_oauth2)%></li>
+        <% end %>
       </ul>
     </div>
   </div>
@@ -31,13 +44,25 @@
   <%= yield %>
 </div>
 
-<div class="footer">
-  <div class="container">
-    Footer
-  </div>
-</div>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
 </body>
 </html>
+
+<script>
+$( document ).ready(function() {
+  $('div[id^=div]').hide();
+    $('#div1').show();
+  });
+
+$('#showdiv1').click(function(){
+    $('div[id^=div]').hide();
+    $('#div1').show();
+});
+
+$('#showdiv2').click(function(){
+    $('div[id^=div]').hide();
+    $('#div2').show();
+});
+</script>
