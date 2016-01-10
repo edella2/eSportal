@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       # id, name, country, short_name, images, race
       matches     = fetch_matches_by_tournament_id(tournament_id)
       matchups    = matches.map {|match| fetch_matchups_by_match_id(match["id"])}.flatten
-      competitors = matchups.map {|matchup| get_competitors_from_matchup(matchup)}.flatten
+      competitors = matchups.map {|matchup| get_competitors_from_matchup(matchup)}.flatten.uniq
     end
 
     private
@@ -59,8 +59,7 @@ class ApplicationController < ActionController::Base
       puts "        fetching matchups by match_id: #{match_id}"
 
       filter = "&with[]=matchups"
-
-      match = HTTParty.get(@matches_root + "/#{match_id}" + @api_key + filter)
+      match  = HTTParty.get(@matches_root + "/#{match_id}" + @api_key + filter)
 
       # returns an array of matchup hashes with keys:
       # id, competitors
