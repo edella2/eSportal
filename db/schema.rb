@@ -60,8 +60,14 @@ ActiveRecord::Schema.define(version: 20160110040146) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "thumbnail"
+    t.string   "large"
+    t.string   "description"
+    t.string   "short_description"
+    t.string   "city"
+    t.string   "short_title"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "users", force: :cascade do |t|

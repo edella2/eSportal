@@ -32,11 +32,17 @@ TOURNAMENTS.each do |tournament_hash|
     game = Game.find(tournament_hash["game"]["id"])
 
     tournament = Tournament.find_or_create_by(
-      id:         tournament_hash["id"],
-      name:       tournament_hash["title"],
-      image:      tournament_hash["images"]["default"],
-      start_date: tournament_hash["start"],
-      end_date:   tournament_hash["end"]
+      id:               tournament_hash["id"],
+      name:             tournament_hash["title"],
+      image:            tournament_hash["images"]["default"],
+      start_date:       tournament_hash["start"],
+      end_date:         tournament_hash["end"],
+      thumbnail:        tournament_hash["images"]["thumbnail"],
+      large:            tournament_hash["images"]["large"],
+      description:      tournament_hash["description"],
+      short_description:tournament_hash["short_description"],
+      city:             tournament_hash["city"],
+      short_title:      tournament_hash["short_title"]
       )
 
     game.tournaments << tournament
