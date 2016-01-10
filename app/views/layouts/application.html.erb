@@ -16,9 +16,13 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <%= link_to "log in", new_user_session_path, class: "btn btn-primary" %>
         <li><a href="#">Grid</a></li>
         <li><a href="#">Calendar</a></li>
+        <% if user_signed_in? %>
+          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete)%></li>
+        <% else %>
+          <li><%= link_to "log in", user_omniauth_authorize_path(:google_oauth2)%></li>
+        <% end %>
       </ul>
     </div>
   </div>
