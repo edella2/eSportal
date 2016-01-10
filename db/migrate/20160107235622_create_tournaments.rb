@@ -6,6 +6,14 @@ class CreateTournaments < ActiveRecord::Migration
       t.date :end_date
       t.integer :game_id
       t.string :image
+      # new ones
+      t.string :thumbnail
+      t.string :large
+      t.string :description
+      t.string :short_description
+      t.string :city
+      t.string :short_title
+      # ...
       t.timestamps null: false
     end
   end

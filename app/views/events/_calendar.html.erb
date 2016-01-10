@@ -1,10 +1,9 @@
+<div class="container">
 <%= month_calendar events: events, previous_link: events_ajax_previous_link, next_link: events_ajax_next_link do |date, events| %>
-  <%= date %>
-<% events.each do |event| %>
-<div>
-  <%= event.name %>
+  <b><%= date %></b><br>
+    <% events.each do |event| %>
+      <img src="<%= event.thumbnail %>">
+      <%= event.name %><br>
+    <% end %>
+  <% end %>
 </div>
-<% end %>
-
-
-<% end %>

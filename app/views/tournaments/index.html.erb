@@ -1,56 +1,98 @@
-<h1>Tournaments</h1><br>
+<div class="row" style="padding-bottom:15px">
+
+  <div class="col-md-6 col-lg-6 col-xs-12 hidden-xs col-sm-6">
+
+    <div class="input-group" style="padding-top:2px">
+      <%= form_tag(tournaments_path, :method => "get", class: "navbar-form", id: "search-form") do %>
+      <div class="input-append">
+      <%= text_field_tag :search, params[:search], class: "form-control span2 btn-border", placeholder: "Search Items" %>
+      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">Go!</button></span>
+      <% end %>
+      </div>
+    </div>
 
 
+  </div>
 
-<div class="row">
-  <div class="col-md-12">
-
+  <div class="col-md-6 col-lg-6 col-sm-6">
     <div class="btn pull-right">
-       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"> Game <span class="caret"></span>
-    </button>
+     <button class="btn btn-warning btn-border dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"> Game <span class="caret"></span></button>
     </div>
+
     <div class="btn-group btn pull-right" role="group" aria-label="...">
-    <%= link_to "Year", tournaments_path(sort_option: "year"), class: "btn btn-default" %>
-    <%= link_to "Month", tournaments_path(sort_option: "month"), class: "btn btn-default" %>
-    <%= link_to "Week", tournaments_path(sort_option: "week"), class: "btn btn-default" %>
-    <%= link_to "Day", tournaments_path(sort_option: "day"), class: "btn btn-default" %>
+    <%= link_to "Year", tournaments_path(sort_option: "year"), class: "btn btn-border btn-warning" %>
+    <%= link_to "Month", tournaments_path(sort_option: "month"), class: "btn btn-border btn-warning" %>
+    <%= link_to "Week", tournaments_path(sort_option: "week"), class: "btn btn-border btn-warning" %>
+    <%= link_to "Day", tournaments_path(sort_option: "day"), class: "btn btn-border btn-warning" %>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="row">
+
+  <% @tournaments.each do |tournament| %>
+
+  <% if tournament.is_live? %>
+  <div class="col-md-12 col-sm-12 col-xs-12 portfolio-item">
+  <% else %>
+  <div class="col-md-4 col-sm-6 col-lg-3 col-xs-12 portfolio-item">
+  <% end %>
+
+  <% if tournament.image && tournament.is_live? %>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail" style=>
+      <img class="hidden-xs grayscale" src="<%= tournament.large %>">
+      <img class="hidden-lg hidden-sm hidden-md grayscale" style="width:100%" src="<%= tournament.image %>">
+    </a>
+
+  <% elsif tournament.image %>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img class="grayscale" src="<%= tournament.image %>"></a>
+  <% else %>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img class="grayscale" src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
+  <% end %>
+
+  <div class="info">
+    <% if tournament.is_live? %>
+    <span class="titling"><span class="label label-success">Live</span>&nbsp;<%= tournament.name%></span>
+    <% else %>
+    <span class="titling"><%= tournament.short_title%></span>
+    <% end %>
+      <br><span><%= tournament.city %> – <%= tournament.start_date %> </span>
+      </p>
     </div>
   </div>
-</div>
-<br>
-
-
-<div id="div1">
-<div class="row">
-  <% @tournaments.each do |tournament| %>
-  <% if tournament.start_date == DateTime.now.to_date || tournament.end_date = (DateTime.now).to_date %>
-  <div class="col-md-3 col-sm-6 col-xs-12 portfolio-item">
-  <% else %>
-  <div class="col-md-3 col-sm-6 col-xs-12 portfolio-item">
-  <% end %>
-  <% if tournament.image %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img src="<%= tournament.image %>"></a>
-  <% else %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
-  <% end %>
-    <div class="info">
-    <h4>
-      <a href="#"><%= tournament.name%></a>
-    </h4>
-    <p><%= tournament.start_date %> – <%= tournament.end_date %></p>
-  </div>
-  </div>
   <% end %>
 </div>
 
-</div>
-<div id="div2">
-<div class="row">
-  <div class="col-md-12">
-<div id="events_calendar">
-  <%= render partial: "/events/calendar", locals: {events: @tournaments} %>
-</div>
-</div>
-</div>
-<br>
-</div>
+
+<style>
+img.grayscale {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+, IE10 */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+    -webkit-transition: all .6s ease; /* Fade to color for Chrome and Safari */
+    -webkit-backface-visibility: hidden; /* Fix for transition flickering */
+}
+
+img.grayscale:hover {
+    filter: none;
+    -webkit-filter: grayscale(0%);
+}
+
+svg {
+    background:url(http://4.bp.blogspot.com/-IzPWLqY4gJ0/T01CPzNb1KI/AAAAAAAACgA/_8uyj68QhFE/s400/a2cf7051-5952-4b39-aca3-4481976cb242.jpg);
+}
+
+svg image {
+    transition: all .6s ease;
+}
+
+svg image:hover {
+    opacity: 0;
+}
+
+
+
+</style>

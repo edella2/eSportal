@@ -5,13 +5,17 @@ Rails.application.routes.draw do
 
   resources :tournaments
   resources :timertests
+  resources :users, only: [:show]
+  resources :competitors, only: [:index, :show]
+  resources :favorites, only: [:create, :destroy]
 
+  get 'calendar', :to => 'tournaments#index_calendar'
 
   # You can have the root of your site routed with "root"
   root 'tournaments#index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
- 
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
