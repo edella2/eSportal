@@ -2,3 +2,26 @@
 
 <img src="<%= @tournament.image %>">
 <p><b><%= @tournament.name %></b><%= @tournament.start_date %> – <%= @tournament.end_date %></p>
+
+<% if @tournament.competitors.empty? %>
+ <p> hello </p>
+<% else %>
+<% @tournament.competitors.each do |competitor| %>
+<%= competitor.name %><br>
+<% end %>
+<% end %>
+
+<% if @tournament.streams %>
+
+  <% @tournament.streams.each do |tournament_stream| %>
+    <a href="<%=tournament_stream.link %>"> <%= @tournament.name %> </a>
+  <% end %>
+<% else %>
+  <p>no stream</p>
+<% end %>
+
+
+
+<button type="button" class="btn btn-default" aria-label="Left Align">Follow</button>
+
+<button type="button" class="btn btn-default" aria-label="Left Align">Subscribe</button>
