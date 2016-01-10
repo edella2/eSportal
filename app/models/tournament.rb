@@ -19,7 +19,10 @@ class Tournament < ActiveRecord::Base
 
   def start_time
     self.start_date ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+  end
 
+  def is_live?
+    self.start_date <= DateTime.now && self.end_date >= DateTime.now
   end
 
   private
