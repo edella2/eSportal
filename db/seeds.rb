@@ -114,8 +114,7 @@ TOURNAMENTS.each do |tournament|
     name:       tournament["title"],
     image:      tournament["images"]["default"],
     start_time: tournament["start"],
-    end_date:   tournament["end"],
-    game_id:    tournament["game"]["id"]
+    end_date:   tournament["end"]
     )
 
   puts "Adding #{tournament['title']}'s stream to database"
@@ -132,7 +131,9 @@ COMPETITORS.each do |competitor|
 
     begin
       tournament = Tournament.find(competitor["tournament_id"])
-      tournament.competitors.find_or_create_by(id: competitor["id"], name: competitor["name"])
+      tournament.competitors.find_or_create_by(
+        id:   competitor["id"],
+        name: competitor["name"])
     rescue
       next
     end
