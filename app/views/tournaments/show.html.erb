@@ -31,7 +31,8 @@
           favoritable_id: @tournament.id,
           favoritable_type: "Tournament"
           }),
-        action: "create", class: "buttonz btn btn-default"
+        action: "create", class: "buttonz btn btn-default",
+        'aria-label' => "Left Align"
       %>
       <!-- <button type="button" class="buttonz btn btn-default" aria-label="Left Align">Follow</button> -->
       <%= button_to "Subscribe", class: "buttony btn btn-default" %>
@@ -43,22 +44,14 @@
 <div class="row">
 
   <div class="col-md-6">
-    <% if @tournament.competitors.empty? %>
-      <p> Competitor list soon </p>
-    <% else %>
-      <% @tournament.competitors.each do |competitor| %>
-        <%= competitor.name %><br>
-      <% end %>
+    <% list_competitor_names_for(@tournament).each do |competitor| %>
+      <p><%= competitor %></p><br>
     <% end %>
   </div>
 
   <div class="col-md-6">
-    <% if @tournament.streams %>
-      <% @tournament.streams.each do |tournament_stream| %>
-        <a href="<%=tournament_stream.link %>"> <%= @tournament.name %> </a>
-      <% end %>
-    <% else %>
-        <p>no stream</p>
+    <% list_stream_urls_for(@tournament).each do |link| %>
+      <%= link_to @tournament.name, link %>
     <% end %>
   </div>
 </div>
