@@ -1,7 +1,6 @@
 module TournamentsHelper
 
   def is_live(tournament)
-    dates = (tournament.start_date..tournament.end_date).to_a
-    dates.include?(DateTime.now.to_date)
+    tournament.start_date <= DateTime.now && tournament.end_date >= DateTime.now
   end
 end
