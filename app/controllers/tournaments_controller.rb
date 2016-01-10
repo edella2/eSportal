@@ -1,8 +1,5 @@
 class TournamentsController < ApplicationController
   def index
-    p params
-
-    binding.pry
     if params[:search]
       @tournaments = Tournament.search(params[:search]).order("created_at DESC")
     else
@@ -47,16 +44,19 @@ class TournamentsController < ApplicationController
 
     @tournaments.select {|tournament| tournament.start_date > DateTime.now - 365}
   end
+
   def sort_tournaments_by_month
     @tournaments = Tournament.all
 
     @tournaments.select {|tournament| tournament.start_date > DateTime.now - 30}
   end
+
   def sort_tournaments_by_week
     @tournaments = Tournament.all
 
     @tournaments.select {|tournament| tournament.start_date > DateTime.now - 7}
   end
+
   def sort_tournaments_by_day
     @tournaments = Tournament.all
 
