@@ -114,8 +114,7 @@ TOURNAMENTS.each do |tournament|
     name:       tournament["title"],
     image:      tournament["images"]["default"],
     start_date: tournament["start"],
-    end_date:   tournament["end"],
-    game_id:    tournament["game"]["id"]
+    end_date:   tournament["end"]
     )
 
   puts "Adding #{tournament['title']}'s stream to database"
