@@ -32,9 +32,11 @@ gem 'pry-rails'
 
 gem 'factory_girl_rails'
 gem 'faker'
-
+gem "simple_calendar", "~> 2.0"
 gem 'httparty'
 gem 'devise'
+
+
 
 
 # Use ActiveModel has_secure_password
