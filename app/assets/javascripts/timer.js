@@ -1,10 +1,10 @@
 $(document).ready(function(){
+  console.log(deadline)
   getTimeRemaining(deadline);
   initializeClock('clockdiv', deadline);
 });
 
-
-var deadline = "<%= parsable %>";
+// var deadline = "<%= parsable %>";
 
 function getTimeRemaining(endtime){
   var t = Date.parse(endtime) - Date.parse(new Date());
