@@ -3,6 +3,7 @@
 <head>
   <title>ESportal</title>
   <script src="https://code.jquery.com/jquery-git2.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -12,12 +13,14 @@
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">eSportal</a>
+      <a class="navbar-brand" href="/tournaments">eSportal</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Grid</a></li>
-        <li><a href="#">Calendar</a></li>
+        <% if current_page_is_home? %>
+        <li><a href="#" id="showdiv1"><i class="fa fa-2x fa-th"></i></a></li>
+        <li><a href="#" id="showdiv2"><i class="fa fa-2x fa-calendar"></i></a></li>
+        <% end %>
         <% if user_signed_in? %>
           <li><%= link_to('Log out', destroy_user_session_path, :method => :delete)%></li>
         <% else %>
@@ -37,3 +40,28 @@
 
 </body>
 </html>
+
+<script>
+$('#showall').click(function(){
+    $('div').show();
+});
+
+$('#showdiv1').click(function(){
+    $('div[id^=div]').hide();
+    $('#div1').show();
+});
+$('#showdiv2').click(function(){
+    $('div[id^=div]').hide();
+    $('#div2').show();
+});
+
+$('#showdiv3').click(function(){
+    $('div[id^=div]').hide();
+    $('#div3').show();
+});
+
+$('#showdiv4').click(function(){
+    $('div[id^=div]').hide();
+    $('#div4').show();
+});
+</script>
