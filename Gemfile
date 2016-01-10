@@ -36,6 +36,8 @@ gem "simple_calendar", "~> 2.0"
 gem 'httparty'
 gem 'devise'
 
+gem 'omniauth-oauth2', '~> 1.3.1'
+gem 'omniauth-google-oauth2'
 
 
 
