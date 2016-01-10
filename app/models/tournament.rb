@@ -13,9 +13,10 @@ class Tournament < ActiveRecord::Base
     update_or_create(tournament_data)
   end
 
-    def start_time
-        self.start_date ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
-    end
+  def start_time
+    self.start_date ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+
+  end
 
   private
 
@@ -40,4 +41,3 @@ class Tournament < ActiveRecord::Base
   end
 
 end
-

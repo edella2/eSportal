@@ -21,7 +21,7 @@
         <% if user_signed_in? %>
           <li><%= link_to('Logout', destroy_user_session_path, :method => :delete)%></li>
         <% else %>
-          <li><%= link_to "log in", user_omniauth_authorize_path(:google_oauth2)%></li>
+          <li><%= link_to "log in", user_omniauth_authorize_path(:google_oauth2)%></p></li>
         <% end %>
       </ul>
     </div>
@@ -32,6 +32,11 @@
   <%= yield %>
 </div>
 
+<div class="footer">
+  <div class="container">
+    Footer
+  </div>
+</div>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 

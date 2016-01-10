@@ -113,7 +113,7 @@ TOURNAMENTS.each do |tournament|
     id:         tournament["id"],
     name:       tournament["title"],
     image:      tournament["images"]["default"],
-    start_time: tournament["start"],
+    start_date: tournament["start"],
     end_date:   tournament["end"],
     game_id:    tournament["game"]["id"]
     )
@@ -127,8 +127,6 @@ TOURNAMENTS.each do |tournament|
 end
 
 COMPETITORS.each do |competitor|
-  print "."
-
   if competitor
     puts "Adding #{competitor['name']} to database"
 
