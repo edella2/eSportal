@@ -17,17 +17,179 @@
 // @import "bootstrap-sprockets"
 // @import "bootstrap"
 
+
+
 .blue
-    background-color: blue
-    height: 40px
+  background-color: blue
+  height: 40px
 
 .green
-    background-color: green
-    height: 40px
+  background-color: green
+  height: 40px
 
 .red
-    background-color: red
-    height: 40px
+  background-color: red
+  height: 40px
 
 .info
-    height: 100px
+  height: 100px
+
+$height-footer: 60px
+
+html
+  min-height: 100%
+  position: relative
+
+body
+  margin-bottom: $height-footer
+
+  #footer
+    bottom: 0
+    width: 100%
+    position: absolute
+    height: $height-footer
+    background-color: #f5f5f5
+
+  .footer-block
+    margin: 20px 0
+
+#img_container
+  position: relative
+  display: inline-block
+  text-align: center
+
+.buttonz
+  position: absolute
+  bottom: 30px
+  right: 30px
+  width: 100px
+  height: 30px
+
+.buttony
+  position: absolute
+  bottom: 30px
+  right: 140px
+  width: 100px
+  height: 30px
+
+$bgDefault      : #b02018
+$bgHighlight    : #b02018
+$colDefault     : #e3e3e3
+$colHighlight   : #ffffff
+$dropDown       : false
+
+.navbar-default
+  background-color: $bgDefault
+  border-color: $bgHighlight
+
+  .navbar-brand
+    color: $colDefault
+    &:hover, &:focus
+      color: $colHighlight
+
+  .navbar-text
+    color: $colDefault
+
+  .navbar-nav
+    > li
+      > a
+        color: $colDefault
+        &:hover, &:focus
+          color: $colHighlight
+      @if $dropDown
+        > .dropdown-menu
+          background-color: $bgDefault
+          > li > a
+            color: $colDefault
+            &:hover, &:focus
+              color: $colHighlight
+              background-color: $bgHighlight
+
+          .divider
+            background-color: $bgHighlight
+    > .active
+      > a, > a:hover, > a:focus
+        color: $colHighlight
+        background-color: $bgHighlight
+    > .open
+      > a, > a:hover, > a:focus
+        color: $colHighlight
+        background-color: $bgHighlight
+
+  .navbar-toggle
+    border-color: $bgHighlight
+    &:hover, &:focus
+      background-color: $bgHighlight
+
+    .icon-bar
+      background-color: $colDefault
+
+  .navbar-collapse,
+
+  .navbar-form
+    border-color: $colDefault
+
+  .navbar-link
+    color: $colDefault
+    &:hover
+      color: $colHighlight
+@media (max-width: 767px)
+
+  .navbar-default .navbar-nav .open .dropdown-menu
+    > li > a
+      color: $colDefault
+      &:hover, &:focus
+        color: $colHighlight
+    > .active
+      > a, > a:hover, > a:focus
+        color: $colHighlight
+        background-color: $bgHighlight
+
+.navbar-brand
+  padding: 0px
+
+.navbar-brand>img
+  height: 100%
+  padding: 7px
+  width: auto
+
+.simple-calendar
+  background-color: white
+
+  .day
+    padding: 4px
+
+  .wday-0
+
+  .wday-1
+
+  .wday-2
+
+  .wday-3
+
+  .wday-4
+
+  .wday-5
+
+  .wday-6
+
+  .today
+    background-color: white
+
+  .past
+    background-color: white
+
+  .future
+    background-color: white
+
+  .start-date
+
+  .prev-month
+    background-color: white
+
+  .next-month
+
+  .current-month
+
+  .has-events
+    background-color: white
