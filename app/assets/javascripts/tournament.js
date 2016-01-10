@@ -1,56 +1,3 @@
-<div class="row">
-<div class="col-md-8 col-sm-12">
-  <h1><%= @tournament.name %></h1>
-</div>
-
-<div class="col-md-4 col-sm-12">
-<span id="clockdiv" class="pull-right">
-  <h1>
-    <span class="days "></span> days /
-    <span class="hours"></span> :
-    <span class="minutes"></span> :
-    <span class="seconds"></span>
- </h1>
-</span>
-</div>
-</div>
-
-<div class="row">
-  <div class="col-md-12 portfolio-item">
-        <a href="#" class="thumbnail"><img src="<%= @tournament.large %>"></a>
-  </div>
-</div>
-
-<% if @tournament.competitors.empty? %>
- <p> Competitor list soon </p>
-<% else %>
-<% @tournament.competitors.each do |competitor| %>
-<%= competitor.name %><br>
-<% end %>
-<% end %>
-
-<% if @tournament.streams %>
-
-  <% @tournament.streams.each do |tournament_stream| %>
-    <a href="<%=tournament_stream.link %>"> <%= @tournament.name %> </a>
-  <% end %>
-<% else %>
-  <p>no stream</p>
-<% end %>
-
-
-
-<button type="button" class="btn btn-default" aria-label="Left Align">Follow</button>
-
-<button type="button" class="btn btn-default" aria-label="Left Align">Subscribe</button>
-
-
-<% t = @tournament.start_date.to_s  %>
-<% t.gsub!(" UTC", "") %>
-<% parsable = t.gsub!(" ", "T") %>
-<%= parsable %>
-
-<script>
 $(document).ready(function(){
   getTimeRemaining(deadline);
   initializeClock('clockdiv', deadline);
@@ -99,4 +46,4 @@ updateClock(); // run function once at first to avoid delay
 var timeinterval = setInterval(updateClock,1000);
 
 }
-</script>
+
