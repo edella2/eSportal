@@ -42,7 +42,6 @@
 </div>
 
 <div class="row">
-
   <div class="col-md-6">
     <% list_competitor_names_for(@tournament).each do |competitor| %>
       <p><%= competitor %></p><br>
@@ -50,8 +49,12 @@
   </div>
 
   <div class="col-md-6">
-    <% list_stream_urls_for(@tournament).each do |link| %>
-      <%= link_to @tournament.name, link %>
+    <% if @tournament.streams.any? %>
+      <% @tournament.streams.each do |stream| %>
+        <%= link_to @tournament.name, stream.link %>
+      <% end %>
+    <% else %>
+      <p>Stream list soon</p>
     <% end %>
   </div>
 </div>
