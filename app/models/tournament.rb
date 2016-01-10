@@ -8,6 +8,10 @@ class Tournament < ActiveRecord::Base
 
   include HTTParty
 
+  def self.search(query)
+    where("lower(name) like ?", "%#{query}%")
+  end
+
   def self.update_data
     tournament_data = HTTParty.get("https://api.abiosgaming.com/v1/tournaments?access_token=#{ENV['ABIOS_API_KEY']}")
     update_or_create(tournament_data)
