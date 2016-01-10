@@ -4,7 +4,7 @@ $(document).ready(function(){
   initializeClock('clockdiv', deadline);
 });
 
-// var deadline = "<%= parsable %>";
+var deadline = deadline;
 
 function getTimeRemaining(endtime){
   var t = Date.parse(endtime) - Date.parse(new Date());
