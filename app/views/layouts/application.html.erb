@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="/tournaments">
@@ -25,16 +25,17 @@
         <li><a href="/calendar"><i class="fa fa-calendar-o"></i></a></li>
         <% end %>
         <% if user_signed_in? %>
-          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete, :class => 'pull-right') %></li>
+          <li><a href="#">Logged in as <%= current_user.email %></a></li>
+          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete) %></li>
         <% else %>
-          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), :class => 'pull-right') %></li>
+          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2)) %></li>
         <% end %>
       </ul>
     </div>
   </div>
 </nav>
 
-<div class="container">
+<div class="container" style="padding-top:65px">
   <%= yield %>
 </div>
 
