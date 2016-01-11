@@ -21,6 +21,8 @@
 
 <% javascript_include_tag "timer" %>
 
+<script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script> 
+
 <div class="row">
   <div class="col-md-12">
     <div class="portfolio-item thumbnail">
@@ -34,10 +36,14 @@
       <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-default", 'aria-label' => "Left Align" do %>
       <i class="fa fa-heart"></i> Follow
       <% end %>
+
+    </a>
+
       <%= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
       <i class="fa fa-calendar-plus-o"></i> Subscribe
       <% end %>
     </div>
+
   </div>
 </div>
 <div class="row infoplus">
@@ -51,6 +57,8 @@
       </section>
     </div>
 
+<div class="row">
+  <div class="col-md-6">
     <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
     <% @tournament.streams.each do |stream| %>
@@ -68,6 +76,19 @@
       <%= competitor %> /
       <% end %>
       <section>
+      
+      <div title="Add to Calendar" class="addeventatc">
+          Add to Calendar
+          <span class="start"><%= @tournament.start_date %></span>
+          <span class="end"><%= @tournament.end_date %></span>
+          <span class="timezone">America/Tijuana</span>
+          <span class="title"><%= @tournament.name %></span>
+          <span class="description"><%= @tournament.description %></span>
+          <span class="location"><%= @tournament.city %></span>
+          <span class="date_format">MM/DD/YYYY</span>
+      </div> 
+
+
       </div>
     </div>
   </div>
