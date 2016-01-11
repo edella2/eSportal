@@ -12,32 +12,36 @@ games_backup       = File.expand_path('.' + '/db/api_response_backups/games_back
 tournaments_backup = File.expand_path('.' + '/db/api_response_backups/tournaments_backup.json')
 matches_backup     = File.expand_path('.' + '/db/api_response_backups/matches_backup.json')
 matchups_backup    = File.expand_path('.' + '/db/api_response_backups/matchups_backup.json')
-competitors_backup = File.expand_path('.' + '/db/api_response_backups/competitors_backup.json')
+
+games       = Abios.fetch_games(api_key)
+
+# temporary limit on games
+games = [games[10]]
+
+tournaments = games.map {|g| Abios.fetch_tournaments_by_game_id(g['id'], api_key)}.flatten
+# temporary limit on tournaments
+tournaments = tournaments.first(3)
+
+matches     = tournaments.map {|t| Abios.fetch_matches_by_tournament_id(t['id'], api_key)}.flatten
+# temporary limit on matches
+matches = matches.first(3)
+
+matchups    = matches.map {|m| Abios.fetch_matchups_by_match_id(m['id'], api_key)}.flatten
+# # temporary limit on matchups
+matchups = matchups.first(3)
 
 File.open(games_backup, 'w+') do |f|
-  f.write(Abios.fetch_games(api_key))
+  games.each {|game| f.puts game.to_json}
 end
 
-# File.open(tournaments_backup, 'a+') do |f|
-#   f.write(HTTParty.get(tournaments_root + api_key).to_json)
-# end
+File.open(tournaments_backup, 'w+') do |f|
+  tournaments.each {|tournament| f.puts tournament.to_json}
+end
 
+File.open(matches_backup, 'w+') do |f|
+  matches.each {|match| f.puts match.to_json}
+end
 
-
-# GAMES       = abios.fetch_games
-# TOURNAMENTS = GAMES.map {|game| abios.fetch_tournaments_by_game(game["id"])}.flatten
-
-# GAMES.each do |game_hash|
-#   if game_hash
-#     puts "writing game to /abios_backup.csv: #{game_hash['title']}"
-
-#     Game.find_or_create_by(
-#       id:   game_hash["id"],
-#       name: game_hash["title"]
-#       )
-#   else
-#     puts "no game data for this record!"
-#   end
-# end
-
-
+File.open(matchups_backup, 'w+') do |f|
+  matchups.each {|matchup| f.puts matchup.to_json}
+end

@@ -14,7 +14,7 @@ module Abios
     HTTParty.get(@@games_root + api_key)
   end
 
-  def self.fetch_tournaments_by_game(game_id, api_key = @@api_key)
+  def self.fetch_tournaments_by_game_id(game_id, api_key = @@api_key)
     puts "  fetching current tournaments by game_id: #{game_id}"
 
     filter = "&games[]=" + game_id.to_s
@@ -45,21 +45,21 @@ module Abios
 
     # returns an array of match hashes with keys:
     # id, title, start, end, bestOf
-    HTTParty.get(@@matches_root + @@api_key + filter)
+    HTTParty.get(@@matches_root + api_key + filter)
   end
 
   def self.fetch_matchups_by_match_id(match_id, api_key = @@api_key)
     puts "        fetching matchups by match_id: #{match_id}"
 
     filter = "&with[]=matchups"
-    match  = HTTParty.get(@@matches_root + "/#{match_id}" + @@api_key + filter)
+    match  = HTTParty.get(@@matches_root + "/#{match_id}" + api_key + filter)
 
     # returns an array of matchup hashes with keys:
     # id, competitors
     match["matchups"]
   end
 
-  def self.get_competitors_from_matchup(matchup, api_key = @@api_key)
+  def self.get_competitors_from_matchup(matchup)
     puts "          parsing competitors from match_id: #{matchup['id']}"
 
     # returns an array of competitor hashes with keys:
@@ -83,18 +83,18 @@ module Abios
   #   HTTParty.get(@@matches_root + @@api_key)
   # end
 
-  # def self.fetch_tournaments_by_game(game_id, api_key = @@api_key)
+  # def self.fetch_tournaments_by_game_id(game_id, api_key = @@api_key)
   #   puts "fetching tournaments by game_id: #{game_id}"
 
   #   filter = "&games[]=" + game_id.to_s
-  #   HTTParty.get(@@tournaments_root + @@api_key + filter)
+  #   HTTParty.get(@@tournaments_root + api_key + filter)
   # end
 
   # def self.fetch_tournaments_with_matches_by_game(game_id, api_key = @@api_key)
   #   puts "fetching tournaments by game_id: #{game_id}"
 
   #   filter = "&with[]=matches&game[]=#{game_id}"
-  #   HTTParty.get(@@tournaments_root + @@api_key + filter)
+  #   HTTParty.get(@@tournaments_root + api_key + filter)
   # end
 
   # def self.fetch_matches_with_competitors
@@ -103,6 +103,6 @@ module Abios
   # def self.fetch_tournaments
   #   puts "fetching current tournaments"
 
-  #   HTTParty.get(@@tournaments_root + @@api_key)
+  #   HTTParty.get(@@tournaments_root + api_key)
   # end
 end
