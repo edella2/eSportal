@@ -44,26 +44,29 @@
   <% end %>
 
   <% if tournament.image && tournament.is_live? %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail" style=>
+
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
       <img class="hidden-xs grayscale" id="<%= tournament.id %>" src="<%= tournament.large %>">
-      <img class="hidden-lg hidden-sm hidden-md grayscale" style="width:100%" src="<%= tournament.image %>">
+      <img class="hidden-lg hidden-sm hidden-md grayscale" id="<%= tournament.id %>" style="width:100%" src="<%= tournament.image %>">
     </a>
 
   <% elsif tournament.image %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img class="grayscale" src="<%= tournament.image %>"></a>
+    <a href="/tournaments/<%=tournament.id%>" id="<%= '#{tournament.id}-default-image' %>"  class="thumbnail"><img class="grayscale" src="<%= tournament.image %>"></a>
   <% else %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img class="grayscale" src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
+    <a href="/tournaments/<%=tournament.id%>" id="<%= '#{tournament.id}-default-image' %>" class="thumbnail"><img class="grayscale" src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
   <% end %>
 
   <div class="info" id="<%= tournament.id %>">
+
     <div id="<%= tournament.id %>">
     <% if tournament.is_live? %>
     <span class="titling"><span class="label label-success">Live</span>&nbsp;<%= tournament.name%></span>
     <% else %>
     <span class="titling"><%= tournament.short_title%></span>
     <% end %>
-      <br><span><%= tournament.city %> – <%= tournament.start_date %> </span>
-      <span class="hidden infohidden" maxlength="10"> <%= tournament.description %> </span>
+      <br>
+      <span id="<%= '#{tournament.id}-default-index-text' %>" class="" ><%= tournament.city %> – <%= tournament.start_date %> </span>
+      <span id="<%= '#{tournament.id}-default-index-text' %>" class="hidden" > <%= tournament.description %> </span>
       </p>
     </div>
   </div>
@@ -79,37 +82,18 @@
 
 <br><br>
 
-<ul>
-<li data-id="firstdiv">First div</li>
-<li data-id="seconddiv">Second div</li>
-<li data-id="thirddiv">Third div</li>
-</ul>
 
-<div id="firstdiv">Content Here</div>
-<div id="seconddiv">Content Here</div>
-<div id="thirddiv">Content Here</div>
 
 <script>
-// This is image
 
-// $('img').hover(function() {
-// console.log(this.id)
-// // this is info
-//   $(".info span").toggle();
-// });
-$('ul li').on({
-    'mouseenter':function(){
-        $('#'+$(this).data('id')).fadeIn();
-    },'mouseleave':function(){
-        $('#'+$(this).data('id')).fadeOut();
-    }
+$('img').hover(function(){
+    var imageId = $(this).attr("id")
+    $("#"+imageId+"-default-index-text").addClass('hidden');
+    $("#"+imageId+"-hover-index-text").removeClass('hidden');
+},function(){
+    $("#"+imageId+"-default-index-text").removeClass('hidden');
+    $("#"+imageId+"-hover-index-text").addClass('hidden');
 });
-</script>
-
-<script>
-function toggler(divId) {
-    $("#" + divId).toggle();
-}
 </script>
 
 
