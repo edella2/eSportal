@@ -29,14 +29,9 @@
 
 </div>
 
-
-
-
 <div class="row">
 
   <% @tournaments.each do |tournament| %>
-
-
   <% if tournament.is_live? %>
   <div class="col-md-12 col-sm-12 col-xs-12 portfolio-item">
   <% else %>
@@ -51,60 +46,56 @@
     </a>
 
   <% elsif tournament.image %>
-    <a href="/tournaments/<%=tournament.id%>"  class="thumbnail"><img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image %>"></a>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
+      <img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image %>">
+    </a>
   <% else %>
-    <a href="/tournaments/<%=tournament.id%>"  class="thumbnail"><img class="grayscale" id="<%= tournament.id%>" src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
+      <img class="grayscale" style="max-height:200px; width:100%" id="<%= tournament.id%>" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
+    </a>
   <% end %>
 
   <div class="info" id="<%= tournament.id %>">
 
     <div id="<%= tournament.id %>">
     <% if tournament.is_live? %>
-    <span class="titling"><span class="label label-success">Live</span>&nbsp;<%= tournament.name%></span>
+    <span class="titling">
+      <span class="label label-success">Live</span> <%= tournament.name%>
+    </span>
+      <span id="<%= tournament.id %>-default-index-text" class="" >
+        <%= tournament.city %> – <%= tournament.start_date %>
+      </span>
+      <span id="<%= tournament.id %>-hover-index-text"  style="display:none" >
+        <%= tournament.description[0..170].gsub(/\s\w+\s*$/, '...') %>
+      </span>
     <% else %>
     <span class="titling"><%= tournament.short_title%></span>
+
+      <span id="<%= tournament.id %>-default-index-text" class="" >
+        <%= tournament.city %> – <%= tournament.start_date %>
+      </span>
+      <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
+        <%= tournament.description[0..40].gsub(/\s\w+\s*$/, '...') %>
+      </span>
     <% end %>
-      <br>
-      <span id="<%= tournament.id %>-default-index-text" class="" ><%= tournament.city %> – <%= tournament.start_date %> </span>
-      <span id="<%= tournament.id %>-hover-index-text"  style="display:none" > <%= tournament.description %> </span>
+
       </p>
     </div>
   </div>
   </div>
   <% end %>
-
 </div>
 
 
-
-
-
-
-<br><br>
-
-
-
 <script>
-
-// $('img').hover(function(){
-//     var imageId = $(this).attr("id")
-//     $("#"+imageId+"-default-index-text").addClass('hidden');
-//     $("#"+imageId+"-hover-index-text").removeClass('hidden');
-// },function(){
-//     var imageId = $(this).attr("id")
-//     $("#"+imageId+"-default-index-text").removeClass('hidden');
-//     $("#"+imageId+"-hover-index-text").addClass('hidden');
-
-// });
-
 $('img').hover(function(){
     var imageId = $(this).attr("id")
-    $("#"+imageId+"-default-index-text").fadeOut(400, function(){
+    $("#"+imageId+"-default-index-text").fadeOut(200, function(){
       $("#"+imageId+"-hover-index-text").fadeIn();
     });
 },function(){
     var imageId = $(this).attr("id")
-    $("#"+imageId+"-hover-index-text").fadeOut(400, function() {
+    $("#"+imageId+"-hover-index-text").fadeOut(200, function() {
       $("#"+imageId+"-default-index-text").fadeIn();
     });
 });
