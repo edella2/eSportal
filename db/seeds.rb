@@ -2,34 +2,44 @@ games_backup_path       = File.expand_path('.' + '/db/api_response_backups/games
 tournaments_backup_path = File.expand_path('.' + '/db/api_response_backups/tournaments_backup.json')
 matches_backup_path     = File.expand_path('.' + '/db/api_response_backups/matches_backup.json')
 matchups_backup_path    = File.expand_path('.' + '/db/api_response_backups/matchups_backup.json')
+competitors_backup_path = File.expand_path('.' + '/db/api_response_backups/competitors_backup.json')
 
-games       = []
-tournaments = []
-matches     = []
-matchups    = []
+GAMES       = []
+TOURNAMENTS = []
+MATCHES     = []
+MATCHUPS    = []
 
 puts "parsing game data from #{games_backup_path}"
 File.open(games_backup_path).each do |line|
-  games << JSON.parse(line)
+  GAMES << JSON.parse(line)
 end
 
 puts "parsing tournament data from #{tournaments_backup_path}"
 File.open(tournaments_backup_path).each do |line|
-  tournaments << JSON.parse(line)
+  TOURNAMENTS << JSON.parse(line)
 end
 
 puts "parsing match data from #{matches_backup_path}"
 File.open(matches_backup_path).each do |line|
-  matches << JSON.parse(line)
+  MATCHES << JSON.parse(line)
 end
 
 puts "parsing matchup data from #{matches_backup_path}"
 File.open(matchups_backup_path).each do |line|
-  matchups << JSON.parse(line)
+  MATCHUPS << JSON.parse(line)
 end
 
-# populates games table
-games.each do |game_hash|
+# puts "parsing competitor data from #{competitors_backup_path}"
+# def get_competitors_from_tournament_hash(tournament_id)
+#   matches    = MATCHES.select     {|m| m['tournament_id'] == tournament_id}
+#   matchups   = MATCHUPS.select    {|m| m['match_id'] == }
+# end
+
+require 'pry'
+binding.pry
+
+# populate games table
+GAMES.each do |game_hash|
   if game_hash
     puts "adding game to database: #{game_hash['title']}"
 
@@ -42,13 +52,11 @@ games.each do |game_hash|
   end
 end
 
-# populates tournaments, streams, and competitors tables
-tournaments.each do |tournament_hash|
+# populate tournaments, streams, and competitors tables
+TOURNAMENTS.each do |tournament_hash|
   if tournament_hash
     # tournaments
     puts "adding tournament to database: #{tournament_hash['title']}"
-
-    game = Game.find(tournament_hash["game"]["id"])
 
     tournament = Tournament.find_or_create_by(
       id:                tournament_hash["id"],
@@ -63,6 +71,8 @@ tournaments.each do |tournament_hash|
       city:              tournament_hash["city"],
       short_title:       tournament_hash["short_title"]
       )
+
+    game = Game.find(tournament_hash["game"]["id"])
 
     game.tournaments << tournament
 
@@ -79,7 +89,7 @@ tournaments.each do |tournament_hash|
     end
 
     # competitors
-    competitors = Abios.fetch_competitors_by_tournament(tournament_hash["id"])
+    competitors = []
 
     if competitors
       puts "  adding competitors to database for tournament: #{tournament_hash['title']}"
