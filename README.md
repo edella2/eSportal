@@ -2,7 +2,7 @@
 eSportal website for E-Sports tournaments
 
 ##Tech
-Rails baby! -- [http://rubyonrails.org](http://rubyonrails.org/)
+Rails -- [http://rubyonrails.org](http://rubyonrails.org/)
 
 Abios API -- [www.Abios.com](www.Abios.com)
 
