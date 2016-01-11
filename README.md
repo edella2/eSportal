@@ -91,7 +91,7 @@ Commit after major features.
 
 
 ##Bonding
-Play some games at a lan cafe
+Bond over some arcade games at Brewcade
 
 
 ##Team
