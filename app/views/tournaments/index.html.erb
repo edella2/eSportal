@@ -11,7 +11,6 @@
       </div>
     </div>
 
-
   </div>
 
   <div class="col-md-6 col-lg-6 col-sm-6">
@@ -31,9 +30,12 @@
 </div>
 
 
+
+
 <div class="row">
 
   <% @tournaments.each do |tournament| %>
+
 
   <% if tournament.is_live? %>
   <div class="col-md-12 col-sm-12 col-xs-12 portfolio-item">
@@ -42,57 +44,70 @@
   <% end %>
 
   <% if tournament.image && tournament.is_live? %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail" style=>
-      <img class="hidden-xs grayscale" src="<%= tournament.large %>">
-      <img class="hidden-lg hidden-sm hidden-md grayscale" style="width:100%" src="<%= tournament.image %>">
+
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
+      <img class="hidden-xs grayscale" id="<%= tournament.id %>" src="<%= tournament.large %>">
+      <img class="hidden-lg hidden-sm hidden-md grayscale" id="<%= tournament.id %>" style="width:100%" src="<%= tournament.image %>">
     </a>
 
   <% elsif tournament.image %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img class="grayscale" src="<%= tournament.image %>"></a>
+    <a href="/tournaments/<%=tournament.id%>"  class="thumbnail"><img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image %>"></a>
   <% else %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img class="grayscale" src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
+    <a href="/tournaments/<%=tournament.id%>"  class="thumbnail"><img class="grayscale" id="<%= tournament.id%>" src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
   <% end %>
 
-  <div class="info">
+  <div class="info" id="<%= tournament.id %>">
+
+    <div id="<%= tournament.id %>">
     <% if tournament.is_live? %>
     <span class="titling"><span class="label label-success">Live</span>&nbsp;<%= tournament.name%></span>
     <% else %>
     <span class="titling"><%= tournament.short_title%></span>
     <% end %>
-      <br><span><%= tournament.city %> – <%= tournament.start_date %> </span>
+      <br>
+      <span id="<%= tournament.id %>-default-index-text" class="" ><%= tournament.city %> – <%= tournament.start_date %> </span>
+      <span id="<%= tournament.id %>-hover-index-text"  style="display:none" > <%= tournament.description %> </span>
       </p>
     </div>
   </div>
+  </div>
   <% end %>
+
 </div>
 
 
-<style>
-img.grayscale {
-    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+, IE10 */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
-    -webkit-transition: all .6s ease; /* Fade to color for Chrome and Safari */
-    -webkit-backface-visibility: hidden; /* Fix for transition flickering */
-}
-
-img.grayscale:hover {
-    filter: none;
-    -webkit-filter: grayscale(0%);
-}
-
-svg {
-    background:url(http://4.bp.blogspot.com/-IzPWLqY4gJ0/T01CPzNb1KI/AAAAAAAACgA/_8uyj68QhFE/s400/a2cf7051-5952-4b39-aca3-4481976cb242.jpg);
-}
-
-svg image {
-    transition: all .6s ease;
-}
-
-svg image:hover {
-    opacity: 0;
-}
 
 
 
-</style>
+
+<br><br>
+
+
+
+<script>
+
+// $('img').hover(function(){
+//     var imageId = $(this).attr("id")
+//     $("#"+imageId+"-default-index-text").addClass('hidden');
+//     $("#"+imageId+"-hover-index-text").removeClass('hidden');
+// },function(){
+//     var imageId = $(this).attr("id")
+//     $("#"+imageId+"-default-index-text").removeClass('hidden');
+//     $("#"+imageId+"-hover-index-text").addClass('hidden');
+
+// });
+
+$('img').hover(function(){
+    var imageId = $(this).attr("id")
+    $("#"+imageId+"-default-index-text").fadeOut(400, function(){
+      $("#"+imageId+"-hover-index-text").fadeIn();
+    });
+},function(){
+    var imageId = $(this).attr("id")
+    $("#"+imageId+"-hover-index-text").fadeOut(400, function() {
+      $("#"+imageId+"-default-index-text").fadeIn();
+    });
+});
+</script>
+
+
