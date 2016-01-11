@@ -13,15 +13,13 @@
        <div class="col-md-6 col-sm-6 h1 grey text-right">
         <span id="clockdiv">
           <span class="days text-right"></span> | <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-        </span></h1>
+        </span>
       </div>
     </div>
   </div>
 </div>
 
 <% javascript_include_tag "timer" %>
-
-<script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script> 
 
 <div class="row">
   <div class="col-md-12">
@@ -75,8 +73,11 @@
       <% list_competitor_names_for(@tournament).each do |competitor| %>
       <%= competitor %> /
       <% end %>
-      <section>
+    </section>
       
+      <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script> 
+
+
       <div title="Add to Calendar" class="addeventatc">
           Add to Calendar
           <span class="start"><%= @tournament.start_date %></span>
@@ -92,7 +93,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 
