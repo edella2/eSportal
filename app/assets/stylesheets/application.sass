@@ -14,20 +14,399 @@
  *= require_self
  */
 
-@import "bootstrap-sprockets"
-@import "bootstrap"
+// @import "bootstrap-sprockets"
+// @import "bootstrap"
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic)
+
+body
+  font-family: Open Sans, sans-serif
+  background-color: #F1F1F1
+
+a
+  transition: color 0.5s ease
 
 .blue
-    background-color: blue
-    height: 40px
+  background-color: blue
+  height: 40px
+
+.grey
+  color: grey
+  font-weight: 300
 
 .green
-    background-color: green
-    height: 40px
+  background-color: green
+  height: 40px
 
 .red
-    background-color: red
-    height: 40px
+  background-color: red
+  height: 40px
+
+.white
+  color: white
 
 .info
-    height: 50px
+  background-color: white
+  margin-bottom: 30px
+  height: 100px
+  padding: 20px
+  -webkit-box-shadow: 0 10px 6px -6px #777
+  -moz-box-shadow: 0 10px 6px -6px #777
+  box-shadow: 0 10px 6px -6px #777
+
+.infoplus
+  @extend .info
+  height: 40%
+  margin: 0px
+
+.titling
+  font-size: 2rem
+
+$height-footer: 60px
+
+html
+  min-height: 100%
+  position: relative
+
+body
+  margin-bottom: $height-footer
+
+  #footer
+    bottom: 0
+    width: 100%
+    position: absolute
+    height: $height-footer
+    background-color: white
+
+  .footer-block
+    margin: 20px 0
+
+#img_container
+  position: relative
+  display: inline-block
+  text-align: center
+
+.buttonz
+  position: absolute
+  bottom: 10px
+  right: 28px
+  width: 100px
+  padding: 4px
+
+.buttony
+  position: absolute
+  bottom: 10px
+  right: 140px
+  width: 100px
+  padding: 4px
+
+$bgDefault      : #b02018
+$bgHighlight    : #b02018
+$colDefault     : #e3e3e3
+$colHighlight   : #ffffff
+$dropDown       : false
+
+.navbar-default
+  background-color: $bgDefault
+  border-color: $bgHighlight
+
+  .navbar-brand
+    color: $colDefault
+    &:hover, &:focus
+      color: $colHighlight
+
+  .navbar-text
+    color: $colDefault
+
+  .navbar-nav
+    > li
+      > a
+        color: $colDefault
+        &:hover, &:focus
+          color: $colHighlight
+      @if $dropDown
+        > .dropdown-menu
+          background-color: $bgDefault
+          > li > a
+            color: $colDefault
+            &:hover, &:focus
+              color: $colHighlight
+              background-color: $bgHighlight
+
+          .divider
+            background-color: $bgHighlight
+    > .active
+      > a, > a:hover, > a:focus
+        color: $colHighlight
+        background-color: $bgHighlight
+    > .open
+      > a, > a:hover, > a:focus
+        color: $colHighlight
+        background-color: $bgHighlight
+
+  .navbar-toggle
+    border-color: $bgHighlight
+    &:hover, &:focus
+      background-color: $bgHighlight
+
+    .icon-bar
+      background-color: $colDefault
+
+  .navbar-collapse,
+
+  .navbar-form
+    border-color: $colDefault
+
+  .navbar-link
+    color: $colDefault
+    &:hover
+      color: $colHighlight
+@media (max-width: 767px)
+
+  .navbar-default .navbar-nav .open .dropdown-menu
+    > li > a
+      color: $colDefault
+      &:hover, &:focus
+        color: $colHighlight
+    > .active
+      > a, > a:hover, > a:focus
+        color: $colHighlight
+        background-color: $bgHighlight
+
+.navbar-brand
+  padding: 0px
+
+.navbar-brand>img
+  height: 100%
+  padding: 7px
+  width: auto
+
+.simple-calendar
+  background-color: white
+
+  .day
+    padding: 4px
+
+  .wday-0
+
+  .wday-1
+
+  .wday-2
+
+  .wday-3
+
+  .wday-4
+
+  .wday-5
+
+  .wday-6
+
+  .today
+    background-color: white
+
+  .past
+    background-color: white
+
+  .future
+    background-color: white
+
+  .start-date
+
+  .prev-month
+    background-color: white
+
+  .next-month
+
+  .current-month
+
+  .has-events
+    background-color: white
+
+
+
+header
+  text-align: center
+  padding: 120px 0
+  background: #fff
+  color: #000
+
+  h1
+    margin: 0 0 15px 0
+    padding: 0
+    font-size: 42px
+    font-weight: normal
+
+
+  h3
+    margin: 0
+    padding: 0
+    text-transform: uppercase
+    font-size: 14px
+    font-weight: bold
+    color: #999
+    a
+      color: #09c
+      text-decoration: none
+
+      &:hover
+        color: #09c
+        text-decoration: underline
+
+
+$default_color: #ffffff
+$primary_color: #3498db
+$success_color: #2ecc71
+$info_color: #81cfe0
+$warning_color: #b02018
+$danger_color: #c0392b
+
+.btn
+  letter-spacing: 0.01em
+  font-size: 12px
+  padding: 10px 10px
+  border: none
+  border-radius: 0px
+  transition: color .3s linear, background-color .3s linear
+
+  &.btn-default
+    color: #000
+    background-color: $default_color
+    border: 1px solid darken($default_color, 10%)
+
+    &.btn-border
+      border-color: $default_color
+      color: #fff
+
+    &.btn-3d
+      box-shadow: inset 0 -2px 0 darken($default_color, 20%)
+
+    &:hover
+      background-color: darken($default_color, 10%)
+      color: #000
+
+  &.btn-primary
+    background-color: $primary_color
+
+    &.btn-border
+      border-color: $primary_color
+      color: $primary_color
+
+    &.btn-3d
+      box-shadow: inset 0 -2px 0 darken($primary_color, 20%)
+
+    &:hover
+      background-color: darken($primary_color, 10%)
+      color: #fff
+
+  &.btn-success
+    background-color: $success_color
+
+    &.btn-border
+      border-color: $success_color
+      color: $success_color
+
+    &.btn-3d
+      box-shadow: inset 0 -2px 0 darken($success_color, 20%)
+
+    &:hover
+      background-color: darken($success_color, 10%)
+      color: #fff
+
+  &.btn-info
+    background-color: $info_color
+
+    &.btn-border
+      border-color: $info_color
+      color: $info_color
+
+    &.btn-3d
+      box-shadow: inset 0 -2px 0 darken($info_color, 20%)
+
+    &:hover
+      background-color: darken($info_color, 10%)
+      color: #fff
+
+  &.btn-warning
+    background-color: $warning_color
+
+    &.btn-border
+      border-color: $warning_color
+      color: $warning_color
+
+    &.btn-3d
+      box-shadow: inset 0 -2px 0 darken($warning_color, 20%)
+
+    &:hover
+      background-color: darken($warning_color, 10%)
+      color: #fff
+
+  &.btn-danger
+    background-color: $danger_color
+
+    &.btn-border
+      border-color: $danger_color
+      color: $danger_color
+
+    &.btn-3d
+      box-shadow: inset 0 -2px 0 darken($danger_color, 20%)
+
+    &:hover
+      background-color: darken($danger_color, 10%)
+      color: #fff
+
+  &.btn-lg
+    font-size: 14px
+    padding: 17px 24px
+
+  &.btn-sm
+    padding: 9px 14px
+
+  &.btn-xs
+    font-size: 11px
+    padding: 7px 12px
+
+  &.btn-border
+    border: 1px solid
+    background: transparent
+
+  &.btn-round
+    border-radius: 40px
+
+  &.btn-square
+    border-radius: 0
+
+
+// Form Control here
+
+.form-control
+  display: block
+  width: 100%
+  padding: 8.5px 12px
+  font-size: 14px
+  line-height: 1.42857143
+  color: #555
+  background-color: #fff
+  background-image: none
+  border: 1px solid $warning_color
+  border-radius: 0px
+
+
+// img processor
+
+img.grayscale
+  filter: url("data:image/svg+xmlutf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale") /* Firefox 3.5+, IE10 */
+  filter: gray /* IE6-9 */
+  -webkit-filter: grayscale(100%) /* Chrome 19+ & Safari 6+ */
+  -webkit-transition: all .6s ease /* Fade to color for Chrome and Safari */
+  -webkit-backface-visibility: hidden /* Fix for transition flickering */
+
+img.grayscale:hover
+  filter: none
+  -webkit-filter: grayscale(0%)
+
+svg image
+  transition: all .6s ease
+
+svg image:hover
+  opacity: 0

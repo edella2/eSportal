@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-8 col-sm-12">
+    <h1><%= @user.name %></h1>
+  </div>
+</div>
+
+<div class="row">
+
+  <h2>Favorite Tournaments</h2>
+  <div class="col-md-6">
+    <% if @favorite_tournaments %>
+      <% @favorite_tournaments.each do |favorite_tournament| %>
+        <%= link_to favorite_tournament.name, tournament_path(favorite_tournament) %><br>
+      <% end %>
+    <% else %>
+      <p> No favorites yet </p>
+    <% end %>
+  </div>
+
+  <h2>Favorite Competitors</h2>
+  <div class="col-md-6">
+    <% if @favorite_competitors %>
+      <% @favorite_competitors.each do |favorite_competitor| %>
+        <%= link_to favorite_competitor.name, competitor_path(favorite_competitor) %><br>
+      <% end %>
+    <% else %>
+      <p> No favorites yet </p>
+    <% end %>
+  </div>
+</div>
+
+
