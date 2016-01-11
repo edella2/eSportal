@@ -28,8 +28,12 @@
 <div class="row">
   <div class="col-md-12 portfolio-item">
     <a href="#" class=" image_container thumbnail"><img src="<%= @tournament.large %>">
-      <button type="button" class="btn btn-warning btn-border" aria-label="Left Align"><i class="fa fa-heart"></i> Follow</button>
-       <div title="Add to Calendar" class="addeventatc btn btn-warning btn-border">
+      <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
+      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-default", 'aria-label' => "Left Align" do %>
+        <i class="fa fa-heart"></i> Follow
+      <% end %>
+
+      <div title="Add to Calendar" class="addeventatc">
           Add to Calendar
           <span class="start"><%= @tournament.start_date %></span>
           <span class="end"><%= @tournament.end_date %></span>
@@ -39,30 +43,26 @@
           <span class="location"><%= @tournament.city %></span>
           <span class="date_format">MM/DD/YYYY</span>
       </div> 
+
     </a>
   </div>
 </div>
 
 
 <div class="row">
-
   <div class="col-md-6">
-    <% if @tournament.competitors.empty? %>
-      <p> Competitor list soon </p>
-    <% else %>
-      <% @tournament.competitors.each do |competitor| %>
-        <%= competitor.name %><br>
-      <% end %>
+    <% list_competitor_names_for(@tournament).each do |competitor| %>
+      <p><%= competitor %></p><br>
     <% end %>
   </div>
 
   <div class="col-md-6">
-    <% if @tournament.streams %>
-      <% @tournament.streams.each do |tournament_stream| %>
-        <a href="<%=tournament_stream.link %>"> <%= @tournament.name %> </a>
+    <% if @tournament.streams.any? %>
+      <% @tournament.streams.each do |stream| %>
+        <%= link_to @tournament.name, stream.link %>
       <% end %>
     <% else %>
-        <p>no stream</p>
+      <p>Stream list soon</p>
     <% end %>
   </div>
 </div>
