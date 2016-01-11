@@ -1,4 +1,5 @@
 <!-- Timer -->
+<% if current_user %>
 <% t = @tournament.start_date.to_s  %>
 <% t.gsub!(" UTC", "") %>
 <% parsable = t.gsub!(" ", "T") %>
@@ -94,5 +95,5 @@
     </div>
   </div>
 </div>
-
+<% end %>
 
