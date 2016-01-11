@@ -23,13 +23,22 @@
 
 <% javascript_include_tag "timer" %>
 
+<script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script> 
+
 <div class="row">
   <div class="col-md-12 portfolio-item">
     <a href="#" class=" image_container thumbnail"><img src="<%= @tournament.large %>">
       <button type="button" class="btn btn-warning btn-border" aria-label="Left Align"><i class="fa fa-heart"></i> Follow</button>
-      <%= form_tag(subscribes_path, :method => "post") do %>
-      <button class="fa fa-calendar-plus-o btn btn-warning btn-border" type="submit">Subscribe!</button>
-      <% end %>
+       <div title="Add to Calendar" class="addeventatc btn btn-warning btn-border">
+          Add to Calendar
+          <span class="start"><%= @tournament.start_date %></span>
+          <span class="end"><%= @tournament.end_date %></span>
+          <span class="timezone">America/Tijuana</span>
+          <span class="title"><%= @tournament.name %></span>
+          <span class="description"><%= @tournament.description %></span>
+          <span class="location"><%= @tournament.city %></span>
+          <span class="date_format">MM/DD/YYYY</span>
+      </div> 
     </a>
   </div>
 </div>
