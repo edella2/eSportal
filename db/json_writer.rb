@@ -1,7 +1,6 @@
 require_relative '../app/models/abios'
 require 'httparty'
 require 'json'
-require 'pry'
 require 'dotenv'
 
 Dotenv.load
@@ -14,9 +13,8 @@ matches_backup     = File.expand_path('.' + '/db/api_response_backups/matches_ba
 matchups_backup    = File.expand_path('.' + '/db/api_response_backups/matchups_backup.json')
 
 games       = Abios.fetch_games(api_key)
-
 # temporary limit on games
-games = [games[10]]
+games = [games[2]]
 
 tournaments = games.map {|g| Abios.fetch_tournaments_by_game_id(g['id'], api_key)}.flatten
 # temporary limit on tournaments

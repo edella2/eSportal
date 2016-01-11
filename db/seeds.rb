@@ -1,14 +1,35 @@
-GAMES       = Abios.fetch_games
+games_backup_path       = File.expand_path('.' + '/db/api_response_backups/games_backup.json')
+tournaments_backup_path = File.expand_path('.' + '/db/api_response_backups/tournaments_backup.json')
+matches_backup_path     = File.expand_path('.' + '/db/api_response_backups/matches_backup.json')
+matchups_backup_path    = File.expand_path('.' + '/db/api_response_backups/matchups_backup.json')
 
-# TEMPORARY: limit number of games for which tournaments are fetched
-TOURNAMENTS = [GAMES[4]].map {|game| Abios.fetch_tournaments_by_game(game["id"])}.flatten
+games       = []
+tournaments = []
+matches     = []
+matchups    = []
 
-# TEMPORARY: limit the number of tournaments fetched for each game
-TOURNAMENTS = TOURNAMENTS.first(4) + TOURNAMENTS.last(4)
+puts "parsing game data from #{games_backup_path}"
+File.open(games_backup_path).each do |line|
+  games << JSON.parse(line)
+end
 
+puts "parsing tournament data from #{tournaments_backup_path}"
+File.open(tournaments_backup_path).each do |line|
+  tournaments << JSON.parse(line)
+end
+
+puts "parsing match data from #{matches_backup_path}"
+File.open(matches_backup_path).each do |line|
+  matches << JSON.parse(line)
+end
+
+puts "parsing matchup data from #{matches_backup_path}"
+File.open(matchups_backup_path).each do |line|
+  matchups << JSON.parse(line)
+end
 
 # populates games table
-GAMES.each do |game_hash|
+games.each do |game_hash|
   if game_hash
     puts "adding game to database: #{game_hash['title']}"
 
@@ -22,7 +43,7 @@ GAMES.each do |game_hash|
 end
 
 # populates tournaments, streams, and competitors tables
-TOURNAMENTS.each do |tournament_hash|
+tournaments.each do |tournament_hash|
   if tournament_hash
     # tournaments
     puts "adding tournament to database: #{tournament_hash['title']}"
