@@ -13,7 +13,9 @@ class TournamentsController < ApplicationController
       when "day"
         @tournaments = sort_tournaments_by_day
       else
-        @tournaments = Tournament.order('created_at DESC')
+        # @tournaments_live = Tournament.all.select { |tournament| tournament.is_live? }
+        # @tournaments = Tournament.order("start_date").select { |tournament| !tournament.is_live?}
+        @tournaments = Tournament.order("start_date")
       end
     end
   end

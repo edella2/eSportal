@@ -4,20 +4,18 @@
 <% parsable = t.gsub!(" ", "T") %>
 <script>var deadline = "<%= parsable %>";</script>
 
-<div class="row">
-  <div class="col-md-8 col-sm-12">
-    <h1><%= @tournament.name %></h1>
-  </div>
 
-  <div class="col-md-4 col-sm-12">
-    <span id="clockdiv" class="pull-right">
-      <h1>
-        <span class="days "></span> days /
-        <span class="hours"></span> :
-        <span class="minutes"></span> :
-        <span class="seconds"></span>
-      </h1>
-    </span>
+<div class="row" style="padding-bottom:5px">
+
+  <div class="col-md-12 col-sm-12">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 h1"><%= @tournament.short_title %></div>
+       <div class="col-md-6 col-sm-6 h1 grey text-right">
+        <span id="clockdiv">
+          <span class="days text-right"></span> | <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+        </span></h1>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -26,11 +24,17 @@
 <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script> 
 
 <div class="row">
-  <div class="col-md-12 portfolio-item">
-    <a href="#" class=" image_container thumbnail"><img src="<%= @tournament.large %>">
+  <div class="col-md-12">
+    <div class="portfolio-item thumbnail">
+      <% if @tournament.image %>
+      <img class="hidden-xs" src="<%= @tournament.large %>">
+      <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image %>">
+      <% else %>
+      <img class="grayscale" style="max-height:200px; width:100%" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
+      <% end %>
       <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
       <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-default", 'aria-label' => "Left Align" do %>
-        <i class="fa fa-heart"></i> Follow
+      <i class="fa fa-heart"></i> Follow
       <% end %>
 
       <div title="Add to Calendar" class="addeventatc">
@@ -45,9 +49,26 @@
       </div> 
 
     </a>
+
+      <%= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
+      <i class="fa fa-calendar-plus-o"></i> Subscribe
+      <% end %>
+    </div>
+
   </div>
 </div>
+<div class="row infoplus">
+  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+    <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
+      <section style="padding-bottom:10px">
+        <span class="h2"><%= @tournament.name %></span>
+      </section>
+      <section>
+        <p><%= @tournament.description %></p>
+      </section>
+    </div>
 
+<<<<<<< HEAD
 
 <div class="row">
   <div class="col-md-6">
@@ -57,15 +78,29 @@
   </div>
 
   <div class="col-md-6">
+=======
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+>>>>>>> e5ae74806148a80c90dcbd445ec6acd1c8ab0be4
     <% if @tournament.streams.any? %>
-      <% @tournament.streams.each do |stream| %>
-        <%= link_to @tournament.name, stream.link %>
-      <% end %>
-    <% else %>
-      <p>Stream list soon</p>
+    <% @tournament.streams.each do |stream| %>
+    <section style="padding-bottom:10px">
+      <span class="h2"><%= link_to "Stream", stream.link %></span>
+    </section>
     <% end %>
+    <% else %>
+    <section>
+      <p>Stream list soon</p>
+    </section>
+    <% end %>
+    <section>
+      <% list_competitor_names_for(@tournament).each do |competitor| %>
+      <%= competitor %> /
+      <% end %>
+      <section>
+      </div>
+    </div>
   </div>
-</div>
 
+</div>
 
 
