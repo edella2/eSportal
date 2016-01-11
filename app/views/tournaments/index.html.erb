@@ -51,9 +51,9 @@
     </a>
 
   <% elsif tournament.image %>
-    <a href="/tournaments/<%=tournament.id%>" id="<%= '#{tournament.id}-default-image' %>"  class="thumbnail"><img class="grayscale" src="<%= tournament.image %>"></a>
+    <a href="/tournaments/<%=tournament.id%>"  class="thumbnail"><img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image %>"></a>
   <% else %>
-    <a href="/tournaments/<%=tournament.id%>" id="<%= '#{tournament.id}-default-image' %>" class="thumbnail"><img class="grayscale" src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
+    <a href="/tournaments/<%=tournament.id%>"  class="thumbnail"><img class="grayscale" id="<%= tournament.id%>" src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
   <% end %>
 
   <div class="info" id="<%= tournament.id %>">
@@ -65,8 +65,8 @@
     <span class="titling"><%= tournament.short_title%></span>
     <% end %>
       <br>
-      <span id="<%= '#{tournament.id}-default-index-text' %>" class="" ><%= tournament.city %> – <%= tournament.start_date %> </span>
-      <span id="<%= '#{tournament.id}-default-index-text' %>" class="hidden" > <%= tournament.description %> </span>
+      <span id="<%= tournament.id %>-default-index-text" class="" ><%= tournament.city %> – <%= tournament.start_date %> </span>
+      <span id="<%= tournament.id %>-hover-index-text"  style="display:none" > <%= tournament.description %> </span>
       </p>
     </div>
   </div>
@@ -86,13 +86,27 @@
 
 <script>
 
+// $('img').hover(function(){
+//     var imageId = $(this).attr("id")
+//     $("#"+imageId+"-default-index-text").addClass('hidden');
+//     $("#"+imageId+"-hover-index-text").removeClass('hidden');
+// },function(){
+//     var imageId = $(this).attr("id")
+//     $("#"+imageId+"-default-index-text").removeClass('hidden');
+//     $("#"+imageId+"-hover-index-text").addClass('hidden');
+
+// });
+
 $('img').hover(function(){
     var imageId = $(this).attr("id")
-    $("#"+imageId+"-default-index-text").addClass('hidden');
-    $("#"+imageId+"-hover-index-text").removeClass('hidden');
+    $("#"+imageId+"-default-index-text").fadeOut(400, function(){
+      $("#"+imageId+"-hover-index-text").fadeIn();
+    });
 },function(){
-    $("#"+imageId+"-default-index-text").removeClass('hidden');
-    $("#"+imageId+"-hover-index-text").addClass('hidden');
+    var imageId = $(this).attr("id")
+    $("#"+imageId+"-hover-index-text").fadeOut(400, function() {
+      $("#"+imageId+"-default-index-text").fadeIn();
+    });
 });
 </script>
 
