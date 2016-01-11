@@ -37,17 +37,6 @@
       <i class="fa fa-heart"></i> Follow
       <% end %>
 
-      <div title="Add to Calendar" class="addeventatc">
-          Add to Calendar
-          <span class="start"><%= @tournament.start_date %></span>
-          <span class="end"><%= @tournament.end_date %></span>
-          <span class="timezone">America/Tijuana</span>
-          <span class="title"><%= @tournament.name %></span>
-          <span class="description"><%= @tournament.description %></span>
-          <span class="location"><%= @tournament.city %></span>
-          <span class="date_format">MM/DD/YYYY</span>
-      </div> 
-
     </a>
 
       <%= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
@@ -68,19 +57,9 @@
       </section>
     </div>
 
-<<<<<<< HEAD
-
 <div class="row">
   <div class="col-md-6">
-    <% list_competitor_names_for(@tournament).each do |competitor| %>
-      <p><%= competitor %></p><br>
-    <% end %>
-  </div>
-
-  <div class="col-md-6">
-=======
     <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
->>>>>>> e5ae74806148a80c90dcbd445ec6acd1c8ab0be4
     <% if @tournament.streams.any? %>
     <% @tournament.streams.each do |stream| %>
     <section style="padding-bottom:10px">
@@ -97,6 +76,19 @@
       <%= competitor %> /
       <% end %>
       <section>
+      
+      <div title="Add to Calendar" class="addeventatc">
+          Add to Calendar
+          <span class="start"><%= @tournament.start_date %></span>
+          <span class="end"><%= @tournament.end_date %></span>
+          <span class="timezone">America/Tijuana</span>
+          <span class="title"><%= @tournament.name %></span>
+          <span class="description"><%= @tournament.description %></span>
+          <span class="location"><%= @tournament.city %></span>
+          <span class="date_format">MM/DD/YYYY</span>
+      </div> 
+
+
       </div>
     </div>
   </div>
