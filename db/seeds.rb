@@ -1,9 +1,7 @@
-abios = Abios.new
-
-GAMES       = abios.fetch_games
+GAMES       = Abios.fetch_games
 
 # TEMPORARY: limit number of games for which tournaments are fetched
-TOURNAMENTS = [GAMES[4]].map {|game| abios.fetch_tournaments_by_game(game["id"])}.flatten
+TOURNAMENTS = [GAMES[4]].map {|game| Abios.fetch_tournaments_by_game(game["id"])}.flatten
 
 # TEMPORARY: limit the number of tournaments fetched for each game
 TOURNAMENTS = TOURNAMENTS.first(4) + TOURNAMENTS.last(4)
@@ -60,7 +58,7 @@ TOURNAMENTS.each do |tournament_hash|
     end
 
     # competitors
-    competitors = abios.fetch_competitors_by_tournament(tournament_hash["id"])
+    competitors = Abios.fetch_competitors_by_tournament(tournament_hash["id"])
 
     if competitors
       puts "  adding competitors to database for tournament: #{tournament_hash['title']}"
