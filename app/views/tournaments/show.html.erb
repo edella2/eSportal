@@ -8,75 +8,70 @@
 <div class="row" style="padding-bottom:5px">
 
   <div class="col-md-12 col-sm-12">
-    <h1><%= @tournament.name %></h1>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 h1"><%= @tournament.short_title %></div>
+      <div class="col-md-6 col-sm-6 h1 grey text-right">
+        <span id="clockdiv">
+          <span class="days text-right"></span> | <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+        </span></h1>
+      </div>
+    </div>
   </div>
-
-
 </div>
 
 <% javascript_include_tag "timer" %>
 
 <div class="row">
   <div class="col-md-12">
-  <div class="portfolio-item thumbnail">
-    <% if @tournament.image %>
+    <div class="portfolio-item thumbnail">
+      <% if @tournament.image %>
       <img class="hidden-xs" src="<%= @tournament.large %>">
       <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image %>">
-    <% else %>
-  <img class="grayscale" style="max-height:200px; width:100%" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
-    <% end %>
-      <span class="timerz">
-        <span id="clockdiv">
-          <span class="days "></span> days /<span class="hours"></span> :<span class="minutes"></span> :<span class="seconds"></span>
-         </span>
-      </span>
-
+      <% else %>
+      <img class="grayscale" style="max-height:200px; width:100%" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
+      <% end %>
       <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
       <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-default", 'aria-label' => "Left Align" do %>
-        <i class="fa fa-heart"></i> Follow
+      <i class="fa fa-heart"></i> Follow
       <% end %>
-
-      <!-- this performs the same action as the follow button above until subscription functionality is implemented -->
       <%= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
-        <i class="fa fa-calendar-plus-o"></i> Subscribe
+      <i class="fa fa-calendar-plus-o"></i> Subscribe
       <% end %>
-</div>
-</div>
+    </div>
+  </div>
 </div>
 <div class="row infoplus">
-<div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
-  <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
-  <section>
-   <h2><%= @tournament.short_title %></h2>
-  </section>
-  <section>
-   <p><%= @tournament.description %></p>
-  </section>
-</div>
+  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+    <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
+    <section style="padding-bottom:10px">
+      <span class="h2"><%= @tournament.name %></span>
+    </section>
+    <section>
+      <p><%= @tournament.description %></p>
+    </section>
+  </div>
 
-<div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
-
-   <% if @tournament.streams.any? %>
-      <% @tournament.streams.each do |stream| %>
-      <section>
-        <h2><%= link_to "Stream", stream.link %></h2>
-      </section>
-      <% end %>
+  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+    <% if @tournament.streams.any? %>
+    <% @tournament.streams.each do |stream| %>
+    <section style="padding-bottom:10px">
+      <span class="h2"><%= link_to "Stream", stream.link %></span>
+    </section>
+    <% end %>
     <% else %>
     <section>
       <p>Stream list soon</p>
     </section>
     <% end %>
-       <section>
-    <% list_competitor_names_for(@tournament).each do |competitor| %>
+    <section>
+      <% list_competitor_names_for(@tournament).each do |competitor| %>
       <%= competitor %> /
-    <% end %>
-  <section>
-</div>
+      <% end %>
+      <section>
+      </div>
+    </div>
+  </div>
 
-</div>
-
-</div>
 </div>
 
 
