@@ -10,7 +10,7 @@
   <div class="col-md-12 col-sm-12">
     <div class="row">
       <div class="col-md-6 col-sm-6 h1"><%= @tournament.short_title %></div>
-      <div class="col-md-6 col-sm-6 h1 grey text-right">
+       <div class="col-md-6 col-sm-6 h1 grey text-right">
         <span id="clockdiv">
           <span class="days text-right"></span> | <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
         </span></h1>
@@ -43,15 +43,15 @@
 <div class="row infoplus">
   <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
-    <section style="padding-bottom:10px">
-      <span class="h2"><%= @tournament.name %></span>
-    </section>
-    <section>
-      <p><%= @tournament.description %></p>
-    </section>
-  </div>
+      <section style="padding-bottom:10px">
+        <span class="h2"><%= @tournament.name %></span>
+      </section>
+      <section>
+        <p><%= @tournament.description %></p>
+      </section>
+    </div>
 
-  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
     <% @tournament.streams.each do |stream| %>
     <section style="padding-bottom:10px">
