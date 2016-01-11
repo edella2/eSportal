@@ -6,6 +6,7 @@ require 'dotenv'
 
 Dotenv.load
 
+api_key          = "?access_token=#{ENV['ABIOS_API_KEY']}"
 
 games_backup       = File.expand_path('.' + '/db/api_response_backups/games_backup.json')
 tournaments_backup = File.expand_path('.' + '/db/api_response_backups/tournaments_backup.json')
@@ -13,9 +14,9 @@ matches_backup     = File.expand_path('.' + '/db/api_response_backups/matches_ba
 matchups_backup    = File.expand_path('.' + '/db/api_response_backups/matchups_backup.json')
 competitors_backup = File.expand_path('.' + '/db/api_response_backups/competitors_backup.json')
 
-# File.open(games_backup, 'w+') do |f|
-#   f.write(HTTParty.get(Abios.games_root + api_key).to_json)
-# end
+File.open(games_backup, 'w+') do |f|
+  f.write(Abios.fetch_games(api_key))
+end
 
 # File.open(tournaments_backup, 'a+') do |f|
 #   f.write(HTTParty.get(tournaments_root + api_key).to_json)
