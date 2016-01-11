@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :competitors, only: [:index, :show]
   resources :favorites, only: [:create, :destroy]
-
+  resources :subscribes, only: [:create]
   get 'calendar', :to => 'tournaments#index_calendar'
 
   # You can have the root of your site routed with "root"
