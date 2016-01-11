@@ -1,55 +1,84 @@
-# ESportal
-ESportal website for E-Sports tournaments
+# eSportal
+eSportal website for E-Sports tournaments
 
 ##Tech
-Rails baby!
-Sass/Bootstrap
-Jquery
-Mechanize or Nokogiri
-Cron job to scrape in the background without affecting front end
+Rails -- [http://rubyonrails.org](http://rubyonrails.org/)
+
+Abios API -- [www.Abios.com](www.Abios.com)
+
+Sass/Bootstrap -- [http://sass-lang.com](http://sass-lang.com)
+
+Jquery -- [https://jquery.com](https://jquery.com)
+
+Google OAuth -- [Google OAuth](https://developers.google.com/identity/)
+
+Scheduler to refresh site with new information -- [Heroku Scheduler](https://elements.heroku.com/addons/scheduler)
+
+Devise -- [Devise Gem](https://github.com/plataformatec/devise)
+
+
+
 
 ## Team Goals
-Better than liquipedia (esportal > liquipedia)
+
 We want to get better and expand our knowledge in Rails
+
 We want a product that we can show to people and be proud of
-Prettiest site ever
-We want to be the best option for finding tournaments
+
+We want to add a new way for people to find and keep up to date with tournaments
+
 Google analytics experience
 
 ## MVP
 Scrape tournament info for one tournament
-Learn scraping for websites
-Counterstrike tournament information
-Calendar with time conversions for one time zone
-Each tournament have its own show page
+
+Tournament information for one game
+
+Countdown clock for upcoming tournaments
+
+Favoriting tournaments or teams
+
+Each tournament has its own show page
+
 Link to stream
-Link to official listing
-Counter for tournament start time
+
 Prize size
+
 Calendar takes you to events for that day(box takes you to the day, link to the event)
+
+Subscribe to tournaments to add them to google calendar as an event
+
+A user can search for tournaments
 
 
 
 
 ##Stretch
 User can filter by categories
-User can have game preferences to be displayed
+
 User can have times for their own time zone
+
 User can favorite a upcoming tournament to get updates
+
 Filtering by players/competitors that you like
+
 Tournament admins can submit their own tournament
+
 Convert to a user’s timezone (from ip address?)
 
 ##Hours
-Hours working until 8
-Lunch 12:30-2:00
-Dinner 6:00ish
+9-8 weekday
+
+10-9 Weekend
+
 
 ##Checkin
 Checkin 3x a day(Morning 9:00 am, Lunch meeting, After dinner)
 
 What we’re working on
+
 What we’re stuck on
+
 Something new we learned
 
 
@@ -62,20 +91,16 @@ Commit after major features.
 
 
 ##Bonding
-Play some games at a lan cafe
+Bond over some arcade games at Brewcade
 
 
 ##Team
-Eric: edella2@gmail.com
-Peter: pjwiebe@gmail.com
-Armani: armanisaldana@gmail.com
-Paul: gastongouron@gmail.com
-Steven: brodericksteven@gmail.com
+Eric Dell'Aringa: edella2@gmail.com
 
+Peter Wiebe: pjwiebe@gmail.com
 
-##TO-DO
-deploy on heroku
-write user stories of mvp
-make mock ups asap
-Investigate and scrap data from liquipedia
-Investigate on parsing data from http://api.abiosgaming.com/
+Armani Saldana: armanisaldana@gmail.com
+
+Paul Gouron: gastongouron@gmail.com
+
+Steven Broderick: brodericksteven@gmail.com
