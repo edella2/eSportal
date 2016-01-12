@@ -42,82 +42,83 @@ end
 if Rails.env.production?
   GAMES       = Abios.fetch_games
   # temporary limit on games (must be an array)
-  GAMES = [GAMES[4]]
+  # GAMES = [GAMES[4]]
 
-  TOURNAMENTS = GAMES.map do |game|
-    Abios.fetch_tournaments_by_game_id(game_id: game['id'])
-  end
-  TOURNAMENTS.flatten!
+  TOURNAMENTS = GAMES.map {|game| Abios.fetch_tournaments_by_game_id(game_id: game['id'])}.flatten
   # temporary limit on tournaments (must be an array)
-  TOURNAMENTS = TOURNAMENTS.first(8)
+  # TOURNAMENTS = TOURNAMENTS.first(8)
 
-  MATCHES     = TOURNAMENTS.map do |tourn|
-    Abios.fetch_matches_by_tournament_id(tournament_id: tourn['id'])
-  end
-  MATCHES.flatten!
+  MATCHES     = TOURNAMENTS.map {|tourn| Abios.fetch_matches_by_tournament_id(tournament_id: tourn['id'])}.flatten
   # temporary limit on matches (must be an array)
-  MATCHES = MATCHES.first(4)
+  # MATCHES = MATCHES.first(4)
 
-
-  MATCHUPS    = MATCHES.map do |match|
-    Abios.fetch_matchups_by_match_id(match_id: match['id'])
-  end
-  MATCHUPS.flatten!
+  MATCHUPS    = MATCHES.map {|match| Abios.fetch_matchups_by_match_id(match_id: match['id'])}.flatten
   # temporary limit on matchups (must be an array)
-  MATCHUPS = MATCHUPS.first(3)
+  # MATCHUPS = MATCHUPS.first(3)
 end
 
 # #############################################################################
 # populate db (same for production and deployment)
 # #############################################################################
 
-# populate games table
-GAMES.each do |game_hash|
-  if game_hash
-    puts "adding game to database: #{game_hash['title']}"
-
-    Game.find_or_create_by(
-      id:   game_hash["id"],
-      name: game_hash["title"]
-      )
-  else
-    puts "no game data for this record!"
+class SeedBuilder
+  def initialize(games: GAMES, tournaments: TOURNAMENTS)
+    populate_games(games)
+    populate_tournaments(tournaments)
   end
-end
 
-# utility method for linking competitors and tournaments across intermediate relations
-def get_competitors_from_tournament_hash(tournament_id)
-  match_ids = MATCHES.select {|m| m['tournament_id'] == tournament_id}.map {|m| m['id']}
-  matchups  = MATCHUPS.select {|m| match_ids.include? m['match_id'] }
+  # populate games
+  def populate_games(array_of_game_objs)
+    array_of_game_objs.each do |game_hash|
+      if game_hash
+        puts "adding game to database: #{game_hash['title']}"
 
-  matchups.map {|m| m['competitors']}.flatten.uniq
-end
+        Game.find_or_create_by(
+          id:   game_hash["id"],
+          name: game_hash["title"]
+          )
+      else
+        puts "no game data for this record!"
+      end
+    end
+  end
 
-# populate tournaments, streams, and competitors tables
-TOURNAMENTS.each do |tournament_hash|
-  if tournament_hash
-    # tournaments
-    puts "adding tournament to database: #{tournament_hash['title']}"
+  # populate tournaments and call methods to populate streams/competitors and build game-tourn association
+  def populate_tournaments(array_of_tourn_objects)
+    array_of_tourn_objects.each do |tournament_hash|
+      if tournament_hash
+        # tournaments
+        puts "adding tournament to database: #{tournament_hash['title']}"
 
-    tournament = Tournament.find_or_create_by(
-      id:                tournament_hash["id"],
-      name:              tournament_hash["title"],
-      image:             tournament_hash["images"]["default"],
-      start_date:        tournament_hash["start"],
-      end_date:          tournament_hash["end"],
-      thumbnail:         tournament_hash["images"]["thumbnail"],
-      large:             tournament_hash["images"]["large"],
-      description:       tournament_hash["description"],
-      short_description: tournament_hash["short_description"],
-      city:              tournament_hash["city"],
-      short_title:       tournament_hash["short_title"]
-      )
+        tournament = Tournament.find_or_create_by(
+          id:                tournament_hash["id"],
+          name:              tournament_hash["title"],
+          image:             tournament_hash["images"]["default"],
+          start_date:        tournament_hash["start"],
+          end_date:          tournament_hash["end"],
+          thumbnail:         tournament_hash["images"]["thumbnail"],
+          large:             tournament_hash["images"]["large"],
+          description:       tournament_hash["description"],
+          short_description: tournament_hash["short_description"],
+          city:              tournament_hash["city"],
+          short_title:       tournament_hash["short_title"]
+          )
 
-    game = Game.find(tournament_hash["game"]["id"])
+        game = Game.find(tournament_hash["game"]["id"])
+        game.tournaments << tournament
 
-    game.tournaments << tournament
+        populate_streams(tournament_hash)
+        populate_competitors(tournament_hash)
+      else
+        puts "no tournament data for this record!"
+      end
+    end
+  end
 
-    # streams
+  private
+
+  # populate streams (called from #populate_tournaments)
+  def populate_streams(tournament_hash)
     if tournament_hash['url']
       puts "  adding stream to database for tournament: #{tournament_hash['title']}"
 
@@ -128,32 +129,35 @@ TOURNAMENTS.each do |tournament_hash|
     else
       puts "  no stream data for #{tournament_hash['title']}!"
     end
+  end
 
-    # competitors
-    competitors = get_competitors_from_tournament_hash(tournament_hash['id'])
+  # populate competitors (called from #populate_tournaments)
+  def populate_competitors(tournament_hash)
+    competitors = get_competitors_from_tournament(tournament_hash)
 
-    if competitors
-      puts "  adding competitors to database for tournament: #{tournament_hash['title']}"
+    competitors.each do |competitor_hash|
+      if competitor_hash
+        puts "    adding competitor to database: #{competitor_hash['name']}"
 
-      competitors.each do |competitor_hash|
-        if competitor_hash
-          puts "    adding competitor to database: #{competitor_hash['name']}"
+        competitor = Competitor.find_or_create_by(
+          id:   competitor_hash["id"],
+          name: competitor_hash["name"]
+          )
 
-          competitor = Competitor.find_or_create_by(
-            id:   competitor_hash["id"],
-            name: competitor_hash["name"]
-            )
-
-          tournament.competitors << competitor
-        else
-          puts "    no competitor data for this record!"
-        end
+        tournament.competitors << competitor
+      else
+        puts "    no competitor data for this record!"
       end
-    else
-      puts "  no competitor data for #{tournament_hash['title']}!"
     end
+  end
 
-  else
-    puts "no tournament data for this record!"
+  # utility method for linking competitors and tournaments across intermediate relations
+  def get_competitors_from_tournament(tournament_hash)
+    match_ids = MATCHES.select {|m| m['tournament_id'] == tournament_hash}.map {|m| m['id']}
+    matchups  = MATCHUPS.select {|m| match_ids.include? m['match_id'] }
+
+    matchups.map {|m| m['competitors']}.flatten.uniq
   end
 end
+
+SeedBuilder.new
