@@ -1,3 +1,7 @@
+
+require 'pry'
+binding.pry
+
 games_backup_path       = File.expand_path('.' + '/db/api_response_backups/games_backup.json')
 tournaments_backup_path = File.expand_path('.' + '/db/api_response_backups/tournaments_backup.json')
 matches_backup_path     = File.expand_path('.' + '/db/api_response_backups/matches_backup.json')
@@ -35,8 +39,6 @@ end
 #   matchups   = MATCHUPS.select    {|m| m['match_id'] == }
 # end
 
-require 'pry'
-binding.pry
 
 # populate games table
 GAMES.each do |game_hash|
