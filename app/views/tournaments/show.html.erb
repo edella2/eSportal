@@ -60,11 +60,11 @@
   <div class="col-md-6">
     <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
-    <% @tournament.streams.each do |stream| %>
-    <section style="padding-bottom:10px">
-      <span class="h2"><%= link_to "Stream", stream.link %></span>
-    </section>
-    <% end %>
+      <% @tournament.streams.each do |stream| %>
+      <section style="padding-bottom:10px">
+        <span class="h2"><%= link_to "Stream", stream.link %></span>
+      </section>
+      <% end %>
     <% else %>
     <section>
       <p>Stream list soon</p>
@@ -75,8 +75,8 @@
       <%= competitor %> /
       <% end %>
     </section>
-      
-      <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script> 
+
+      <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script>
 
 
       <div title="Add to Calendar" class="addeventatc">
@@ -88,7 +88,7 @@
           <span class="description"><%= @tournament.description %></span>
           <span class="location"><%= @tournament.city %></span>
           <span class="date_format">MM/DD/YYYY</span>
-      </div> 
+      </div>
 
 
       </div>
