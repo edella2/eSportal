@@ -1,5 +1,4 @@
 <!-- Timer -->
-<% if current_user %>
 <% t = @tournament.start_date.to_s  %>
 <% t.gsub!(" UTC", "") %>
 <% parsable = t.gsub!(" ", "T") %>
@@ -32,11 +31,13 @@
       <img class="grayscale" style="max-height:200px; width:100%" src="http://goo.gl/7ezbJB">
       <% end %>
 
+      <% if current_user %>
       <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
-      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align" do %>
+      <% end %>
+      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
       <i class="fa fa-heart"></i> Follow
       <% end %>
-      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align" do %>
+      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
 
     </a>
 
@@ -84,8 +85,10 @@
     <section>
 
       <% @tournament.competitors.each do |competitor| %>
+      <% if current_user %>
       <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
-      <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default" %>
+      <% end %>
+      <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default", disabled: !current_user %>
       <% end %>
 
     </section>
@@ -95,6 +98,3 @@
 
 
    </div>
-
-<% end %>
-
