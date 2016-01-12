@@ -17,8 +17,17 @@
 // @import "bootstrap-sprockets"
 // @import "bootstrap"
 
+$bgDefault      : #b02018
+$bgHighlight    : #b02018
+$colDefault     : #e3e3e3
+$colHighlight   : #ffffff
+$dropDown       : false
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic)
+
+@mixin background-opacity($color, $opacity: 0.3)
+  background: $color
+  background: rgba($color, $opacity)
 
 body
   font-family: Open Sans, sans-serif
@@ -26,6 +35,12 @@ body
 
 a
   transition: color 0.5s ease
+  text-decoration: none
+  color: $bgDefault
+
+a:hover
+  @extend a
+  color: black
 
 .blue
   background-color: blue
@@ -100,12 +115,6 @@ body
   right: 140px
   width: 100px
   padding: 4px
-
-$bgDefault      : #b02018
-$bgHighlight    : #b02018
-$colDefault     : #e3e3e3
-$colHighlight   : #ffffff
-$dropDown       : false
 
 .navbar-default
   background-color: $bgDefault
@@ -183,46 +192,86 @@ $dropDown       : false
   width: auto
 
 .simple-calendar
-  background-color: white
+  table
+    -webkit-border-horizontal-spacing: 0px
+    -webkit-border-vertical-spacing: 0px
+    background-color: rgba(0, 0, 0, 0)
+    border: 1px solid rgb(221, 221, 221)
+    border-collapse: collapse
+    box-sizing: border-box
+    max-width: 100%
+    width: 100%
+
+  table thead
+    margin-top: 10px
+
+  tr
+    border-collapse: collapse
+
+
+  th
+    margin-top: 10px
+    padding: 0px
+    border-bottom: 1px solid rgb(221, 221, 221)
+    border-collapse: collapse
+    border-left: 1px solid rgb(221, 221, 221)
+    border-right: 1px solid rgb(221, 221, 221)
+    border-top: 0px none rgb(51, 51, 51)
+    box-sizing: border-box
+    text-align: left
+
+
+  td
+    padding: 0px
+    vertical-align: top
+    width: 14%
+
+    border: 1px solid #ddd
+    border-top-color: rgb(221, 221, 221)
+    border-top-style: solid
+    border-top-width: 1px
+    border-right-color: rgb(221, 221, 221)
+    border-right-style: solid
+    border-right-width: 1px
+    border-bottom-color: rgb(221, 221, 221)
+    border-bottom-style: solid
+    border-bottom-width: 1px
+    border-left-color: rgb(221, 221, 221)
+    border-left-style: solid
+    border-left-width: 1px
+
+  td:hover
+
 
   .day
-    padding: 4px
 
   .wday-0
 
   .wday-1
-
   .wday-2
-
   .wday-3
-
   .wday-4
-
   .wday-5
-
   .wday-6
 
   .today
-    background-color: white
+
 
   .past
-    background-color: white
 
   .future
-    background-color: white
 
   .start-date
 
   .prev-month
-    background-color: white
+    background: #DDD
 
   .next-month
+    background: #DDD
 
   .current-month
 
   .has-events
-    background-color: white
-
 
 
 header

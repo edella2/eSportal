@@ -50,7 +50,7 @@
       <div class="col-md-6 col-sm-6 h1"><%= @tournament.short_title %></div>
        <div class="col-md-6 col-sm-6 h1 grey text-right">
         <span id="clockdiv">
-          <span class="days text-right"></span> | <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+          <span class="days text-right"></span> <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
         </span>
       </div>
     </div>
@@ -95,7 +95,6 @@
     </div>
 
 <div class="row">
-  <div class="col-md-6">
     <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
@@ -109,8 +108,11 @@
     </section>
     <% end %>
     <section>
-      <% list_competitor_names_for(@tournament).each do |competitor| %>
-      <%= competitor %> /
+      <% @tournament.competitors.each do |competitor| %>
+      <%= competitor.name %>
+      <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
+      <%= button_to favorites_path(favorite_params), action: "create", class: "btn btn-default", 'aria-label' => "Left Align" do %>
+      <% end %>
       <% end %>
     </section>
 
@@ -139,8 +141,6 @@
         <span class="date_format">MM/DD/YYYY</span>
       </div>
 
-
-      </div>
     </div>
   </div>
 </div>
