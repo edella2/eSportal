@@ -8,8 +8,8 @@ class SubscriptionsController < ApplicationController
       'summary' => 'New Event Title',
       'description' => 'The description',
       'location' => 'Location',
-      'start' => { 'dateTime' => Chronic.parse('tomorrow 4 pm') },
-      'end' => { 'dateTime' => Chronic.parse('tomorrow 5pm') } }
+      'start' => { 'dateTime' => '2016-01-12T09:00:00-07:00' },
+      'end' => { 'dateTime' => '2016-01-12T10:00:00-07:00' } }
 
     client = Google::APIClient.new
     client.authorization.access_token = current_user.token
