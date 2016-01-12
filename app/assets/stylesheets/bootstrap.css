@@ -4166,6 +4166,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-collapse {
+  text-align: left;
   padding-right: 15px;
   padding-left: 15px;
   overflow-x: visible;
@@ -4259,7 +4260,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand {
   float: left;
-  height: 55px;
+  height: 54px;
   padding: 15px 15px;
   font-size: 18px;
   line-height: 20px;
@@ -4525,7 +4526,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #e7e7e7;
+  /*border-color: #e7e7e7;*/
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
