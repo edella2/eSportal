@@ -9,21 +9,28 @@ class SubscriptionsController < ApplicationController
       'summary' => tournament.name,
       'description' => tournament.description,
       'location' => tournament.city,
-      'start' => { 'dateTime' => DateTime.parse("#{tournament.start_date}").to_s },
-      'end' => { 'dateTime' => DateTime.parse("#{tournament.end_date}").to_s } }
+      'start' => { 'dateTime' => DateTime.parse("#{tournament.start_date}") },
+      'end' => { 'dateTime' => DateTime.parse("#{tournament.end_date}") } }
 
     p @event
     p "*"*50
 
     client = Google::APIClient.new
+    p client
+    p "*"*50
     client.authorization.access_token = current_user.token
+    p client.authorization.access_token
+    p "*"*50
     service = client.discovered_api('calendar', 'v3')
+    p service
+    p "*"*50
 
     @set_event = client.execute(api_method: service.events.insert,
                                 parameters: { 'calendarId' => 'primary', 'sendNotifications' => true },
                                 body: JSON.dump(@event),
                                 headers: { 'Content-Type' => 'application/json' })
-
+    p @set_event
+    p "*"*50
     redirect_to '/'
   end
 
