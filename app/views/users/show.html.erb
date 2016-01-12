@@ -24,10 +24,10 @@
 
   <div class="col-md-6">
     <div class="row portfolio-item thumbnail infoplus">
-      <span class="h3">Favorite Competitors</span>
+      <span class="h3">Favorite Competitors</span><br><hr>
     <% if @favorite_competitors %>
       <% @favorite_competitors.each do |favorite_competitor| %>
-       <p><%= link_to favorite_competitor.name, competitor_path(favorite_competitor) %></p><br><hr>
+       <span class="p"><%= link_to favorite_competitor.name, competitor_path(favorite_competitor) %></span> /
       <% end %>
     <% else %>
       <p> No favorites yet </p>

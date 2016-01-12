@@ -71,8 +71,11 @@
     </section>
     <% end %>
     <section>
-      <% list_competitor_names_for(@tournament).each do |competitor| %>
-      <%= competitor %> /
+      <% @tournament.competitors.each do |competitor| %>
+      <%= competitor.name %>
+      <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
+      <%= button_to favorites_path(favorite_params), action: "create", class: "btn btn-default", 'aria-label' => "Left Align" do %>
+      <% end %>
       <% end %>
     </section>
 
