@@ -35,10 +35,11 @@
       <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-default", 'aria-label' => "Left Align" do %>
       <i class="fa fa-heart"></i> Follow
       <% end %>
+      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
 
     </a>
 
-      <%= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
+      <%#= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
       <i class="fa fa-calendar-plus-o"></i> Subscribe
       <% end %>
     </div>
@@ -75,8 +76,8 @@
       <%= competitor %> /
       <% end %>
     </section>
-      
-      <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script> 
+
+      <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script>
 
 
       <div title="Add to Calendar" class="addeventatc">
@@ -88,12 +89,13 @@
           <span class="description"><%= @tournament.description %></span>
           <span class="location"><%= @tournament.city %></span>
           <span class="date_format">MM/DD/YYYY</span>
-      </div> 
+      </div>
 
 
       </div>
     </div>
   </div>
 </div>
+
 <% end %>
 

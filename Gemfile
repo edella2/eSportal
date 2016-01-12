@@ -39,6 +39,8 @@ gem 'devise'
 gem 'google-api-client', :require => 'google/api_client'
 gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-google-oauth2'
+gem 'chronic'
+
 
 gem 'chronic'
 
