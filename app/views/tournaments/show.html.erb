@@ -84,7 +84,7 @@
   </div>
 </div>
 <div class="row infoplus">
-  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+  <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
     <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
       <section style="padding-bottom:10px">
         <span class="h2"><%= @tournament.name %></span>
@@ -94,8 +94,8 @@
       </section>
     </div>
 
-<div class="row">
-    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+
+    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
       <section style="padding-bottom:10px">
@@ -107,31 +107,39 @@
       <p>Stream list soon</p>
     </section>
     <% end %>
+
     <section>
+
       <% @tournament.competitors.each do |competitor| %>
-      <%= competitor.name %>
+      <div class="btn-group">
       <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
-      <%= button_to favorites_path(favorite_params), action: "create", class: "btn btn-default", 'aria-label' => "Left Align" do %>
+      <%= button_to favorites_path(favorite_params), action: "create", class: "btn btn-xs btn-default" do %>
+      <%= competitor.name %>
       <% end %>
       <% end %>
+    </div>
     </section>
 
+    </div>
 
-     <div class="addeventatc">
+
+
+    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4" style="padding-right:0px !important">
+     <div class="addeventatc pull-right">
         <div class="date">
           <span class="mon"><%= Date::MONTHNAMES[@tournament.start_date.mon] %></span>
           <span class="day"><%= @tournament.start_date.day %></span>
           <div class="bdr1"></div>
           <div class="bdr2"></div>
         </div>
-      
+
         <div class="desc">
           <p>
             <strong class="hed"><%= @tournament.name %></strong>
             <span class="des">Location: <%= @tournament.city %></span>
           </p>
         </div>
-        
+
         <span class="start"><%= @tournament.start_date %></span>
         <span class="end"><%= @tournament.end_date %></span>
         <span class="timezone">America/Tijuana</span>
@@ -140,9 +148,9 @@
         <span class="location"><%= @tournament.city %></span>
         <span class="date_format">MM/DD/YYYY</span>
       </div>
+      </div>
 
-    </div>
-  </div>
+
 </div>
 
 <% end %>
