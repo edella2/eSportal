@@ -261,19 +261,16 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-<<<<<<< HEAD
     selenium-webdriver (2.48.1)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-=======
     signet (0.7.2)
       addressable (~> 2.3)
       faraday (~> 0.9)
       jwt (~> 1.5)
       multi_json (~> 1.10)
->>>>>>> 9c3f4f2509e7d85a5dc3e89360a7757d98c0373e
     simple_calendar (2.0.3)
       rails (>= 3.0)
     slop (3.6.0)
@@ -321,11 +318,8 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   byebug
   capybara
-<<<<<<< HEAD
   chromedriver-helper
-=======
   chronic
->>>>>>> 9c3f4f2509e7d85a5dc3e89360a7757d98c0373e
   coffee-rails (~> 4.1.0)
   devise
   dotenv-rails
@@ -355,4 +349,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.11.2
+   1.10.6
