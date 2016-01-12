@@ -12,7 +12,7 @@
 <body>
 
 <nav class="navbar navbar-default">
-  <section class="container-fluid" class="blue">
+  <section class="container-fluid" style="height:54px" class="blue">
   <div class="container" style="background-color:#B02B2C">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -24,17 +24,17 @@
         <%= image_tag("esportal.png", :alt => "rss feed") %>
         </a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav pull-right">
+    <div class="collapse navbar-collapse pull-right" id="myNavbar">
+      <ul class="nav navbar-nav">
         <% if current_page_is_tournament? || current_page_is_calendar? %>
-          <li><a href="/tournaments"><i style="padding-top:2px" class="appzicon fa fa-th"></i></a></li>
-          <li><a href="/calendar"><i class="appzicon fa fa-calendar-o"></i></a></li>
+          <li><a href="/tournaments" class="text-right"><i style="padding-top:2px" class="appzicon fa fa-th"></i></a></li>
+          <li><a href="/calendar" class="text-right"><i class="appzicon text-right fa fa-calendar-o"></i></a></li>
         <% end %>
         <% if user_signed_in? %>
           <li><a href="/users/<%= current_user.id %>">Logged in as <%= current_user.email %></a></li>
-          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete) %></li>
+          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete, class: "text-right") %></li>
         <% else %>
-          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2)) %></li>
+          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), class: "text-right") %></li>
         <% end %>
       </ul>
     </div>
