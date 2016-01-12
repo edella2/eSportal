@@ -42,6 +42,7 @@ gem 'omniauth-google-oauth2'
 gem 'chronic'
 
 
+gem 'chronic'
 
 
 # Use ActiveModel has_secure_password

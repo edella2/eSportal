@@ -5,8 +5,8 @@
     <div class="input-group" style="padding-top:2px">
       <%= form_tag(tournaments_path, :method => "get", class: "navbar-form", id: "search-form") do %>
       <div class="input-append">
-      <%= text_field_tag :search, params[:search], class: "form-control span2 btn-border", placeholder: "Search Items" %>
-      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">Go!</button></span>
+      <%= text_field_tag :search, params[:search], class: "form-control btn-border", placeholder: "Search Items" %>
+      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">&nbsp;<i class="fa fa-search"></i>&nbsp;</button></span>
       <% end %>
       </div>
     </div>
@@ -88,6 +88,7 @@
 
 
 <script>
+
 $('img').hover(function(){
     var imageId = $(this).attr("id")
     $("#"+imageId+"-default-index-text").fadeOut(0, function(){
@@ -100,5 +101,3 @@ $('img').hover(function(){
     });
 });
 </script>
-
-

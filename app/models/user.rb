@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   #Can favorite models that are favorable
   has_many :favorites, inverse_of: :user
 
+
 	def self.from_omniauth(access_token, signed_in_resource = nil)
 	    data = access_token.info
 	    user = User.where(:email => data["email"]).first
