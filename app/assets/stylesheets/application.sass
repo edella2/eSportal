@@ -55,11 +55,15 @@ a:hover
   height: 40px
 
 .red
-  background-color: red
-  height: 40px
+  color: $bgDefault !important
 
 .white
   color: white
+
+.miniinfo
+  -webkit-box-shadow: 0 10px 6px -6px #777
+  -moz-box-shadow: 0 10px 6px -6px #777
+  box-shadow: 0 10px 6px -6px #777
 
 .info
   background-color: white
@@ -69,6 +73,11 @@ a:hover
   -webkit-box-shadow: 0 10px 6px -6px #777
   -moz-box-shadow: 0 10px 6px -6px #777
   box-shadow: 0 10px 6px -6px #777
+
+.dailyinfo
+  @include background-opacity($bgDefault, $opacity: 0.35)
+  border-radius: 10px
+  margin-bottom: 6px
 
 .infoplus
   @extend .info
@@ -104,17 +113,22 @@ body
 
 .buttonz
   position: absolute
-  bottom: 10px
+  bottom: 30px
   right: 28px
   width: 100px
   padding: 4px
 
 .buttony
   position: absolute
-  bottom: 10px
+  bottom: 30px
   right: 140px
   width: 100px
   padding: 4px
+
+.buttonx
+  position: absolute
+  top: 10px
+  left: 10px
 
 .navbar-default
   background-color: $bgDefault
@@ -196,7 +210,7 @@ body
     -webkit-border-horizontal-spacing: 0px
     -webkit-border-vertical-spacing: 0px
     background-color: rgba(0, 0, 0, 0)
-    border: 1px solid rgb(221, 221, 221)
+    border: 0px solid rgb(221, 221, 221)
     border-collapse: collapse
     box-sizing: border-box
     max-width: 100%
@@ -207,15 +221,16 @@ body
 
   tr
     border-collapse: collapse
+    margin-bottom: 10px
 
 
   th
     margin-top: 10px
     padding: 0px
-    border-bottom: 1px solid rgb(221, 221, 221)
+    border-bottom: 0px solid rgb(221, 221, 221)
     border-collapse: collapse
-    border-left: 1px solid rgb(221, 221, 221)
-    border-right: 1px solid rgb(221, 221, 221)
+    border-left: 0px solid rgb(221, 221, 221)
+    border-right: 0px solid rgb(221, 221, 221)
     border-top: 0px none rgb(51, 51, 51)
     box-sizing: border-box
     text-align: left
@@ -225,28 +240,30 @@ body
     padding: 0px
     vertical-align: top
     width: 14%
-
-    border: 1px solid #ddd
-    border-top-color: rgb(221, 221, 221)
+    border: 4px solid #F1F1F1
+    border-top-color: #F1F1F1
     border-top-style: solid
-    border-top-width: 1px
-    border-right-color: rgb(221, 221, 221)
+    border-top-width: 4px
+    border-right-color: #F1F1F1
     border-right-style: solid
-    border-right-width: 1px
-    border-bottom-color: rgb(221, 221, 221)
+    border-right-width: 4px
+    border-bottom-color: #F1F1F1
     border-bottom-style: solid
-    border-bottom-width: 1px
-    border-left-color: rgb(221, 221, 221)
+    border-bottom-width: 4px
+    border-left-color: #F1F1F1
     border-left-style: solid
-    border-left-width: 1px
+    border-left-width: 4px
 
   td:hover
+    @include background-opacity($bgDefault, $opacity: 0.3)
+    border-radius: 20px
 
+    .dailyinfo
+      @include background-opacity($bgDefault, $opacity: 0.6)
 
   .day
 
   .wday-0
-
   .wday-1
   .wday-2
   .wday-3
@@ -254,8 +271,10 @@ body
   .wday-5
   .wday-6
 
-  .today
+  .today > div.dailyinfo
+    background-color: $bgDefault
 
+  .today
 
   .past
 
@@ -265,9 +284,11 @@ body
 
   .prev-month
     background: #DDD
+    border-radius: 20px
 
   .next-month
     background: #DDD
+    border-radius: 20px
 
   .current-month
 
@@ -459,3 +480,9 @@ svg image
 
 svg image:hover
   opacity: 0
+
+.btn-competitor
+  margin-bottom: 3px
+
+form
+  display: inline-block !important
