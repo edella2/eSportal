@@ -63,7 +63,8 @@
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
       <section style="padding-bottom:10px">
-        <span class="h2"><i class="fa fa-video-camera"></i> <%= link_to "Stream", stream.link %>
+        <span class="h2"><i class="fa red fa-video-camera"></i> <%= link_to "Stream", stream.link %>
+
                    <span class="mon date"><%= Date::MONTHNAMES[@tournament.start_date.mon] %></span>
           <span class="day date"><%= @tournament.start_date.day %></span>
           <div class="bdr1"></div>
@@ -84,7 +85,7 @@
 
       <% @tournament.competitors.each do |competitor| %>
       <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
-      <%= link_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default" %>
+      <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default" %>
       <% end %>
 
     </section>
