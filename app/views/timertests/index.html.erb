@@ -1,4 +1,4 @@
-<% t = @tournaments.first.start_date.to_s  %>
+<% t = @tournaments.first.start.to_s  %>
 <% t.gsub!(" UTC", "") %>
 <% parsable = t.gsub!(" ", "T") %>
 <%= parsable %>
