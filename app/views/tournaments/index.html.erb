@@ -112,16 +112,44 @@
 
 <script>
 
+// $('img').hover(function(){
+//     var imageId = $(this).attr("id")
+//     // $("#"+imageId+"-default-index-text").animate({opacity: 1}, 600, function(){
+//     //       $("#"+imageId+"-hover-index-text").animate({opacity: 1}, 600);
+
+//     // });
+//     $("#"+imageId+"-default-index-text").fadeOut(100, function(){
+//       $("#"+imageId+"-hover-index-text").fadeIn();
+//     });
+// },function(){
+//     var imageId = $(this).attr("id")
+//     $("#"+imageId+"-hover-index-text").fadeOut(200, function() {
+//       $("#"+imageId+"-default-index-text").fadeIn();
+//     });
+// });
+
+
 $('img').hover(function(){
     var imageId = $(this).attr("id")
-    $("#"+imageId+"-default-index-text").fadeOut(0, function(){
-      $("#"+imageId+"-hover-index-text").fadeIn();
+    // $("#"+imageId+"-default-index-text").animate({opacity: 1}, 600, function(){
+    //       $("#"+imageId+"-hover-index-text").animate({opacity: 1}, 600);
+
+    // });
+    $("#"+imageId+"-default-index-text").stop().fadeOut(200, function(){
+      $("#"+imageId+"-hover-index-text").stop().fadeIn(400);
     });
 },function(){
     var imageId = $(this).attr("id")
-    $("#"+imageId+"-hover-index-text").fadeOut(200, function() {
-      $("#"+imageId+"-default-index-text").fadeIn();
+    $("#"+imageId+"-hover-index-text").stop().fadeOut(400, function() {
+      $("#"+imageId+"-default-index-text").stop().fadeIn(600);
     });
+});
+
+
+$("#no-queue div").hover(function(){
+    $(this).animate({ width: "200px" }, {queue: false});
+}, function() {
+    $(this).animate({ width: "100px" }, {queue: false});
 });
 </script>
 
