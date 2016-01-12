@@ -13,5 +13,6 @@ class AddColsToTournaments < ActiveRecord::Migration
     add_column    :tournaments, :link_website, :string
     add_column    :tournaments, :link_wiki, :string
     add_column    :tournaments, :link_youtube, :string
+    add_column    :tournaments, :url, :string
   end
 end
