@@ -75,7 +75,7 @@
         <b><%= tournament.city %></b> – <%= tournament.start_date %>
       </span>
       <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
-        <p><%= tournament.description[0..40].gsub(/\s\w+\s*$/, '...') %></p>
+        <p><%= tournament.description[0..40].gsub(/\s\w+\s*$/, '...').gsub(/(&nbsp;)/, ' ') %></p>
       </span>
     <% end %>
 
