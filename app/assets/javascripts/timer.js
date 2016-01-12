@@ -13,7 +13,7 @@ function getTimeRemaining(endtime){
   var hours = Math.floor( (t/(1000*60*60)) % 24 );
   var days = Math.floor( t/(1000*60*60*24) );
 
-  if (days > 1 ) {
+  if (days > -1 ) {
       return {
       'total': t,
       'days': days,
@@ -37,7 +37,7 @@ function initializeClock(id, endtime){
   function updateClock(){
     var t = getTimeRemaining(endtime);
 
-    daysSpan.innerHTML = ('0' + t.days).slice(-2) + 'days';
+    daysSpan.innerHTML = ('0' + t.days).slice(-2) + ' days';
     hoursSpan.innerHTML = ('0' + t.hours).slice(-2) + ':';
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2) + ':';
     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2) ;
