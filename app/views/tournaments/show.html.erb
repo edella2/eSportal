@@ -1,5 +1,5 @@
 <!-- Timer -->
-<% t = @tournament.start_date.to_s  %>
+<% t = @tournament.start.to_s  %>
 <% t.gsub!(" UTC", "") %>
 <% parsable = t.gsub!(" ", "T") %>
 <script>var deadline = "<%= parsable %>";</script>
@@ -24,9 +24,9 @@
 <div class="row">
   <div class="col-md-12">
     <div class="portfolio-item thumbnail">
-      <% if @tournament.image %>
-      <img class="hidden-xs" src="<%= @tournament.large %>">
-      <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image %>">
+      <% if @tournament.image_default %>
+      <img class="hidden-xs" src="<%= @tournament.image_large %>">
+      <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image_default %>">
       <% else %>
       <img class="grayscale" style="max-height:200px; width:100%" src="http://goo.gl/7ezbJB">
       <% end %>
@@ -52,7 +52,7 @@
   <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
       <section style="padding-bottom:10px">
-        <span class="h2"><%= @tournament.name %></span>
+        <span class="h2"><%= @tournament.title %></span>
       </section>
       <section>
         <p>  <b>Location: <%= @tournament.city %></b> – <%= @tournament.description.gsub(/(&nbsp;)/, ' ') %></p>
@@ -63,10 +63,10 @@
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
       <section style="padding-bottom:10px">
-        <span class="h2"><i class="fa coolblue fa-video-camera"></i> <%= link_to "Stream", stream.link %>
+        <span class="h2"><i class="fa coolblue fa-video-camera"></i> <%= link_to "Stream", stream.url %>
 
-          <span class="mon date"><%= Date::MONTHNAMES[@tournament.start_date.mon] %></span>
-          <span class="day date"><%= @tournament.start_date.day %></span>
+          <span class="mon date"><%= Date::MONTHNAMES[@tournament.start.mon] %></span>
+          <span class="day date"><%= @tournament.start.day %></span>
           <div class="bdr1"></div>
           <div class="bdr2"></div>
 

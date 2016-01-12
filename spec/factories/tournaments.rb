@@ -11,18 +11,18 @@ FactoryGirl.define do
 
 
     trait :past do
-      start_date        DateTime.now - 5
-      end_date          DateTime.now - 2
+      start        DateTime.now - 5
+      end          DateTime.now - 2
     end
 
     trait :current  do
-      start_date        DateTime.now - 3
-      end_date          DateTime.now + 3
+      start        DateTime.now - 3
+      end          DateTime.now + 3
     end
 
     trait :upcoming do
-      start_date        DateTime.now + 3
-      end_date          DateTime.now + 6
+      start        DateTime.now + 3
+      end          DateTime.now + 6
     end
   end
 end
