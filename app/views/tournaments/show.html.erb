@@ -33,10 +33,10 @@
       <% end %>
 
       <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
-      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-default", 'aria-label' => "Left Align" do %>
+      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align" do %>
       <i class="fa fa-heart"></i> Follow
       <% end %>
-      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
+      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align" do %>
 
     </a>
 
