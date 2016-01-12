@@ -16,6 +16,7 @@ $danger_color   : #c0392b
 $colDefault     : #e3e3e3
 $colHighlight   : #ffffff
 $dropDown       : false
+$coolblue       : #356AA0
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic)
 
@@ -34,7 +35,7 @@ a
 
 a:hover
   @extend a
-  color: black
+  color: #356AA0
   font-weight: italic
 
 .appzicon
@@ -43,6 +44,9 @@ a:hover
 .blue
   background-color: blue
   height: 40px
+
+.coolblue
+  color: $coolblue
 
 .grey
   color: grey
@@ -71,6 +75,8 @@ a:hover
   -webkit-box-shadow: 0 10px 6px -6px #777
   -moz-box-shadow: 0 10px 6px -6px #777
   box-shadow: 0 10px 6px -6px #777
+  overflow-x: hidden
+  overflow-y: hidden
 
 .dailyinfo
   @include background-opacity($warning_color, $opacity: 0.35)
@@ -174,10 +180,7 @@ body
     .icon-bar
       background-color: $colDefault
 
-  .navbar-collapse,
-
-  .navbar-form
-    border-color: $colDefault
+  .navbar-collapse
 
   .navbar-link
     color: $colDefault
@@ -479,9 +482,9 @@ form
 
 
 section.container-fluid
-  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(53,106,160,1)), color-stop(12%, rgba(53,106,160,1)), color-stop(13%, rgba(176,43,44,1)), color-stop(24%, rgba(176,43,44,1)), color-stop(100%, rgba(176,43,44,1)))
-  background: -webkit-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 12%, rgba(176,43,44,1) 13%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
-  background: -o-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 12%, rgba(176,43,44,1) 13%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
-  background: -ms-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 12%, rgba(176,43,44,1) 13%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
-  background: linear-gradient(to right, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 12%, rgba(176,43,44,1) 13%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(53,106,160,1)), color-stop(18.5%, rgba(53,106,160,1)), color-stop(18.5%, rgba(176,43,44,1)), color-stop(24%, rgba(176,43,44,1)), color-stop(100%, rgba(176,43,44,1)))
+  background: -webkit-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 18.5%, rgba(176,43,44,1) 18.5%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: -o-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 18.5%, rgba(176,43,44,1) 18.5%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: -ms-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 18.5%, rgba(176,43,44,1) 18.5%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: linear-gradient(to right, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 18.5%, rgba(176,43,44,1) 18.5%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#b02b2c', GradientType=1 )
