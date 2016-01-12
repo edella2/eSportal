@@ -1,6 +1,101 @@
-<h1>here is a tournament</h1>
+<!-- Timer -->
+<% if current_user %>
+<% t = @tournament.start_date.to_s  %>
+<% t.gsub!(" UTC", "") %>
+<% parsable = t.gsub!(" ", "T") %>
+<script>var deadline = "<%= parsable %>";</script>
 
-<%= @tournament.name %>
-<%= @tournament.start_date %>
-<%= @tournament.end_date %>
+
+<div class="row" style="padding-bottom:5px">
+
+  <div class="col-md-12 col-sm-12">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 h1"><%= @tournament.short_title %></div>
+       <div class="col-md-6 col-sm-6 h1 grey text-right">
+        <span id="clockdiv">
+          <span class="days text-right"></span> | <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% javascript_include_tag "timer" %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portfolio-item thumbnail">
+      <% if @tournament.image %>
+      <img class="hidden-xs" src="<%= @tournament.large %>">
+      <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image %>">
+      <% else %>
+      <img class="grayscale" style="max-height:200px; width:100%" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
+      <% end %>
+      <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
+      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-default", 'aria-label' => "Left Align" do %>
+      <i class="fa fa-heart"></i> Follow
+      <% end %>
+      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
+
+    </a>
+
+      <%#= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
+      <i class="fa fa-calendar-plus-o"></i> Subscribe
+      <% end %>
+    </div>
+
+  </div>
+</div>
+<div class="row infoplus">
+  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+    <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
+      <section style="padding-bottom:10px">
+        <span class="h2"><%= @tournament.name %></span>
+      </section>
+      <section>
+        <p><%= @tournament.description %></p>
+      </section>
+    </div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+    <% if @tournament.streams.any? %>
+      <% @tournament.streams.each do |stream| %>
+      <section style="padding-bottom:10px">
+        <span class="h2"><%= link_to "Stream", stream.link %></span>
+      </section>
+      <% end %>
+    <% else %>
+    <section>
+      <p>Stream list soon</p>
+    </section>
+    <% end %>
+    <section>
+      <% list_competitor_names_for(@tournament).each do |competitor| %>
+      <%= competitor %> /
+      <% end %>
+    </section>
+
+      <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script>
+
+
+      <div title="Add to Calendar" class="addeventatc">
+          Add to Calendar
+          <span class="start"><%= @tournament.start_date %></span>
+          <span class="end"><%= @tournament.end_date %></span>
+          <span class="timezone">America/Tijuana</span>
+          <span class="title"><%= @tournament.name %></span>
+          <span class="description"><%= @tournament.description %></span>
+          <span class="location"><%= @tournament.city %></span>
+          <span class="date_format">MM/DD/YYYY</span>
+      </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
 

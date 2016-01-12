@@ -1,7 +1,42 @@
 class TournamentsController < ApplicationController
-
   def index
-    @tournaments = Tournament.order("created_at DESC")
+    if params[:search]
+      @tournaments = Tournament.search(params[:search])
+    else
+      case params[:sort_option]
+      when "year"
+        @tournaments = sort_tournaments_by_year
+      when "month"
+        @tournaments = sort_tournaments_by_month
+      when "week"
+        @tournaments = sort_tournaments_by_week
+      when "day"
+        @tournaments = sort_tournaments_by_day
+      else
+        # @tournaments_live = Tournament.all.select { |tournament| tournament.is_live? }
+        # @tournaments = Tournament.order("start_date").select { |tournament| !tournament.is_live?}
+        @tournaments = Tournament.order("start_date")
+      end
+    end
+  end
+
+  def index_calendar
+    if params[:search]
+      @tournaments = Tournament.search(params[:search]).order("created_at DESC")
+    else
+      case params[:sort_option]
+      when "year"
+        @tournaments = sort_tournaments_by_year
+      when "month"
+        @tournaments = sort_tournaments_by_month
+      when "week"
+        @tournaments = sort_tournaments_by_week
+      when "day"
+        @tournaments = sort_tournaments_by_day
+      else
+        @tournaments = Tournament.order('created_at DESC')
+      end
+    end
   end
 
   def show
@@ -22,6 +57,31 @@ class TournamentsController < ApplicationController
   private
 
   def tournament_params
-    params.require(:tournament).permit(:name, :start_date, :end_date, :game_id, :image)
+    params.require(:tournament).permit(:name, :start_time, :end_date, :game_id, :image)
+  end
+
+  def sort_tournaments_by_year
+    @tournaments = Tournament.all
+
+    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 365}
+  end
+
+  def sort_tournaments_by_month
+    @tournaments = Tournament.all
+
+    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 30}
+  end
+
+  def sort_tournaments_by_week
+    @tournaments = Tournament.all
+
+    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 7}
+  end
+
+  def sort_tournaments_by_day
+    @tournaments = Tournament.all
+
+    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 1}
   end
 end
+

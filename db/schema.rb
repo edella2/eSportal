@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109044430) do
+ActiveRecord::Schema.define(version: 20160111234320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20160109044430) do
   create_table "competitors_tournaments", force: :cascade do |t|
     t.integer "competitor_id"
     t.integer "tournament_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "favoritable_id"
+    t.integer  "user_id"
+    t.string   "favoritable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "games", force: :cascade do |t|
@@ -49,12 +57,17 @@ ActiveRecord::Schema.define(version: 20160109044430) do
 
   create_table "tournaments", force: :cascade do |t|
     t.string   "name"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.integer  "game_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string   "image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "thumbnail"
+    t.string   "large"
+    t.string   "description"
+    t.string   "short_description"
+    t.string   "city"
+    t.string   "short_title"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,9 +83,15 @@ ActiveRecord::Schema.define(version: 20160109044430) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
 end
