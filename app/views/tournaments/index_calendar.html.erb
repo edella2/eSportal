@@ -6,7 +6,7 @@
       <%= form_tag(tournaments_path, :method => "get", class: "navbar-form", id: "search-form") do %>
       <div class="input-append">
       <%= text_field_tag :search, params[:search], class: "form-control span2 btn-border", placeholder: "Search Items" %>
-      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">Go!</button></span>
+      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">&nbsp;<i class="fa fa-search"></i>&nbsp;</button></span>
       <% end %>
       </div>
     </div>
@@ -20,10 +20,8 @@
     </div>
 
     <div class="btn-group btn pull-right" role="group" aria-label="...">
-    <%= link_to "Year", tournaments_path(sort_option: "year"), class: "btn btn-border btn-warning" %>
     <%= link_to "Month", tournaments_path(sort_option: "month"), class: "btn btn-border btn-warning" %>
     <%= link_to "Week", tournaments_path(sort_option: "week"), class: "btn btn-border btn-warning" %>
-    <%= link_to "Day", tournaments_path(sort_option: "day"), class: "btn btn-border btn-warning" %>
     </div>
 
   </div>
@@ -38,4 +36,5 @@
 
 </div>
 
-<object data="https://calendar.google.com/calendar/embed?src=contact.esportal%40gmail.com&ctz=America/Los_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></object>
+<!-- RIP google cal -->
+<!-- <object data="https://calendar.google.com/calendar/embed?src=contact.esportal%40gmail.com&ctz=America/Los_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></object> -->

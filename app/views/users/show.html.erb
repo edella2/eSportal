@@ -1,15 +1,15 @@
-<div class="row" style="padding-bottom:5px">
-
-  <div class="col-md-12 col-sm-12">
-    <div class="row">
-      <div class="col-md-6 col-sm-6 h1"><%= @user.name %></div>
+<div class="row" style="padding-top:15px">
+  <div class="col-md-12">
+    <div class="row portfolio-item thumbnail infoplus">
+      <span class="h3"><%= @user.name %></span><br><hr>
+      <p>Signed in as <%= @user.email %></p>
+    </div>
   </div>
 </div>
-</div>
 
 
-<div class="row">
-  <div class="col-md-12">
+<div class="row" style="padding-top:30px">
+  <div class="col-md-6">
     <div class="row portfolio-item thumbnail infoplus">
       <span class="h3">Favorite Tournaments</span>
       <% if @favorite_tournaments %> <br><hr>
@@ -21,16 +21,13 @@
       <% end %>
     </div>
   </div>
-</div><br>
 
-
-<div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="row portfolio-item thumbnail infoplus">
       <span class="h3">Favorite Competitors</span>
     <% if @favorite_competitors %>
       <% @favorite_competitors.each do |favorite_competitor| %>
-        <%= link_to favorite_competitor.name, competitor_path(favorite_competitor) %><br><hr>
+       <p><%= link_to favorite_competitor.name, competitor_path(favorite_competitor) %></p><br><hr>
       <% end %>
     <% else %>
       <p> No favorites yet </p>
