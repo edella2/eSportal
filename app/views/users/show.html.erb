@@ -1,32 +1,47 @@
-<div class="row">
-  <div class="col-md-8 col-sm-12">
-    <h1><%= @user.name %></h1>
+<div class="row" style="padding-bottom:5px">
+
+  <div class="col-md-12 col-sm-12">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 h1"><%= @user.name %></div>
   </div>
 </div>
+</div>
+
 
 <div class="row">
-
-  <h2>Favorite Tournaments</h2>
-  <div class="col-md-6">
-    <% if @favorite_tournaments %>
+  <div class="col-md-12">
+    <div class="row portfolio-item thumbnail infoplus">
+      <span class="h3">Favorite Tournaments</span>
+      <% if @favorite_tournaments %> <br><hr>
       <% @favorite_tournaments.each do |favorite_tournament| %>
-        <%= link_to favorite_tournament.name, tournament_path(favorite_tournament) %><br>
+      <%= link_to favorite_tournament.name, tournament_path(favorite_tournament) %><br>
       <% end %>
-    <% else %>
+      <% else %>
       <p> No favorites yet </p>
-    <% end %>
+      <% end %>
+    </div>
   </div>
+</div><br>
 
-  <h2>Favorite Competitors</h2>
-  <div class="col-md-6">
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="row portfolio-item thumbnail infoplus">
+      <span class="h3">Favorite Competitors</span>
     <% if @favorite_competitors %>
       <% @favorite_competitors.each do |favorite_competitor| %>
-        <%= link_to favorite_competitor.name, competitor_path(favorite_competitor) %><br>
+        <%= link_to favorite_competitor.name, competitor_path(favorite_competitor) %><br><hr>
       <% end %>
     <% else %>
       <p> No favorites yet </p>
     <% end %>
+    </div>
+    </div>
   </div>
 </div>
+
+
+
+
 
 
