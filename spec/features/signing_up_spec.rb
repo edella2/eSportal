@@ -11,3 +11,5 @@ RSpec.feature "Users can sign up" do
     expect(page).to have_content("You have signed up successfully.")
   end
 end
+
+

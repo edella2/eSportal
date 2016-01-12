@@ -9,7 +9,15 @@ class Tournament < ActiveRecord::Base
   include HTTParty
 
   def self.search(query)
-    where("lower(name) like ?", "%#{query}%")
+    long_name = where("lower(name) like ?", "%#{query}%")
+    short_name = where("lower(short_title) like ?", "%#{query}%")
+    competitors = Competitor.where("lower(name) like ?", "%#{query}%")
+    tournaments_with_competitor = []
+
+    competitors.each do |competitor|
+      tournaments_with_competitor += competitor.tournaments
+    end
+    (long_name + short_name + tournaments_with_competitor).uniq
   end
 
   def self.update_data
