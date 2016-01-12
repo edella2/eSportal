@@ -18,6 +18,8 @@ class TournamentsController < ApplicationController
         @tournaments = Tournament.order("start_date")
       end
     end
+    @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
+    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
   end
 
   def index_calendar
