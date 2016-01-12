@@ -6,6 +6,6 @@ module TournamentsHelper
 
 
   # def list_stream_urls_for(tournament)
-  #   tournament.streams.any? ? tournament.streams.map {|s| s.link} : ["Stream list soon"]
+  #   tournament.streams.any? ? tournament.streams.map {|s| s.url} : ["Stream list soon"]
   # end
 end

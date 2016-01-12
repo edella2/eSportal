@@ -7,9 +7,9 @@
     <% events.each do |event| %>
     <div class="row">
 <div class="col-md-12" style="margin-bottom:10px">
-  <% if event.image && event.image != "https://img.abiosgaming.com/events/No-Logo-Tournament-Small.png" %>
+  <% if event.image_default && event.image_default != "https://img.abiosgaming.com/events/No-Logo-Tournament-Small.png" %>
     <div class="thumbnail">
-      <a href="/tournaments/<%=event.id%>"><img class="grayscale" src="<%= event.image %>"></a>
+      <a href="/tournaments/<%=event.id%>"><img class="grayscale" src="<%= event.image_default %>"></a>
     </div>
   <% else %>
     <div class="thumbnail">

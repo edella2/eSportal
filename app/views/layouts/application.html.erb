@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>portal</title>
+  <title>eSportal</title>
   <script src="https://code.jquery.com/jquery-git2.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -34,7 +34,7 @@
           <li><a href="/users/<%= current_user.id %>">Logged in as <%= current_user.email %></a></li>
           <li><%= link_to('Log out', destroy_user_session_path, :method => :delete, class: "text-right") %></li>
         <% else %>
-          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), class: "text-right") %></li>
+          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), class: " no-padding-right text-right") %></li>
         <% end %>
       </ul>
     </div>

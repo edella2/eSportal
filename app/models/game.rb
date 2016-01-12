@@ -1,3 +1,3 @@
 class Game < ActiveRecord::Base
-  has_and_belongs_to_many :tournaments
+  has_many :tournaments
 end
