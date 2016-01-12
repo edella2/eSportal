@@ -52,7 +52,7 @@ if Rails.env.production?
   # temporary limit on matches (must be an array)
   # MATCHES = MATCHES.first(4)
 
-  MATCHUPS = MATCHES.map {|match| Abios.fetch_matchups_by_match_id(match_id: match['id'])}
+  MATCHUPS = MATCHES.map {|match| Abios.fetch_matchups_by_match_id(match_id: match['id'])}.flatten
   # temporary limit on matchups (must be an array)
   # MATCHUPS = MATCHUPS.first(3)
 end
