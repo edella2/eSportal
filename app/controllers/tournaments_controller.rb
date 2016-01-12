@@ -1,7 +1,7 @@
 class TournamentsController < ApplicationController
   def index
     if params[:search]
-      @tournaments = Tournament.search(params[:search]).order("created_at DESC")
+      @tournaments = Tournament.search(params[:search])
     else
       case params[:sort_option]
       when "year"
