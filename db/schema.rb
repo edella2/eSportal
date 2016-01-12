@@ -50,11 +50,6 @@ ActiveRecord::Schema.define(version: 20160112194530) do
     t.string   "image_rectangle"
   end
 
-  create_table "games_tournaments", force: :cascade do |t|
-    t.integer "game_id"
-    t.integer "tournament_id"
-  end
-
   create_table "streams", force: :cascade do |t|
     t.string   "title"
     t.string   "url"
