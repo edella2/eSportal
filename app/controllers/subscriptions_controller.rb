@@ -12,8 +12,6 @@ class SubscriptionsController < ApplicationController
       'start' => { 'dateTime' => DateTime.parse("#{tournament.start_date}") },
       'end' => { 'dateTime' => DateTime.parse("#{tournament.end_date}") } }
 
-      p @event
-      p "*"*50
     client = Google::APIClient.new
     client.authorization.access_token = current_user.token
     service = client.discovered_api('calendar', 'v3')
