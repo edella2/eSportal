@@ -1,7 +1,3 @@
-
-require 'pry'
-binding.pry
-
 games_backup_path       = File.expand_path('.' + '/db/api_response_backups/games_backup.json')
 tournaments_backup_path = File.expand_path('.' + '/db/api_response_backups/tournaments_backup.json')
 matches_backup_path     = File.expand_path('.' + '/db/api_response_backups/matches_backup.json')
@@ -33,12 +29,12 @@ File.open(matchups_backup_path).each do |line|
   MATCHUPS << JSON.parse(line)
 end
 
-# puts "parsing competitor data from #{competitors_backup_path}"
-# def get_competitors_from_tournament_hash(tournament_id)
-#   matches    = MATCHES.select     {|m| m['tournament_id'] == tournament_id}
-#   matchups   = MATCHUPS.select    {|m| m['match_id'] == }
-# end
+def get_competitors_from_tournament_hash(tournament_id)
+  match_ids = MATCHES.select {|m| m['tournament_id'] == tournament_id}.map {|m| m['id']}
+  matchups  = MATCHUPS.select {|m| match_ids.include? m['match_id'] }
 
+  matchups.map {|m| m['competitors']}.flatten.uniq
+end
 
 # populate games table
 GAMES.each do |game_hash|
@@ -91,7 +87,7 @@ TOURNAMENTS.each do |tournament_hash|
     end
 
     # competitors
-    competitors = []
+    competitors = get_competitors_from_tournament_hash(tournament_hash['id'])
 
     if competitors
       puts "  adding competitors to database for tournament: #{tournament_hash['title']}"

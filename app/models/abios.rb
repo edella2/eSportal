@@ -45,7 +45,7 @@ module Abios
   end
 
   def self.fetch_matches_by_tournament_id(tournament_id: 1005, api_key: @@api_key)
-    puts "      fetching matches by tournament_id: #{tournament_id}"
+    puts "    fetching matches by tournament_id: #{tournament_id}"
 
     filter = "&tournaments[]=" + tournament_id.to_s
     matches = HTTParty.get(@@matches_root + api_key + filter)
@@ -59,7 +59,7 @@ module Abios
   end
 
   def self.fetch_matchups_by_match_id(match_id: 49526, api_key: @@api_key)
-    puts "        fetching matchups by match_id: #{match_id}"
+    puts "      fetching matchups by match_id: #{match_id}"
 
     filter = "&with[]=matchups"
     match  = HTTParty.get(@@matches_root + "/#{match_id}" + api_key + filter)
