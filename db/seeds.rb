@@ -42,18 +42,18 @@ end
 if Rails.env.production?
   GAMES       = Abios.fetch_games
 
-  TOURNAMENTS = games.map do |game|
+  TOURNAMENTS = GAMES.map do |game|
     Abios.fetch_tournaments_by_game_id(game_id: game['id'])
   end
   TOURNAMENTS.flatten!
 
-  MATCHES     = tournaments.map do |tourn|
+  MATCHES     = TOURNAMENTS.map do |tourn|
     Abios.fetch_matches_by_tournament_id(tournament_id: tourn['id'])
   end
   MATCHES.flatten!
 
 
-  MATCHUPS    = matches.map do |match|
+  MATCHUPS    = MATCHES.map do |match|
     Abios.fetch_matchups_by_match_id(match_id: match['id'], api_key: api_key)
   end
   MATCHUPS.flatten!
