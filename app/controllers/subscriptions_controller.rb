@@ -6,11 +6,11 @@ class SubscriptionsController < ApplicationController
     tournament = Tournament.find(favorite_params[:favoritable_id])
 
     @event = {
-      'summary' => tournament.name,
+      'summary' => tournament.title,
       'description' => tournament.description.gsub("&nbsp;", " ") + " \n\n " + tournament_url(tournament),
       'location' => tournament.city,
-      'start' => { 'dateTime' => DateTime.parse("#{tournament.start_date}") },
-      'end' => { 'dateTime' => DateTime.parse("#{tournament.end_date}") } }
+      'start' => { 'dateTime' => DateTime.parse("#{tournament.start}") },
+      'end' => { 'dateTime' => DateTime.parse("#{tournament.end}") } }
 
     client = Google::APIClient.new
     client.authorization.access_token = current_user.token
@@ -25,8 +25,7 @@ class SubscriptionsController < ApplicationController
 
   private
 
-    def favorite_params
-      params.require(:favorite).permit(:favoritable_id, :user_id, :favoritable_type)
-    end
-
+  def favorite_params
+    params.require(:favorite).permit(:favoritable_id, :user_id, :favoritable_type)
+  end
 end

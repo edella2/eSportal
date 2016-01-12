@@ -14,7 +14,7 @@
       <span class="h3">Favorite Tournaments</span>
       <% if @favorite_tournaments %> <br><hr>
       <% @favorite_tournaments.each do |favorite_tournament| %>
-      <b><%= link_to favorite_tournament.name, tournament_path(favorite_tournament) %></b><br>
+      <b><%= link_to favorite_tournament.title, tournament_path(favorite_tournament) %></b><br>
       <% end %>
       <% else %>
       <p> No favorites yet </p>

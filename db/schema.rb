@@ -11,15 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111234320) do
+ActiveRecord::Schema.define(version: 20160112194530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "competitors", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "country_name"
+    t.string   "country_short_name"
+    t.string   "country_image_default"
+    t.string   "country_image_thumbnail"
+    t.string   "race"
   end
 
   create_table "competitors_tournaments", force: :cascade do |t|
@@ -36,19 +41,18 @@ ActiveRecord::Schema.define(version: 20160111234320) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "games_tournaments", force: :cascade do |t|
-    t.integer "game_id"
-    t.integer "tournament_id"
+    t.string   "title"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "long_title"
+    t.string   "image_square"
+    t.string   "image_circle"
+    t.string   "image_rectangle"
   end
 
   create_table "streams", force: :cascade do |t|
     t.string   "title"
-    t.string   "link"
+    t.string   "url"
     t.integer  "tournament_id"
     t.string   "language"
     t.datetime "created_at",    null: false
@@ -56,18 +60,27 @@ ActiveRecord::Schema.define(version: 20160111234320) do
   end
 
   create_table "tournaments", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.string   "image"
-    t.string   "thumbnail"
-    t.string   "large"
+    t.string   "title"
+    t.datetime "start"
+    t.datetime "end"
+    t.string   "image_thumbnail"
+    t.string   "image_large"
     t.string   "description"
     t.string   "short_description"
     t.string   "city"
     t.string   "short_title"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "image_default"
+    t.string   "prizepool_total"
+    t.string   "prizepool_first"
+    t.string   "prizepool_second"
+    t.string   "prizepool_third"
+    t.string   "link_website"
+    t.string   "link_wiki"
+    t.string   "link_youtube"
+    t.string   "url"
+    t.integer  "game_id"
   end
 
   create_table "users", force: :cascade do |t|

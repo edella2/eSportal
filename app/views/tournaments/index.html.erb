@@ -17,6 +17,9 @@
     <!-- Dropdown button -->
     <div class="btn pull-right">
 
+    <% form_tag(tournaments_path, :method => "get") do %>
+      <%= select( :tournament, :index, Game.all.collect {|game| game.title}, {include_blank: 'All'}, onchange: "tournaments_path({search: game.title})") %>
+    <% end %>
     </div>
     <!-- Dropdown button end -->
     <div class="btn-group btn pull-right" role="group" aria-label="...">
@@ -35,11 +38,11 @@
   <% @tournaments_live.each do |tournament| %>
   <div class="col-md-12 col-sm-12 col-xs-12 portfolio-item">
 
-  <% if tournament.image%>
+  <% if tournament.image_default %>
 
     <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
-      <img class="hidden-xs grayscale" id="<%= tournament.id %>" src="<%= tournament.large %>">
-      <img class="hidden-lg hidden-sm hidden-md grayscale" id="<%= tournament.id %>" style="width:100%" src="<%= tournament.image %>">
+      <img class="hidden-xs grayscale" id="<%= tournament.id %>" src="<%= tournament.image_large %>">
+      <img class="hidden-lg hidden-sm hidden-md grayscale" id="<%= tournament.id %>" style="width:100%" src="<%= tournament.image_default %>">
     </a>
 
 
@@ -54,10 +57,10 @@
       <div id="<%= tournament.id %>">
 
       <span class="h4">
-        <span class="label label-success">Live</span> <%= tournament.name%>
+        <span class="label label-success">Live</span> <%= tournament.title%>
       </span><br>
         <span id="<%= tournament.id %>-default-index-text" class="" >
-          <p style="padding-top:7px"><b><%= tournament.city %></b> – <%= tournament.start_date %></p>
+          <p style="padding-top:7px"><b><%= tournament.city %></b> – <%= tournament.start %></p>
         </span>
         <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
           <p style="padding-top:7px"><%= raw(tournament.description[0..170]) %></p>
@@ -78,10 +81,10 @@
 
 
 
-  <% if tournament.image %>
+  <% if tournament.image_default %>
 
     <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
-      <img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image %>">
+      <img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image_default %>">
     </a>
   <% else %>
     <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
@@ -95,7 +98,7 @@
       <span class="h4"><%= tournament.short_title%></span><br>
 
         <span id="<%= tournament.id %>-default-index-text" class="" >
-          <b><%= tournament.city %></b> – <%= tournament.start_date %>
+          <b><%= tournament.city %></b> – <%= tournament.start %>
         </span>
         <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
           <p><%= raw(tournament.description[0..40]) %></p>
