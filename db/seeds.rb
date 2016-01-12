@@ -1,40 +1,67 @@
-games_backup_path       = File.expand_path('.' + '/db/api_response_backups/games_backup.json')
-tournaments_backup_path = File.expand_path('.' + '/db/api_response_backups/tournaments_backup.json')
-matches_backup_path     = File.expand_path('.' + '/db/api_response_backups/matches_backup.json')
-matchups_backup_path    = File.expand_path('.' + '/db/api_response_backups/matchups_backup.json')
-competitors_backup_path = File.expand_path('.' + '/db/api_response_backups/competitors_backup.json')
+# #############################################################################
+# build seed data from backups on development only
+# #############################################################################
 
-GAMES       = []
-TOURNAMENTS = []
-MATCHES     = []
-MATCHUPS    = []
+if Rails.env.development?
+  games_backup_path       = File.expand_path('.' + '/db/api_response_backups/games_backup.json')
+  tournaments_backup_path = File.expand_path('.' + '/db/api_response_backups/tournaments_backup.json')
+  matches_backup_path     = File.expand_path('.' + '/db/api_response_backups/matches_backup.json')
+  matchups_backup_path    = File.expand_path('.' + '/db/api_response_backups/matchups_backup.json')
+  competitors_backup_path = File.expand_path('.' + '/db/api_response_backups/competitors_backup.json')
 
-puts "parsing game data from #{games_backup_path}"
-File.open(games_backup_path).each do |line|
-  GAMES << JSON.parse(line)
+  GAMES       = []
+  TOURNAMENTS = []
+  MATCHES     = []
+  MATCHUPS    = []
+
+  puts "parsing game data from #{games_backup_path}"
+  File.open(games_backup_path).each do |line|
+    GAMES << JSON.parse(line)
+  end
+
+  puts "parsing tournament data from #{tournaments_backup_path}"
+  File.open(tournaments_backup_path).each do |line|
+    TOURNAMENTS << JSON.parse(line)
+  end
+
+  puts "parsing match data from #{matches_backup_path}"
+  File.open(matches_backup_path).each do |line|
+    MATCHES << JSON.parse(line)
+  end
+
+  puts "parsing matchup data from #{matches_backup_path}"
+  File.open(matchups_backup_path).each do |line|
+    MATCHUPS << JSON.parse(line)
+  end
 end
 
-puts "parsing tournament data from #{tournaments_backup_path}"
-File.open(tournaments_backup_path).each do |line|
-  TOURNAMENTS << JSON.parse(line)
+# #############################################################################
+# build seed data directly from API (production only)
+# #############################################################################
+
+if Rails.env.production?
+  GAMES       = Abios.fetch_games
+
+  TOURNAMENTS = games.map do |game|
+    Abios.fetch_tournaments_by_game_id(game_id: game['id'])
+  end
+  TOURNAMENTS.flatten!
+
+  MATCHES     = tournaments.map do |tourn|
+    Abios.fetch_matches_by_tournament_id(tournament_id: tourn['id'])
+  end
+  MATCHES.flatten!
+
+
+  MATCHUPS    = matches.map do |match|
+    Abios.fetch_matchups_by_match_id(match_id: match['id'], api_key: api_key)
+  end
+  MATCHUPS.flatten!
 end
 
-puts "parsing match data from #{matches_backup_path}"
-File.open(matches_backup_path).each do |line|
-  MATCHES << JSON.parse(line)
-end
-
-puts "parsing matchup data from #{matches_backup_path}"
-File.open(matchups_backup_path).each do |line|
-  MATCHUPS << JSON.parse(line)
-end
-
-def get_competitors_from_tournament_hash(tournament_id)
-  match_ids = MATCHES.select {|m| m['tournament_id'] == tournament_id}.map {|m| m['id']}
-  matchups  = MATCHUPS.select {|m| match_ids.include? m['match_id'] }
-
-  matchups.map {|m| m['competitors']}.flatten.uniq
-end
+# #############################################################################
+# populate db (same for production and deployment)
+# #############################################################################
 
 # populate games table
 GAMES.each do |game_hash|
@@ -48,6 +75,14 @@ GAMES.each do |game_hash|
   else
     puts "no game data for this record!"
   end
+end
+
+# utility method for linking competitors and tournaments across intermediate relations
+def get_competitors_from_tournament_hash(tournament_id)
+  match_ids = MATCHES.select {|m| m['tournament_id'] == tournament_id}.map {|m| m['id']}
+  matchups  = MATCHUPS.select {|m| match_ids.include? m['match_id'] }
+
+  matchups.map {|m| m['competitors']}.flatten.uniq
 end
 
 # populate tournaments, streams, and competitors tables
