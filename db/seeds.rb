@@ -56,7 +56,7 @@ if Rails.env.production?
   end
   MATCHES.flatten!
   # temporary limit on matches (must be an array)
-  MATCHES = matches.first(4)
+  MATCHES = MATCHES.first(4)
 
 
   MATCHUPS    = MATCHES.map do |match|
@@ -64,7 +64,7 @@ if Rails.env.production?
   end
   MATCHUPS.flatten!
   # temporary limit on matchups (must be an array)
-  MATCHUPS = matchups.first(3)
+  MATCHUPS = MATCHUPS.first(3)
 end
 
 # #############################################################################
