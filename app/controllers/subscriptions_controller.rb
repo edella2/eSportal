@@ -9,8 +9,8 @@ class SubscriptionsController < ApplicationController
       'summary' => tournament.name,
       'description' => tournament.description,
       'location' => tournament.city,
-      'start' => { 'dateTime' => DateTime.parse(tournament.start_date).to_s },
-      'end' => { 'dateTime' => DateTime.parse(tournament.end_date).to_s } }
+      'start' => { 'dateTime' => DateTime.parse("#{tournament.start_date}").to_s },
+      'end' => { 'dateTime' => DateTime.parse("#{tournament.end_date}").to_s } }
 
     p @event
     p "*"*50
