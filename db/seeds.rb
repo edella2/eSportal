@@ -41,22 +41,30 @@ end
 
 if Rails.env.production?
   GAMES       = Abios.fetch_games
+  # temporary limit on games (must be an array)
+  GAMES = [GAMES[4]]
 
   TOURNAMENTS = GAMES.map do |game|
     Abios.fetch_tournaments_by_game_id(game_id: game['id'])
   end
   TOURNAMENTS.flatten!
+  # temporary limit on tournaments (must be an array)
+  TOURNAMENTS = TOURNAMENTS.first(8)
 
   MATCHES     = TOURNAMENTS.map do |tourn|
     Abios.fetch_matches_by_tournament_id(tournament_id: tourn['id'])
   end
   MATCHES.flatten!
+  # temporary limit on matches (must be an array)
+  MATCHES = matches.first(4)
 
 
   MATCHUPS    = MATCHES.map do |match|
-    Abios.fetch_matchups_by_match_id(match_id: match['id'], api_key: api_key)
+    Abios.fetch_matchups_by_match_id(match_id: match['id'])
   end
   MATCHUPS.flatten!
+  # temporary limit on matchups (must be an array)
+  MATCHUPS = matchups.first(3)
 end
 
 # #############################################################################
