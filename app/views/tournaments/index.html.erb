@@ -45,7 +45,8 @@
       <img class="hidden-lg hidden-sm hidden-md grayscale" id="<%= tournament.id %>" style="width:100%" src="<%= tournament.image %>">
     </a>
 
-  <% elsif tournament.image %>
+
+  <% elsif tournament.image && tournament.image != "https://img.abiosgaming.com/events/No-Logo-Tournament-Small.png"%>
     <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
       <img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image %>">
     </a>
