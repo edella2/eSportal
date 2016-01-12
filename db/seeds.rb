@@ -1,5 +1,6 @@
 # #############################################################################
 # build seed data from backups on development only
+# #############################################################################
 
 if Rails.env.development?
   games_backup_path       = File.expand_path('.' + '/db/api_response_backups/games_backup.json')
@@ -32,18 +33,35 @@ if Rails.env.development?
   File.open(matchups_backup_path).each do |line|
     MATCHUPS << JSON.parse(line)
   end
-
-  def get_competitors_from_tournament_hash(tournament_id)
-    match_ids = MATCHES.select {|m| m['tournament_id'] == tournament_id}.map {|m| m['id']}
-    matchups  = MATCHUPS.select {|m| match_ids.include? m['match_id'] }
-
-    matchups.map {|m| m['competitors']}.flatten.uniq
-  end
 end
 
+# #############################################################################
+# build seed data directly from API (production only)
+# #############################################################################
+
+if Rails.env.production?
+  GAMES       = Abios.fetch_games
+
+  TOURNAMENTS = games.map do |game|
+    Abios.fetch_tournaments_by_game_id(game_id: game['id'])
+  end
+  TOURNAMENTS.flatten!
+
+  MATCHES     = tournaments.map do |tourn|
+    Abios.fetch_matches_by_tournament_id(tournament_id: tourn['id'])
+  end
+  MATCHES.flatten!
+
+
+  MATCHUPS    = matches.map do |match|
+    Abios.fetch_matchups_by_match_id(match_id: match['id'], api_key: api_key)
+  end
+  MATCHUPS.flatten!
+end
 
 # #############################################################################
 # populate db (same for production and deployment)
+# #############################################################################
 
 # populate games table
 GAMES.each do |game_hash|
@@ -57,6 +75,14 @@ GAMES.each do |game_hash|
   else
     puts "no game data for this record!"
   end
+end
+
+# utility method for linking competitors and tournaments across intermediate relations
+def get_competitors_from_tournament_hash(tournament_id)
+  match_ids = MATCHES.select {|m| m['tournament_id'] == tournament_id}.map {|m| m['id']}
+  matchups  = MATCHUPS.select {|m| match_ids.include? m['match_id'] }
+
+  matchups.map {|m| m['competitors']}.flatten.uniq
 end
 
 # populate tournaments, streams, and competitors tables
