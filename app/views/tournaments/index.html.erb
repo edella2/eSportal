@@ -6,7 +6,7 @@
       <%= form_tag(tournaments_path, :method => "get", class: "navbar-form", id: "search-form") do %>
       <div class="input-append">
       <%= text_field_tag :search, params[:search], class: "form-control btn-border", placeholder: "Search Items" %>
-      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">&nbsp;<i class="fa fa-search"></i>&nbsp;</button></span>
+      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">&nbsp;search&nbsp;</button></span>
       <% end %>
       </div>
     </div>
@@ -14,10 +14,13 @@
   </div>
 
   <div class="col-md-6 col-lg-6 col-sm-6">
+    <!-- Dropdown button -->
     <div class="btn pull-right">
-     <button class="btn btn-warning btn-border dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"> Game <span class="caret"></span></button>
+    <% form_tag(tournaments_path, :method => "get") do %>
+      <%= select( :tournament, :index, Game.all.collect {|game| game.name}, {include_blank: 'All'}, onchange: "tournaments_path({search: game.name})") %>
+    <% end %>
     </div>
-
+    <!-- Dropdown button end -->
     <div class="btn-group btn pull-right" role="group" aria-label="...">
     <%= link_to "Year", tournaments_path(sort_option: "year"), class: "btn btn-border btn-warning" %>
     <%= link_to "Month", tournaments_path(sort_option: "month"), class: "btn btn-border btn-warning" %>
@@ -31,21 +34,54 @@
 
 <div class="row">
 
-  <% @tournaments.each do |tournament| %>
-  <% if tournament.is_live? %>
+  <% @tournaments_live.each do |tournament| %>
   <div class="col-md-12 col-sm-12 col-xs-12 portfolio-item">
-  <% else %>
-  <div class="col-md-4 col-sm-6 col-lg-3 col-xs-12 portfolio-item">
-  <% end %>
 
-  <% if tournament.image && tournament.is_live? %>
+  <% if tournament.image%>
 
     <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
       <img class="hidden-xs grayscale" id="<%= tournament.id %>" src="<%= tournament.large %>">
       <img class="hidden-lg hidden-sm hidden-md grayscale" id="<%= tournament.id %>" style="width:100%" src="<%= tournament.image %>">
     </a>
 
-  <% elsif tournament.image %>
+
+  <% else %>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
+      <img class="grayscale" style="max-height:200px; width:100%" id="<%= tournament.id%>" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
+    </a>
+  <% end %>
+
+    <div class="info" id="<%= tournament.id %>">
+
+      <div id="<%= tournament.id %>">
+
+      <span class="h4">
+        <span class="label label-success">Live</span> <%= tournament.name%>
+      </span><br>
+        <span id="<%= tournament.id %>-default-index-text" class="" >
+          <p style="padding-top:7px"><b><%= tournament.city %></b> – <%= tournament.start_date %></p>
+        </span>
+        <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
+          <p style="padding-top:7px"><%= raw(tournament.description[0..170]) %></p>
+        </span>
+
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<div class="row">
+
+  <% @tournaments_not_live.each do |tournament| %>
+  <div class="col-md-4 col-sm-6 col-lg-3 col-xs-12 portfolio-item">
+
+
+
+  <% if tournament.image %>
+
     <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
       <img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image %>">
     </a>
@@ -55,33 +91,22 @@
     </a>
   <% end %>
 
-  <div class="info" id="<%= tournament.id %>">
+    <div class="info" id="<%= tournament.id %>">
 
-    <div id="<%= tournament.id %>">
-    <% if tournament.is_live? %>
-    <span class="h4">
-      <span class="label label-success">Live</span> <%= tournament.name%>
-    </span><br>
-      <span id="<%= tournament.id %>-default-index-text" class="" >
-        <p style="padding-top:7px"><b><%= tournament.city %></b> – <%= tournament.start_date %></p>
-      </span>
-      <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
-        <p style="padding-top:7px"><%= tournament.description[0..170].gsub(/\s\w+\s*$/, '...') %></p>
-      </span>
-    <% else %>
-    <span class="h4"><%= tournament.short_title%></span><br>
+      <div id="<%= tournament.id %>">
+      <span class="h4"><%= tournament.short_title%></span><br>
 
-      <span id="<%= tournament.id %>-default-index-text" class="" >
-        <b><%= tournament.city %></b> – <%= tournament.start_date %>
-      </span>
-      <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
-        <p><%= tournament.description[0..40].gsub(/\s\w+\s*$/, '...') %></p>
-      </span>
-    <% end %>
+        <span id="<%= tournament.id %>-default-index-text" class="" >
+          <b><%= tournament.city %></b> – <%= tournament.start_date %>
+        </span>
+        <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
+          <p><%= raw(tournament.description[0..40]) %></p>
+        </span>
 
-      </p>
+
+        </p>
+      </div>
     </div>
-  </div>
   </div>
   <% end %>
 </div>
@@ -101,3 +126,13 @@ $('img').hover(function(){
     });
 });
 </script>
+
+
+
+
+
+
+
+
+
+

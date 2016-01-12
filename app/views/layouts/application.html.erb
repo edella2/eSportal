@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ESportal</title>
+  <title>portal</title>
   <script src="https://code.jquery.com/jquery-git2.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -11,19 +11,24 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
+<nav class="navbar navbar-default">
+  <section class="container-fluid" class="blue">
+  <div class="container" style="background-color:#B02B2C">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/tournaments">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a style="solid blue" class="navbar-brand" href="/tournaments">
         <%= image_tag("esportal.png", :alt => "rss feed") %>
         </a>
     </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav pull-right">
         <% if current_page_is_tournament? || current_page_is_calendar? %>
-        <li><a href="/tournaments"><i class="fa fa-th"></i></a></li>
-        <li><a href="/calendar"><i class="fa fa-calendar-o"></i></a></li>
+          <li><a href="/tournaments"><i style="padding-top:2px" class="appzicon fa fa-th"></i></a></li>
+          <li><a href="/calendar"><i class="appzicon fa fa-calendar-o"></i></a></li>
         <% end %>
         <% if user_signed_in? %>
           <li><a href="/users/<%= current_user.id %>">Logged in as <%= current_user.email %></a></li>
@@ -33,7 +38,8 @@
         <% end %>
       </ul>
     </div>
-  </div>
+   </div>
+  </section>
 </nav>
 
 <div class="container" style="padding-top:65px">
@@ -42,7 +48,14 @@
 
 <div id="footer">
     <div class="container">
-      <p class="footer-block">Make a cool footer with a bunch of useless infos</p>
+      <p class="footer-block">
+        <span class="small pull-left">
+          <b class"black">eSportal</b> has been handcrafted with <i class="fa small p fa-heart red"></i> by <a href="">Armani</a>, <a href="">Eric</a>, <a href="">Peter</a>, <a href="">Paul</a> and <a href="">Steven</a>.
+        </span>
+        <span class="small pull-right black hidden-sm hidden-xs">
+          <a href=""><i class="fa fa-2x fa-envelope"></i></i></a>&nbsp; &nbsp; &nbsp;<a href=""><i class="fa fa-2x fa-github-square"></i></i></a>
+        </span>
+      </p>
     </div>
   </div>
 </body>

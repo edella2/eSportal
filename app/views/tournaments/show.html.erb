@@ -1,40 +1,3 @@
-<style>/* AddEvent theme CSS
----------------------------------------------------------------------- */
-
-/* The button */
-.addeventatc              {width:280px;display:inline-block;position:relative;z-index:999998;cursor:pointer;background:#f7f7f7;font-family:Roboto,Optima,Segoe,"Segoe UI",Candara,Calibri,Arial,sans-serif;font-weight:300;color:#333!important;font-size:15px;line-height:100%;border:1px solid #cfcfcf;-webkit-box-shadow:1px 1px 3px rgba(0,0,0,0.15);-moz-box-shadow:1px 1px 3px rgba(0,0,0,0.15);box-shadow:1px 1px 3px rgba(0,0,0,0.15);-webkit-border-radius:2px;border-radius:2px;}
-.addeventatc:hover            {background-color:#f4f4f4;}
-.addeventatc:active           {top:1px;}
-.addeventatc .date            {width:60px;height:60px;float:left;position:relative;margin-left: .3em;}
-.addeventatc .date .mon         {display:block;text-align:center;padding:9px 0px 0px 0px;font-size:11px;color:#bf5549;font-weight:bold;line-height:110%;text-transform:uppercase;}
-.addeventatc .date .day         {display:block;text-align:center;padding:0px 0px 8px 0px;font-size:30px;font-weight:bold;color:#333;line-height:100%;}
-.addeventatc .date .bdr1        {width:1px;height:50px;background:#eaeaea;position:absolute;z-index:100;top:5px;right:-3px;}
-.addeventatc .date .bdr2        {width:1px;height:50px;background:#fff;position:absolute;z-index:100;top:5px;right:-4px;}
-.addeventatc .desc            {width:210px;height:60px;float:left;position:relative;}
-.addeventatc .desc p          {margin:0;display:block;text-align:left;padding:7px 0px 0px 18px;font-size:12px;color:#666;line-height:110%;}
-.addeventatc .desc .hed         {height:15px;display:block;overflow:hidden;margin-bottom:3px;font-size:14px;line-height:110%;color:#333;text-transform:uppercase;}
-.addeventatc .desc .des         {height:28px;display:block;overflow:hidden;}
-.addeventatc-selected           {background-color:#f4f4f4;}
-.addeventatc .start, .addeventatc .end, .addeventatc .timezone, .addeventatc .title, .addeventatc .description, .addeventatc .location, .addeventatc .organizer, .addeventatc .organizer_email, .addeventatc .facebook_event, .addeventatc .all_day_event, .addeventatc .date_format, .addeventatc .alarm_reminder, .addeventatc .recurring, .addeventatc .attendees {display:none!important;}
-
-/* The drop down */
-.addeventatc_dropdown           {width:280px;position:absolute;z-index:99999;padding:6px 0px 0px 0px;background:#fff;text-align:left;display:none;margin-top:-2px;margin-left:-1px;border:1px solid #cfcfcf;-webkit-box-shadow:1px 3px 6px rgba(0,0,0,0.15);-moz-box-shadow:1px 3px 6px rgba(0,0,0,0.15);box-shadow:1px 3px 6px rgba(0,0,0,0.15);}
-.addeventatc_dropdown span        {display:block;line-height:100%;background:#fff;text-decoration:none;font-size:14px;color:#333;padding:9px 10px 9px 40px;}
-.addeventatc_dropdown span:hover    {background-color:#f4f4f4;color:#000;text-decoration:none;font-size:14px;}
-.addeventatc_dropdown em        {color:#999!important;font-size:12px!important;}
-.addeventatc_dropdown .frs        {background:#fff;color:#cacaca!important;cursor:pointer;font-size:9px!important;font-style:normal!important;font-weight:normal!important;line-height:110%!important;padding-left:10px;position:absolute;right:10px;text-align:right;text-decoration:none;top:5px;z-index:101;}
-.addeventatc_dropdown .frs:hover    {color:#999!important;}
-.addeventatc_dropdown .ateappleical   {background-image:url(../gfx/dropdown-apple-t1.png);background-position:13px 50%;background-repeat:no-repeat;}
-.addeventatc_dropdown .ateoutlook     {background-image:url(../gfx/dropdown-outlook-t1.png);background-position:13px 50%;background-repeat:no-repeat;}
-.addeventatc_dropdown .ateoutlookcom  {background-image:url(../gfx/dropdown-outlook-t1.png);background-position:13px 50%;background-repeat:no-repeat;}
-.addeventatc_dropdown .ategoogle    {background-image:url(../gfx/dropdown-google-t1.png);background-position:13px 50%;background-repeat:no-repeat;}
-.addeventatc_dropdown .ateyahoo     {background-image:url(../gfx/dropdown-yahoo-t1.png);background-position:13px 50%;background-repeat:no-repeat;}
-.addeventatc_dropdown .atefacebook    {background-image:url(../gfx/dropdown-facebook-t1.png);background-position:13px 50%;background-repeat:no-repeat;}
-.addeventatc_dropdown .copyx      {height:21px;display:block;position:relative;cursor:default;}
-.addeventatc_dropdown .brx        {height:1px;overflow:hidden;background:#e0e0e0;position:absolute;z-index:100;left:10px;right:10px;top:9px;}
-.addeventatc_icon .atc_node { display: none;}
-</style>
-
 <!-- Timer -->
 <% if current_user %>
 <% t = @tournament.start_date.to_s  %>
@@ -66,13 +29,14 @@
       <img class="hidden-xs" src="<%= @tournament.large %>">
       <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image %>">
       <% else %>
-      <img class="grayscale" style="max-height:200px; width:100%" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
+      <img class="grayscale" style="max-height:200px; width:100%" src="http://goo.gl/7ezbJB">
       <% end %>
+
       <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
-      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-default", 'aria-label' => "Left Align" do %>
+      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align" do %>
       <i class="fa fa-heart"></i> Follow
       <% end %>
-      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
+      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align" do %>
 
     </a>
 
@@ -84,22 +48,32 @@
   </div>
 </div>
 <div class="row infoplus">
-  <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
       <section style="padding-bottom:10px">
         <span class="h2"><%= @tournament.name %></span>
       </section>
       <section>
-        <p><%= @tournament.description %></p>
+        <p>  <b>Location: <%= @tournament.city %></b> – <%= @tournament.description.gsub(/(&nbsp;)/, ' ') %></p>
       </section>
     </div>
 
 
-    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
       <section style="padding-bottom:10px">
-        <span class="h2"><%= link_to "Stream", stream.link %></span>
+        <span class="h2"><i class="fa red fa-video-camera"></i> <%= link_to "Stream", stream.link %>
+
+                   <span class="mon date"><%= Date::MONTHNAMES[@tournament.start_date.mon] %></span>
+          <span class="day date"><%= @tournament.start_date.day %></span>
+          <div class="bdr1"></div>
+          <div class="bdr2"></div>
+
+
+
+
+        </span>
       </section>
       <% end %>
     <% else %>
@@ -107,51 +81,20 @@
       <p>Stream list soon</p>
     </section>
     <% end %>
-
     <section>
 
       <% @tournament.competitors.each do |competitor| %>
-      <div class="btn-group">
       <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
-      <%= button_to favorites_path(favorite_params), action: "create", class: "btn btn-xs btn-default" do %>
-      <%= competitor.name %>
+      <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default" %>
       <% end %>
-      <% end %>
-    </div>
+
     </section>
 
     </div>
 
 
 
-    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4" style="padding-right:0px !important">
-     <div class="addeventatc pull-right">
-        <div class="date">
-          <span class="mon"><%= Date::MONTHNAMES[@tournament.start_date.mon] %></span>
-          <span class="day"><%= @tournament.start_date.day %></span>
-          <div class="bdr1"></div>
-          <div class="bdr2"></div>
-        </div>
-
-        <div class="desc">
-          <p>
-            <strong class="hed"><%= @tournament.name %></strong>
-            <span class="des">Location: <%= @tournament.city %></span>
-          </p>
-        </div>
-
-        <span class="start"><%= @tournament.start_date %></span>
-        <span class="end"><%= @tournament.end_date %></span>
-        <span class="timezone">America/Tijuana</span>
-        <span class="title"><%= @tournament.name %></span>
-        <span class="description"><%= @tournament.description %></span>
-        <span class="location"><%= @tournament.city %></span>
-        <span class="date_format">MM/DD/YYYY</span>
-      </div>
-      </div>
-
-
-</div>
+   </div>
 
 <% end %>
 

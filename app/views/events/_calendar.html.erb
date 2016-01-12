@@ -1,15 +1,23 @@
 <div class="container">
 <%= month_calendar events: events, previous_link: events_ajax_previous_link, next_link: events_ajax_next_link do |date, events| %>
-  <span class="p small" style="color:grey; padding-left:3px"><%= date.to_s[-2..-1] %></span>
+<div class="dailyinfo text-center">
+  <span class="p small" style="color:white; padding-left:5px; padding-top:5px"><%= date.to_s[-2..-1] %></span>
+</div>
 
     <% events.each do |event| %>
     <div class="row">
-<div class="col-md-12">
+<div class="col-md-12" style="margin-bottom:10px">
+  <% if event.image && event.image != "https://img.abiosgaming.com/events/No-Logo-Tournament-Small.png" %>
     <div class="thumbnail">
-      <a><img src="<%= event.image %>"></a>
+      <a href="/tournaments/<%=event.id%>"><img class="grayscale" src="<%= event.image %>"></a>
     </div>
-      <div class="caption">
-        <span class="h3"><%= event.short_title %></span>
+  <% else %>
+    <div class="thumbnail">
+      <a href="/tournaments/<%=event.id%>"><img src="http://goo.gl/7ezbJB"></a>
+    </div>
+  <% end %>
+      <div class="caption miniinfo" style="background-color:white; padding-left:2px;">
+        <span class="h5"><%= event.short_title %></span>
       </div>
     </div>
   </div>
