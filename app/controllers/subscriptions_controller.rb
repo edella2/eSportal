@@ -9,8 +9,11 @@ class SubscriptionsController < ApplicationController
       'summary' => tournament.name,
       'description' => tournament.description,
       'location' => tournament.city,
-      'start' => { 'dateTime' => tournament.start_date },
-      'end' => { 'dateTime' => tournament.end_date } }
+      'start' => { 'dateTime' => DateTime.parse(tournament.start_date).to_s },
+      'end' => { 'dateTime' => DateTime.parse(tournament.end_date).to_s } }
+
+    p @event
+    p "*"*50
 
     client = Google::APIClient.new
     client.authorization.access_token = current_user.token
