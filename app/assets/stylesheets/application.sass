@@ -1,14 +1,4 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
  *
  *= require_tree .
  *= require_self
@@ -17,8 +7,12 @@
 // @import "bootstrap-sprockets"
 // @import "bootstrap"
 
-$bgDefault      : #b02018
-$bgHighlight    : #b02018
+$default_color  : #ffffff
+$primary_color  : #3498db
+$success_color  : #2ecc71
+$info_color     : #81cfe0
+$warning_color  : #B02B2C
+$danger_color   : #c0392b
 $colDefault     : #e3e3e3
 $colHighlight   : #ffffff
 $dropDown       : false
@@ -36,7 +30,7 @@ body
 a
   transition: color 0.5s ease
   text-decoration: none
-  color: $bgDefault
+  color: $warning_color
 
 a:hover
   @extend a
@@ -59,7 +53,7 @@ a:hover
   height: 40px
 
 .red
-  color: $bgDefault !important
+  color: $warning_color !important
 
 .white
   color: white
@@ -79,7 +73,7 @@ a:hover
   box-shadow: 0 10px 6px -6px #777
 
 .dailyinfo
-  @include background-opacity($bgDefault, $opacity: 0.35)
+  @include background-opacity($warning_color, $opacity: 0.35)
   border-radius: 10px
   margin-bottom: 6px
 
@@ -135,8 +129,8 @@ body
   left: 10px
 
 .navbar-default
-  background-color: $bgDefault
-  border-color: $bgHighlight
+  background-color: $warning_color
+  border-color: #F1F1F1
 
   .navbar-brand
     color: $colDefault
@@ -154,28 +148,28 @@ body
           color: $colHighlight
       @if $dropDown
         > .dropdown-menu
-          background-color: $bgDefault
+          background-color: #F1F1F1
           > li > a
             color: $colDefault
             &:hover, &:focus
               color: $colHighlight
-              background-color: $bgHighlight
+              background-color: #F1F1F1
 
           .divider
-            background-color: $bgHighlight
+            background-color: #F1F1F1
     > .active
       > a, > a:hover, > a:focus
         color: $colHighlight
-        background-color: $bgHighlight
+        background-color: #F1F1F1
     > .open
       > a, > a:hover, > a:focus
         color: $colHighlight
-        background-color: $bgHighlight
+        background-color: #F1F1F1
 
   .navbar-toggle
-    border-color: $bgHighlight
+    border-color: #F1F1F1
     &:hover, &:focus
-      background-color: $bgHighlight
+      background-color: #F1F1F1
 
     .icon-bar
       background-color: $colDefault
@@ -199,14 +193,14 @@ body
     > .active
       > a, > a:hover, > a:focus
         color: $colHighlight
-        background-color: $bgHighlight
+        background-color: #F1F1F1
 
 .navbar-brand
   padding: 0px
 
 .navbar-brand>img
   height: 100%
-  padding: 7px
+  padding: 0px
   width: auto
 
 .simple-calendar
@@ -259,11 +253,11 @@ body
     border-left-width: 4px
 
   td:hover
-    @include background-opacity($bgDefault, $opacity: 0.3)
+    @include background-opacity($warning_color, $opacity: 0.3)
     border-radius: 20px
 
     .dailyinfo
-      @include background-opacity($bgDefault, $opacity: 0.6)
+      @include background-opacity($warning_color, $opacity: 0.6)
 
   .day
 
@@ -276,7 +270,7 @@ body
   .wday-6
 
   .today > div.dailyinfo
-    background-color: $bgDefault
+    background-color: $warning_color
 
   .today
 
@@ -326,14 +320,6 @@ header
       &:hover
         color: #09c
         text-decoration: underline
-
-
-$default_color: #ffffff
-$primary_color: #3498db
-$success_color: #2ecc71
-$info_color: #81cfe0
-$warning_color: #b02018
-$danger_color: #c0392b
 
 .btn
   letter-spacing: 0.01em
@@ -490,3 +476,12 @@ svg image:hover
 
 form
   display: inline-block !important
+
+
+section.container-fluid
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(53,106,160,1)), color-stop(12%, rgba(53,106,160,1)), color-stop(13%, rgba(176,43,44,1)), color-stop(24%, rgba(176,43,44,1)), color-stop(100%, rgba(176,43,44,1)))
+  background: -webkit-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 12%, rgba(176,43,44,1) 13%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: -o-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 12%, rgba(176,43,44,1) 13%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: -ms-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 12%, rgba(176,43,44,1) 13%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: linear-gradient(to right, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 12%, rgba(176,43,44,1) 13%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#b02b2c', GradientType=1 )
