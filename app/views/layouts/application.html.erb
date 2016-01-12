@@ -7,6 +7,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
 </head>
 <body>
 
@@ -25,7 +26,7 @@
         <li><a href="/calendar"><i class="fa fa-calendar-o"></i></a></li>
         <% end %>
         <% if user_signed_in? %>
-          <li><a href="#">Logged in as <%= current_user.email %></a></li>
+          <li><a href="/users/<%= current_user.id %>">Logged in as <%= current_user.email %></a></li>
           <li><%= link_to('Log out', destroy_user_session_path, :method => :delete) %></li>
         <% else %>
           <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2)) %></li>
