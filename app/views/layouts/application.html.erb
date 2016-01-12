@@ -22,8 +22,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <% if current_page_is_tournament? || current_page_is_calendar? %>
-        <li><a href="/tournaments"><i class="fa fa-th"></i></a></li>
-        <li><a href="/calendar"><i class="fa fa-calendar-o"></i></a></li>
+        <li><a href="/tournaments"><i style="padding-top:2px" class="appzicon fa fa-th"></i></a></li>
+        <li><a href="/calendar"><i class="appzicon fa fa-calendar-o"></i></a></li>
         <% end %>
         <% if user_signed_in? %>
           <li><a href="/users/<%= current_user.id %>">Logged in as <%= current_user.email %></a></li>
@@ -42,7 +42,14 @@
 
 <div id="footer">
     <div class="container">
-      <p class="footer-block">Make a cool footer with a bunch of useless infos</p>
+      <p class="footer-block">
+        <span class="small pull-left">
+          <a href=""><i class="fa fa-2x fa-envelope"></i></i></a>&nbsp; &nbsp; &nbsp;<a href=""><i class="fa fa-2x fa-github-square"></i></i></a>
+        </span>
+        <span class="small pull-right black hidden-sm hidden-xs">
+          <b class"black">eSportal</b> has been handcrafted with <i class="fa small p fa-heart red"></i> by <a href="">Armani</a>, <a href="">Eric</a>, <a href="">Peter</a>, <a href="">Paul</a> and <a href="">Steven</a>.
+        </span>
+      </p>
     </div>
   </div>
 </body>
