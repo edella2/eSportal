@@ -1,6 +1,6 @@
-FactoryGirl.define do
-  factory :favorite do
-    
-  end
+# FactoryGirl.define do
+#   factory :favorite do
 
-end
+#   end
+
+# end

@@ -35,10 +35,11 @@
       <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-default", 'aria-label' => "Left Align" do %>
       <i class="fa fa-heart"></i> Follow
       <% end %>
+      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
 
     </a>
 
-      <%= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
+      <%#= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
       <i class="fa fa-calendar-plus-o"></i> Subscribe
       <% end %>
     </div>
@@ -59,11 +60,11 @@
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
-    <% @tournament.streams.each do |stream| %>
-    <section style="padding-bottom:10px">
-      <span class="h2"><%= link_to "Stream", stream.link %></span>
-    </section>
-    <% end %>
+      <% @tournament.streams.each do |stream| %>
+      <section style="padding-bottom:10px">
+        <span class="h2"><%= link_to "Stream", stream.link %></span>
+      </section>
+      <% end %>
     <% else %>
     <section>
       <p>Stream list soon</p>
@@ -89,10 +90,9 @@
           <span class="date_format">MM/DD/YYYY</span>
       </div>
 
-
-
     </div>
   </div>
 </div>
+
 <% end %>
 
