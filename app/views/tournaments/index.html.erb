@@ -5,12 +5,11 @@
     <div class="input-group" style="padding-top:2px">
       <%= form_tag(tournaments_path, :method => "get", class: "navbar-form", id: "search-form") do %>
       <div class="input-append">
-      <%= text_field_tag :search, params[:search], class: "form-control span2 btn-border", placeholder: "Search Items" %>
-      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">Go!</button></span>
+      <%= text_field_tag :search, params[:search], class: "form-control btn-border", placeholder: "Search Items" %>
+      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">&nbsp;<i class="fa fa-search"></i>&nbsp;</button></span>
       <% end %>
       </div>
     </div>
-
 
   </div>
 
@@ -30,11 +29,9 @@
 
 </div>
 
-
 <div class="row">
 
   <% @tournaments.each do |tournament| %>
-
   <% if tournament.is_live? %>
   <div class="col-md-12 col-sm-12 col-xs-12 portfolio-item">
   <% else %>
@@ -42,57 +39,65 @@
   <% end %>
 
   <% if tournament.image && tournament.is_live? %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail" style=>
-      <img class="hidden-xs grayscale" src="<%= tournament.large %>">
-      <img class="hidden-lg hidden-sm hidden-md grayscale" style="width:100%" src="<%= tournament.image %>">
+
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
+      <img class="hidden-xs grayscale" id="<%= tournament.id %>" src="<%= tournament.large %>">
+      <img class="hidden-lg hidden-sm hidden-md grayscale" id="<%= tournament.id %>" style="width:100%" src="<%= tournament.image %>">
     </a>
 
   <% elsif tournament.image %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img class="grayscale" src="<%= tournament.image %>"></a>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
+      <img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image %>">
+    </a>
   <% else %>
-    <a href="/tournaments/<%=tournament.id%>" class="thumbnail"><img class="grayscale" src="http://sisj.in/wp-content/uploads/2015/11/480px-Placeholder-480x270.png"></a>
+    <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
+      <img class="grayscale" style="max-height:200px; width:100%" id="<%= tournament.id%>" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
+    </a>
   <% end %>
 
-  <div class="info">
+  <div class="info" id="<%= tournament.id %>">
+
+    <div id="<%= tournament.id %>">
     <% if tournament.is_live? %>
-    <span class="titling"><span class="label label-success">Live</span>&nbsp;<%= tournament.name%></span>
+    <span class="h4">
+      <span class="label label-success">Live</span> <%= tournament.name%>
+    </span><br>
+      <span id="<%= tournament.id %>-default-index-text" class="" >
+        <p style="padding-top:7px"><b><%= tournament.city %></b> – <%= tournament.start_date %></p>
+      </span>
+      <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
+        <p style="padding-top:7px"><%= tournament.description[0..170].gsub(/\s\w+\s*$/, '...') %></p>
+      </span>
     <% else %>
-    <span class="titling"><%= tournament.short_title%></span>
+    <span class="h4"><%= tournament.short_title%></span><br>
+
+      <span id="<%= tournament.id %>-default-index-text" class="" >
+        <b><%= tournament.city %></b> – <%= tournament.start_date %>
+      </span>
+      <span id="<%= tournament.id %>-hover-index-text" style="display:none" >
+        <p><%= tournament.description[0..40].gsub(/\s\w+\s*$/, '...') %></p>
+      </span>
     <% end %>
-      <br><span><%= tournament.city %> – <%= tournament.start_date %> </span>
+
       </p>
     </div>
+  </div>
   </div>
   <% end %>
 </div>
 
 
-<style>
-img.grayscale {
-    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+, IE10 */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
-    -webkit-transition: all .6s ease; /* Fade to color for Chrome and Safari */
-    -webkit-backface-visibility: hidden; /* Fix for transition flickering */
-}
+<script>
 
-img.grayscale:hover {
-    filter: none;
-    -webkit-filter: grayscale(0%);
-}
-
-svg {
-    background:url(http://4.bp.blogspot.com/-IzPWLqY4gJ0/T01CPzNb1KI/AAAAAAAACgA/_8uyj68QhFE/s400/a2cf7051-5952-4b39-aca3-4481976cb242.jpg);
-}
-
-svg image {
-    transition: all .6s ease;
-}
-
-svg image:hover {
-    opacity: 0;
-}
-
-
-
-</style>
+$('img').hover(function(){
+    var imageId = $(this).attr("id")
+    $("#"+imageId+"-default-index-text").fadeOut(0, function(){
+      $("#"+imageId+"-hover-index-text").fadeIn();
+    });
+},function(){
+    var imageId = $(this).attr("id")
+    $("#"+imageId+"-hover-index-text").fadeOut(200, function() {
+      $("#"+imageId+"-default-index-text").fadeIn();
+    });
+});
+</script>

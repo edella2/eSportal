@@ -36,8 +36,10 @@ gem "simple_calendar", "~> 2.0"
 gem 'httparty'
 gem 'devise'
 
+gem 'google-api-client', :require => 'google/api_client'
 gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-google-oauth2'
+gem 'chronic'
 
 
 
@@ -66,4 +68,6 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end

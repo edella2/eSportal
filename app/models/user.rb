@@ -1,3 +1,4 @@
+
 class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
@@ -7,15 +8,25 @@ class User < ActiveRecord::Base
   #Can favorite models that are favorable
   has_many :favorites, inverse_of: :user
 
-	def self.from_omniauth(access_token)
+
+	def self.from_omniauth(access_token, signed_in_resource = nil)
 	    data = access_token.info
 	    user = User.where(:email => data["email"]).first
 
-	    unless user
-	        user = User.create(name: data["name"],
-	           		   email: data["email"],
-	           		   password: Devise.friendly_token[0,20]
-	        )
+      if user
+        user.provider = access_token.provider
+        user.uid = access_token.uid
+        user.token = access_token.credentials.token
+        user.save
+	    else
+	      user = User.create(
+          name: data["name"],
+       	  email: data["email"],
+      	  password: Devise.friendly_token[0,20],
+          uid: access_token.uid,
+          provider: access_token.provider,
+          token: access_token.credentials.token
+	      )
 	    end
 	    user
 	end
