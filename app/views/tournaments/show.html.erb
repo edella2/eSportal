@@ -59,20 +59,16 @@
       </section>
     </div>
 
-
     <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
       <section style="padding-bottom:10px">
-        <span class="h2"><i class="fa red fa-video-camera"></i> <%= link_to "Stream", stream.url %>
+        <span class="h2"><i class="fa coolblue fa-video-camera"></i> <%= link_to "Stream", stream.url %>
 
-                   <span class="mon date"><%= Date::MONTHNAMES[@tournament.start.mon] %></span>
+          <span class="mon date"><%= Date::MONTHNAMES[@tournament.start.mon] %></span>
           <span class="day date"><%= @tournament.start.day %></span>
           <div class="bdr1"></div>
           <div class="bdr2"></div>
-
-
-
 
         </span>
       </section>
@@ -98,3 +94,62 @@
 
 
    </div>
+
+
+<% end %>
+
+<script>
+$(document).ready(function(){
+  console.log(deadline)
+  getTimeRemaining(deadline);
+  initializeClock('clockdiv', deadline);
+});
+
+var deadline = deadline;
+
+function getTimeRemaining(endtime){
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor( (t/1000) % 60 );
+  var minutes = Math.floor( (t/1000/60) % 60 );
+  var hours = Math.floor( (t/(1000*60*60)) % 24 );
+  var days = Math.floor( t/(1000*60*60*24) );
+
+  if (days > -1 ) {
+      return {
+      'total': t,
+      'days': days,
+      'hours': hours,
+      'minutes': minutes,
+      'seconds': seconds
+    };
+  }
+}
+
+function initializeClock(id, endtime){
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+
+  function updateClock(){
+    var t = getTimeRemaining(endtime);
+
+    daysSpan.innerHTML = ('0' + t.days).slice(-2) + ' days';
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2) + ':';
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2) + ':';
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2) ;
+
+    if(t.total<=0){
+      clearInterval(timeinterval);
+    }
+  }
+
+updateClock(); // run function once at first to avoid delay
+var timeinterval = setInterval(updateClock,1000);
+
+}
+
+
+</script>
