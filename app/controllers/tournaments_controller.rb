@@ -1,8 +1,11 @@
+require 'will_paginate/array'
 class TournamentsController < ApplicationController
   def index
+    @games = Game.all
     if params[:search]
       @tournaments = Tournament.search(params[:search])
     else
+
       case params[:sort_option]
       when "year"
         @tournaments = sort_tournaments_by_year
@@ -13,17 +16,28 @@ class TournamentsController < ApplicationController
       when "day"
         @tournaments = sort_tournaments_by_day
       else
-        @tournaments = Tournament.order(:start)
+        require 'will_paginate/array'
+        @tournaments = Tournament.all
+        @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
+        @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
+        @games = Game.all
+
+        @tournaments = @tournaments_live + @tournaments_not_live
+
+        @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
+
+        respond_to do |format|
+          format.html
+          format.js
+        end
       end
     end
-    @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
-    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}.sort{|tournament_1, tournament_2| tournament_2.start <=> tournament_1.start}
-    @games = Game.all
   end
 
   def index_calendar
+    @games = Game.all
     if params[:search]
-      @tournaments = Tournament.search(params[:search]).order("created_at DESC")
+      @tournaments = Tournament.search(params[:search]).order(created_at: :desc)
     else
       case params[:sort_option]
       when "year"
@@ -35,7 +49,7 @@ class TournamentsController < ApplicationController
       when "day"
         @tournaments = sort_tournaments_by_day
       else
-        @tournaments = Tournament.order('created_at DESC')
+        @tournaments = Tournament.order(created_at: :desc)
       end
     end
   end
@@ -57,6 +71,21 @@ class TournamentsController < ApplicationController
   end
 
   private
+
+  def tournament_sort(type)
+    case type
+    when "year"
+      @tournaments = sort_tournaments_by_year
+    when "month"
+      @tournaments = sort_tournaments_by_month
+    when "week"
+      @tournaments = sort_tournaments_by_week
+    when "day"
+      @tournaments = sort_tournaments_by_day
+    else
+      @tournaments = Tournament.order(:start)
+    end
+  end
 
   def tournament_params
     params.require(:tournament).permit(:name, :start, :end, :game_id, :image)

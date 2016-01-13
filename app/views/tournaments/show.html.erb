@@ -24,6 +24,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="portfolio-item thumbnail">
+
       <% if @tournament.image_default %>
         <img class="hidden-xs" src="<%= @tournament.image_large %>">
         <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image_default %>">
@@ -31,25 +32,28 @@
         <img class="grayscale base-prop" src="http://goo.gl/7ezbJB">
       <% end %>
 
-      <% if current_user %>
+      <% if user_signed_in? %>
         <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
-      <% end %>
 
-      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
-        <i class="fa fa-heart"></i> Follow
-      <% end %>
+        <% if current_user.favorites.where(favoritable_id: @tournament.id).any? %>
+          <%= button_to favorite_path(favorite_params), method: "delete", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+          <i class="fa fa-heart"></i> Unfollow
+          <% end %>
+        <% else %>
+          <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+          <i class="fa fa-heart"></i> Follow
+          <% end %>
+        <% end %>
 
-      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
-
-    </a>
-
-      <%#= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
-      <i class="fa fa-calendar-plus-o"></i> Subscribe
+        <%= button_to subscriptions_path(favorite_params),id: 'sub_text', action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+          <i class="fa fa-calendar-plus-o"></i> Subscribe
+        <% end %>
       <% end %>
     </div>
 
   </div>
 </div>
+
 <div class="row infoplus">
   <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
@@ -59,46 +63,44 @@
       <section>
         <p>  <b>Location: <%= @tournament.city %></b> – <%= @tournament.description.gsub(/(&nbsp;)/, ' ') %></p>
       </section>
-    </div>
+  </div>
 
-    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
       <section class="pad-bot-sm">
-        <span class="h2"><i class="fa coolblue fa-video-camera"></i> <%= link_to "Stream", stream.url %>
+        <span class="h2"><i class="fa pale-grey fa-video-camera"></i> <%= link_to "Stream", stream.url %>
 
-          <span class="mon date"><%= Date::MONTHNAMES[@tournament.start.mon] %></span>
-          <span class="day date"><%= @tournament.start.day %></span>
-          <div class="bdr1"></div>
-          <div class="bdr2"></div>
-
+          <span class="light-text pull-right"><%= @tournament.favorites.count %> followers</span>
         </span>
+
       </section>
       <% end %>
     <% else %>
-    <section>
-      <p>Stream list soon</p>
-    </section>
+      <section>
+        <p>Stream list soon</p>
+      </section>
     <% end %>
+    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow:</p>
+
     <section>
-
       <% @tournament.competitors.each do |competitor| %>
-      <% if current_user %>
-      <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
+        <% if user_signed_in? %>
+          <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
+        <% end %>
+        <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default", disabled: !user_signed_in? %>
       <% end %>
-      <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default", disabled: !current_user %>
-      <% end %>
-
     </section>
 
-    </div>
+  </div>
 
-   </div>
+</div>
+
+
 
 
 <script>
 $(document).ready(function(){
-  console.log(deadline)
   getTimeRemaining(deadline);
   initializeClock('clockdiv', deadline);
 });
@@ -145,8 +147,7 @@ function initializeClock(id, endtime){
   }
 
 updateClock(); // run function once at first to avoid delay
-var timeinterval = setInterval(updateClock,1000);
-
+  var timeinterval = setInterval(updateClock,1000);
 }
 
 </script>

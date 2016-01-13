@@ -1,17 +1,17 @@
 <div class="row" style="padding-bottom:15px">
-
   <div class="col-md-12">
     <div class="btn pull-right">
-     <button class="btn btn-warning btn-border dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"> Game <span class="caret"></span></button>
-    </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning btn-border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <% @games.each do |game| %>
+            <li><%= link_to game.title ,game_path(game, calendar_sort: game.title) %></li>
+          <% end %>
+        </ul>
+      </div>
 
-    <div class="btn-group btn pull-right" role="group" aria-label="...">
-    <%= link_to "Month", tournaments_path(sort_option: "month"), class: "btn btn-border btn-warning" %>
-    <%= link_to "Week", tournaments_path(sort_option: "week"), class: "btn btn-border btn-warning" %>
     </div>
-
   </div>
-
 </div>
 
 <div class="row">
@@ -19,8 +19,5 @@
     <div id="events_calendar">
       <%= render partial: "/events/calendar", locals: {events: @tournaments} %>
     </div>
-
 </div>
 
-<!-- RIP google cal -->
-<!-- <object data="https://calendar.google.com/calendar/embed?src=contact.esportal%40gmail.com&ctz=America/Los_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></object> -->
