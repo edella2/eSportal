@@ -1,11 +1,12 @@
 require 'will_paginate/array'
+
 class TournamentsController < ApplicationController
   def index
     @games = Game.all
 
     case params[:sort_option]
     when "search"
-      @tournaments = Tournament.search(params[:search])
+      @tournaments = Search.new(params[:search]).matches
 
     when "year"
       @tournaments = Tournament.by_year
@@ -37,7 +38,7 @@ class TournamentsController < ApplicationController
   def index_calendar
     @games = Game.all
     if params[:search]
-      @tournaments = Tournament.search(params[:search]).order(created_at: :desc)
+      @tournaments = Search.new(params[:search]).order(created_at: :desc).matches
     else
       case params[:sort_option]
       when "year"
