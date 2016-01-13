@@ -3,8 +3,8 @@
 <div class="row pad-top-sm">
   <div class="col-md-12">
     <div class="row portfolio-item thumbnail infoplus">
-      <span class="h3"><%= @user.name %></span><br><hr>
-      <p>Signed in as <%= @user.email %></p>
+      <span class="h2"><%= @user.name %></span><br><hr>
+      <p>Signed in as <a href="http://www.gmail.com"><%= @user.email %></a><br>Check <a href="https://calendar.google.com/">your calendar</a></p>
     </div>
   </div>
 </div>
@@ -16,7 +16,7 @@
       <span class="h3">Favorite Tournaments</span>
       <% if @favorite_tournaments %> <br><hr>
       <% @favorite_tournaments.each do |favorite_tournament| %>
-      <b><%= link_to favorite_tournament.title, tournament_path(favorite_tournament) %></b><br>
+      <%= link_to favorite_tournament.title, tournament_path(favorite_tournament) %><b> / </b>
       <% end %>
       <% else %>
       <p> No favorites yet </p>

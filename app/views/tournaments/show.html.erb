@@ -75,7 +75,7 @@
         <p>Stream list soon</p>
       </section>
     <% end %>
-    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow :</p>
+    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow :</p><br><br>
 
     <section>
       <% @tournament.competitors.each do |competitor| %>

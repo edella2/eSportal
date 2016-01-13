@@ -1,0 +1,62 @@
+.visible {
+  float:left;
+  font-weight:600;
+  overflow:hidden;
+  height:40px;
+  width:100%;
+  margin-bottom: 77px;
+}
+
+p {
+  display:inline;
+  float:left;
+  margin:0;
+}
+
+span.visible > ul {
+  list-style:none;
+  animation:10s linear 2s normal none infinite change;
+  animation-timing-function: ease-in;
+  -webkit-animation:10s linear 2s normal none infinite change;
+  -moz-animation:10s linear 2s normal none infinite change;
+  -o-animation:10s linear 2s normal none infinite change;
+}
+
+span.visible > ul li {
+  line-height:40px;
+  padding-right: 40px
+}
+
+@-webkit-keyframes opacity {
+  0%   {opacity:0;}
+  50%  {opacity:1;}
+  100% {opacity:0;}
+}
+@keyframes opacity {
+  0%   {opacity:0;}
+  50%  {opacity:1;}
+  100% {opacity:0;}
+}
+
+@-webkit-keyframes change {
+  0%   {margin-top:0;}
+  15%  {margin-top:0;}
+  25%  {margin-top:-40px;}
+  40%  {margin-top:-40px;}
+  50%  {margin-top:-80px;}
+  65%  {margin-top:-80px;}
+  75%  {margin-top:-40px;}
+  85%  {margin-top:-40px;}
+  100% {margin-top:0;}
+}
+@keyframes change {
+  0%   {margin-top:0;}
+  15%  {margin-top:0;}
+  25%  {margin-top:-40px;}
+  40%  {margin-top:-40px;}
+  50%  {margin-top:-80px;}
+  65%  {margin-top:-80px;}
+  75%  {margin-top:-40px;}
+  85%  {margin-top:-40px;}
+  100% {margin-top:0;}
+}
