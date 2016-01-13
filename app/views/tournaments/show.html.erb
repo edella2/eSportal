@@ -13,7 +13,7 @@
           <% if @tournament.is_live? %>
             <span class="label label-warning">LIVE!</span>
           <% elsif @tournament.is_over? %>
-            <span class="label label-warning">Game over!</span>
+            <span class="label label-warning">Game Over!</span>
           <% else %>
             <span id="clockdiv">
             <span class="days text-right"></span> <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
