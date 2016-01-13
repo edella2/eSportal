@@ -7,7 +7,7 @@ jQuery ->
       console.log(more_tournaments_url)
 
       if more_tournaments_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60
-        $('.pagination').html('<p>hello</p>')
+        $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />')
         $.getScript more_tournaments_url
         return
       return
