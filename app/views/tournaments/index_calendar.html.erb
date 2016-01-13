@@ -1,20 +1,6 @@
 <div class="row" style="padding-bottom:15px">
 
-  <div class="col-md-6">
-
-    <div class="input-group">
-      <%= form_tag(tournaments_path, :method => "get", class: "navbar-form", id: "search-form") do %>
-      <div class="input-append">
-      <%= text_field_tag :search, params[:search], class: "form-control span2 btn-border", placeholder: "Search Items" %>
-      <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">&nbsp;<i class="fa fa-search"></i>&nbsp;</button></span>
-      <% end %>
-      </div>
-    </div>
-
-
-  </div>
-
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="btn pull-right">
      <button class="btn btn-warning btn-border dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"> Game <span class="caret"></span></button>
     </div>

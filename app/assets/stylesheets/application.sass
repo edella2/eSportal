@@ -8,7 +8,7 @@
 // @import "bootstrap"
 
 $default_color  : #ffffff
-$primary_color  : #3498db
+$primary_color  : #356AA0
 $success_color  : #2ecc71
 $info_color     : #81cfe0
 $warning_color  : #B02B2C
@@ -224,7 +224,6 @@ body
     border-collapse: collapse
     margin-bottom: 10px
 
-
   th
     margin-top: 10px
     padding: 0px
@@ -235,7 +234,6 @@ body
     border-top: 0px none rgb(51, 51, 51)
     box-sizing: border-box
     text-align: left
-
 
   td
     padding: 0px
@@ -256,11 +254,12 @@ body
     border-left-width: 4px
 
   td:hover
-    @include background-opacity($warning_color, $opacity: 0.3)
+
     border-radius: 20px
 
     .dailyinfo
       @include background-opacity($warning_color, $opacity: 0.6)
+      transition: color .3s linear, background-color .3s linear
 
   .day
 
@@ -468,6 +467,10 @@ img.grayscale:hover
   filter: none
   -webkit-filter: grayscale(0%)
 
+img.grayscale:focus
+  filter: none
+  -webkit-filter: grayscale(0%)
+
 svg image
   transition: all .6s ease
 
@@ -482,9 +485,34 @@ form
 
 
 section.container-fluid
-  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(53,106,160,1)), color-stop(18.5%, rgba(53,106,160,1)), color-stop(18.5%, rgba(176,43,44,1)), color-stop(24%, rgba(176,43,44,1)), color-stop(100%, rgba(176,43,44,1)))
-  background: -webkit-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 18.5%, rgba(176,43,44,1) 18.5%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
-  background: -o-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 18.5%, rgba(176,43,44,1) 18.5%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
-  background: -ms-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 18.5%, rgba(176,43,44,1) 18.5%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
-  background: linear-gradient(to right, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 18.5%, rgba(176,43,44,1) 18.5%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(53,106,160,1)), color-stop(20%, rgba(53,106,160,1)), color-stop(20%, rgba(176,43,44,1)), color-stop(24%, rgba(176,43,44,1)), color-stop(100%, rgba(176,43,44,1)))
+  background: -webkit-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 20%, rgba(176,43,44,1) 20%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: -o-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 20%, rgba(176,43,44,1) 20%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: -ms-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 20%, rgba(176,43,44,1) 20%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
+  background: linear-gradient(to right, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 50%, rgba(176,43,44,1) 80%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#b02b2c', GradientType=1 )
+
+.no-padding-right
+  padding-right: 0px !important
+
+.pad-top
+  padding-top: 30px
+
+.pad-top-sm
+  padding-top: 15px
+
+.pad-top-xs
+  padding-top: 7px
+
+.pad-bot-lg
+  padding-bottom: 15px
+
+.pad-bot-md
+  padding-bottom: 10px
+
+.pad-bot-sm
+  padding-bottom: 5px
+
+.base-prop
+  max-height: 200px
+  width: 100%

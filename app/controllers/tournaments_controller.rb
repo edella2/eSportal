@@ -13,13 +13,12 @@ class TournamentsController < ApplicationController
       when "day"
         @tournaments = sort_tournaments_by_day
       else
-        # @tournaments_live = Tournament.all.select { |tournament| tournament.is_live? }
-        # @tournaments = Tournament.order("start_date").select { |tournament| !tournament.is_live?}
-        @tournaments = Tournament.order("start_date")
+        @tournaments = Tournament.order(:start)
       end
     end
     @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
-    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
+    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}.sort{|tournament_1, tournament_2| tournament_2.start <=> tournament_1.start}
+    @games = Game.all
   end
 
   def index_calendar
@@ -43,6 +42,7 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
+    # @followers = Tournament
   end
 
   def update
@@ -59,31 +59,31 @@ class TournamentsController < ApplicationController
   private
 
   def tournament_params
-    params.require(:tournament).permit(:name, :start_time, :end_date, :game_id, :image)
+    params.require(:tournament).permit(:name, :start, :end, :game_id, :image)
   end
 
   def sort_tournaments_by_year
     @tournaments = Tournament.all
 
-    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 365}
+    @tournaments.select {|tournament| tournament.start > DateTime.now - 365}
   end
 
   def sort_tournaments_by_month
     @tournaments = Tournament.all
 
-    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 30}
+    @tournaments.select {|tournament| tournament.start > DateTime.now - 30}
   end
 
   def sort_tournaments_by_week
     @tournaments = Tournament.all
 
-    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 7}
+    @tournaments.select {|tournament| tournament.start > DateTime.now - 7}
   end
 
   def sort_tournaments_by_day
     @tournaments = Tournament.all
 
-    @tournaments.select {|tournament| tournament.start_date > DateTime.now - 1}
+    @tournaments.select {|tournament| tournament.start > DateTime.now - 1}
   end
 end
 
