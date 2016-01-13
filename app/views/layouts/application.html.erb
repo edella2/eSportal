@@ -12,7 +12,7 @@
 <body>
 
 <nav class="navbar navbar-default">
-  <section class="container-fluid" style="height:54px" class="blue">
+  <section class="container-fluid esportal-nav">
   <div class="container" style="background-color:#B02B2C">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -32,9 +32,9 @@
         <% end %>
         <% if user_signed_in? %>
           <li><a href="/users/<%= current_user.id %>">Logged in as <%= current_user.email %></a></li>
-          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete, class: "text-right") %></li>
+          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete, class: "no-padding-right text-right") %></li>
         <% else %>
-          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), class: " no-padding-right text-right") %></li>
+          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), class: "no-padding-right text-right") %></li>
         <% end %>
       </ul>
     </div>

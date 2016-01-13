@@ -1,4 +1,5 @@
-<div class="row" id="my-tournaments">
+<% if tournament.is_live? %>
+<div id="my-tournaments">
 
   <div class="col-md-12 col-sm-12 col-xs-12 portfolio-item">
   <% if tournament.image_default %>
@@ -25,11 +26,10 @@
     </div>
   </div>
 
-</div>
 
-<div class="row">
+<% else %>
 
-  <% @tournaments_not_live.each do |tournament| %>
+
   <div class="col-md-4 col-sm-6 col-lg-3 col-xs-12 portfolio-item">
   <% if tournament.image_default %>
     <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
@@ -40,7 +40,6 @@
       <img class="grayscale" style="max-height:200px; width:100%" id="<%= tournament.id%>" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
     </a>
   <% end %>
-
     <div class="info" id="<%= tournament.id %>">
       <div id="<%= tournament.id %>">
        <span class="h4"><%= tournament.short_title%></span><br>
@@ -54,5 +53,5 @@
       </div>
     </div>
   </div>
-  <% end %>
-</div>
+
+<% end %>

@@ -12,11 +12,9 @@
 
 
   <div class="col-md-6 col-lg-6 col-sm-6">
+
     <!-- Dropdown button -->
     <div class="btn pull-right">
-
-
-
       <div class="btn-group">
         <button type="button" class="btn btn-warning btn-border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games <span class="caret"></span></button>
         <ul class="dropdown-menu">
@@ -28,6 +26,7 @@
 
     </div>
     <!-- Dropdown button end -->
+
     <div class="btn-group btn pull-right" role="group" aria-label="...">
     <%= link_to "Year", tournaments_path(sort_option: "year"), class: "btn btn-border btn-warning" %>
     <%= link_to "Month", tournaments_path(sort_option: "month"), class: "btn btn-border btn-warning" %>
@@ -35,18 +34,11 @@
     <%= link_to "Day", tournaments_path(sort_option: "day"), class: "btn btn-border btn-warning" %>
     </div>
   </div>
-</div>
-
-<% if @tournaments_live %>
-<div id="my-tournaments">
+  <div id="my-tournaments">
   <%= render @tournaments %>
 </div>
-
-<% else %>
-<div id="my-tournaments">
-  <%= render @tournaments %>
 </div>
-<% end %>
+
 
 <div id="infinite-scrolling">
   <%= will_paginate %>
