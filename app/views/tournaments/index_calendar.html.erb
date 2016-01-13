@@ -17,8 +17,8 @@
     </div>
 
     <div class="btn-group btn pull-right" role="group" aria-label="...">
-    <%= link_to "Month", tournaments_path(sort_option: "month"), class: "btn btn-border btn-warning" %>
-    <%= link_to "Week", tournaments_path(sort_option: "week"), class: "btn btn-border btn-warning" %>
+      <%= link_to "Month", tournaments_path(sort_option: "month"), class: "btn btn-border btn-warning" %>
+      <%= link_to "Week", tournaments_path(sort_option: "week"), class: "btn btn-border btn-warning" %>
     </div>
 
   </div>
@@ -27,9 +27,9 @@
 
 <div class="row">
 
-    <div id="events_calendar">
-      <%= render partial: "/events/calendar", locals: {events: @tournaments} %>
-    </div>
+  <div id="events_calendar">
+    <%= render partial: "/events/calendar", locals: {events: @tournaments} %>
+  </div>
 
 </div>
 
