@@ -35,6 +35,10 @@ class Tournament < ActiveRecord::Base
     self.start <= DateTime.now && self.end >= DateTime.now
   end
 
+  def is_over?
+    self.end <= DateTime.now
+  end
+
   # This is needed for the calendar plugin
   def start_time
     self.start
