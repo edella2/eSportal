@@ -1,15 +1,13 @@
-<!-- Timer -->
 <% t = @tournament.start.to_s  %>
 <% t.gsub!(" UTC", "") %>
 <% parsable = t.gsub!(" ", "T") %>
 <script>var deadline = "<%= parsable %>";</script>
 
 <div class="row pad-bot-sm">
-
   <div class="col-md-12 col-sm-12">
     <div class="row">
       <div class="col-md-6 col-sm-6 h1"><%= get_game_title(@tournament.game_id) %>: <span class="light-text"><%= @tournament.short_title %></span> </div>
-       <div class="col-md-6 light-text col-sm-6 h1 text-right">
+       <div class="col-md-6 light-text hidden-xs col-sm-6 h1 text-right">
         <span id="clockdiv">
           <span class="days text-right"></span> <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
         </span>
@@ -66,10 +64,8 @@
       <% @tournament.streams.each do |stream| %>
       <section class="pad-bot-sm">
         <span class="h2"><%= link_to stream.url do %><i class="fa fa-globe"></i> Stream</i><% end %>
-
           <span class="light-text pull-right"><%= @tournament.favorites.count %> followers</span>
         </span>
-
       </section>
       <% end %>
     <% else %>
@@ -87,11 +83,8 @@
         <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default", disabled: !user_signed_in? %>
       <% end %>
     </section>
-
   </div>
-
 </div>
-
 
 <script>
 $(document).ready(function(){

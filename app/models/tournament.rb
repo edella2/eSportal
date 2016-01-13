@@ -10,7 +10,7 @@ class Tournament < ActiveRecord::Base
     tournament_matches = where("LOWER(title) LIKE ?", "%#{query.downcase}%")
     tournament_matches += where("LOWER(short_title) LIKE ?", "%#{query.downcase}%")
     competitor_matches = Competitor.where("LOWER(name) LIKE ?", "%#{query.downcase}%")
-    competitor_matches_tournaments = competitor_matches.map {|c| c.tournaments}.flatten
+    competitor_matches_tournaments = competitor_matches.map {|c| c.tournaments}.flatten.uniq
 
     tournament_matches + competitor_matches_tournaments
   end

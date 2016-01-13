@@ -4,20 +4,26 @@
  *= require_self
  */
 
-// @import "bootstrap-sprockets"
+@import "bootstrap-sprockets"
 @import "bootstrap"
 
-$default_color  : #ffffff
-$primary_color  : #356AA0
-$success_color  : #2ecc71
-$info_color     : #81cfe0
-$warning_color  : #B02B2C
-$danger_color   : #c0392b
-$colDefault     : #e3e3e3
-$colHighlight   : #ffffff
-$dropDown       : false
-$coolblue       : #356AA0
-$height-footer  : 60px
+
+$dark               : gunmetal
+$esportal-color     : #C52F24
+$esportal-secondary : #803833
+
+$nprogress-color    : #f1f1f1
+$nprogress-height   : 10px
+$nprogress-zindex   : 10100
+$default_color      : #ffffff
+$primary_color      : #356AA0
+$success_color      : #2ecc71
+$info_color         : #81cfe0
+$danger_color       : #c0392b
+$colDefault         : #e3e3e3
+$colHighlight       : #ffffff
+$dropDown           : false
+$height-footer      : 60px
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic)
 
@@ -28,6 +34,7 @@ $height-footer  : 60px
 html
   min-height: 100%
   position: relative
+  color: $dark
 
 body
   margin-bottom: $height-footer
@@ -47,32 +54,34 @@ body
 a
   transition: color 0.5s ease
   text-decoration: none
-  color: $warning_color
+  color: $esportal-color
 
 a:hover
   @extend a
-  color: #356AA0
+  color: $esportal-secondary
   font-weight: italic
 
 div.pagination
   display: none
 
+
 /* Pauls Helpers */
+
 .appzicon
   font-size: 20px
 
 .blue
-  background-color: blue
+  background-color: $esportal-secondary
   height: 40px
 
-.coolblue
-  color: $coolblue
+.esportal-secondary
+  color: $esportal-secondary
 
 .pale-grey
   color: silver
 
 .pale-grey:hover
-  color: $warning_color
+  color: $esportal-color
   transition: color .3s linear, background-color .3s linear
 
 .grey
@@ -84,13 +93,13 @@ div.pagination
   height: 40px
 
 .red
-  color: $warning_color !important
+  color: $esportal-color !important
 
 .white
   color: white
 
 .esportal-nav
-  color: blue
+  color: $esportal-secondary
   height: 54px
 
 .no-padding-right
@@ -144,7 +153,7 @@ div.pagination
   overflow-y: hidden
 
 .dailyinfo
-  @include background-opacity($warning_color, $opacity: 0.35)
+  @include background-opacity($esportal-color, $opacity: 0.35)
   border-radius: 10px
   margin-bottom: 6px
 
@@ -182,13 +191,17 @@ div.pagination
   text-align: center
 
 .navbar-default
-  background-color: $warning_color
+  background-color: $esportal-color
   border-color: #F1F1F1
 
   .navbar-brand
     color: $colDefault
     &:hover, &:focus
       color: $colHighlight
+
+  .label
+    background-color: $dark
+    &:hover, &:focus
 
   .navbar-text
     color: $colDefault
@@ -246,7 +259,10 @@ div.pagination
         background-color: #F1F1F1
 
 .navbar-brand
-  padding: 0px
+  padding-top: 15px
+  font-weight: 900
+  font-size: 26px
+  letter-spacing: -1px
 
 .navbar-brand>img
   height: 100%
@@ -305,12 +321,13 @@ div.pagination
     border-radius: 20px
 
     .dailyinfo
-      @include background-opacity($warning_color, $opacity: 0.6)
+      @include background-opacity($esportal-color, $opacity: 0.6)
       transition: color .3s linear, background-color .3s linear
 
   .day
 
   .wday-0
+
   .wday-1
   .wday-2
   .wday-3
@@ -319,7 +336,7 @@ div.pagination
   .wday-6
 
   .today > div.dailyinfo
-    background-color: $warning_color
+    background-color: $esportal-color
 
   .today
 
@@ -437,17 +454,17 @@ header
       color: #fff
 
   &.btn-warning
-    background-color: $warning_color
+    background-color: $esportal-color
 
     &.btn-border
-      border-color: $warning_color
-      color: $warning_color
+      border-color: $esportal-color
+      color: $esportal-color
 
     &.btn-3d
-      box-shadow: inset 0 -2px 0 darken($warning_color, 20%)
+      box-shadow: inset 0 -2px 0 darken($esportal-color, 20%)
 
     &:hover
-      background-color: darken($warning_color, 10%)
+      background-color: darken($esportal-color, 10%)
       color: #fff
 
   &.btn-danger
@@ -497,7 +514,7 @@ header
   color: #555
   background-color: #fff
   background-image: none
-  border: 1px solid $warning_color
+  border: 1px solid $esportal-color
   border-radius: 0px
 
 
@@ -538,3 +555,26 @@ section.container-fluid
   background: -ms-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 20%, rgba(176,43,44,1) 20%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
   background: linear-gradient(to right, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 50%, rgba(176,43,44,1) 80%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#b02b2c', GradientType=1 )
+
+.btn-warning:hover
+  color: #fff
+  background-color: white
+  border-color: $esportal-secondary
+
+.btn-warning:active,
+.btn-warning.active,
+.open > .dropdown-toggle.btn-warning
+  color: #fff
+  background-color: white
+  border-color: $esportal-secondary
+
+.btn-warning:active:hover, .btn-warning.active:hover, .open > .dropdown-toggle.btn-warning:hover, .btn-warning:active:focus,
+.btn-warning.active:focus, .open > .dropdown-toggle.btn-warning:focus, .btn-warning:active.focus, .btn-warning.active.focus, .open > .dropdown-toggle.btn-warning.focus
+  color: #fff
+  background-color: $esportal-secondary
+  border-color: $esportal-secondary
+
+.btn-warning:active,
+.btn-warning.active,
+.open > .dropdown-toggle.btn-warning
+  background-image: none

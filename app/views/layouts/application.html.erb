@@ -14,8 +14,7 @@
 <body>
 
   <nav class="navbar navbar-default">
-    <section class="container-fluid esportal-nav">
-      <div class="container" style="background-color:#B02B2C">
+      <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
             <span class="icon-bar"></span>
@@ -23,7 +22,8 @@
             <span class="icon-bar"></span>
           </button>
           <a style="solid blue" class="navbar-brand" href="/tournaments">
-            <%= image_tag("esportal.png", :alt => "rss feed") %>
+            <i>ESPORTAL</i>
+           <!--  snowcone #image_tag("esportal.png", :alt => "rss feed") snowcone -->
           </a>
         </div>
         <div class="collapse navbar-collapse pull-right" id="myNavbar">
@@ -31,7 +31,8 @@
             <% if current_page_is_tournament? || current_page_is_calendar? %>
               <li><a href="/tournaments" class="text-right"><i style="padding-top:2px" class="appzicon fa fa-th"></i></a></li>
               <li><a href="/calendar" class="text-right"><i class="appzicon text-right fa fa-calendar-o"></i></a></li>
-              <% end %>
+            <% end %>
+
             <% if user_signed_in? %>
               <li><a href="/users/<%= current_user.id %>">Logged in as <%= current_user.email %></a></li>
               <li><%= link_to('Log out', destroy_user_session_path, :method => :delete, class: "no-padding-right text-right") %></li>
@@ -41,7 +42,7 @@
             <% end %>
           </ul>
         </div>
-      </div>
+
     </section>
   </nav>
 
