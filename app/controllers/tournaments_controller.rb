@@ -31,7 +31,7 @@ class TournamentsController < ApplicationController
   end
 
   def show
-    @tournament = Tournament.find(params[:id])
+    @tournament = Tournament.find(params[:id]).decorate
     # @followers = Tournament
   end
 

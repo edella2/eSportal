@@ -5,53 +5,23 @@ class Tournament < ActiveRecord::Base
   has_and_belongs_to_many :competitors
   belongs_to :game
 
+  # TODO: this should be moved out of the tournament model if we start displaying competitor pages in results
   def self.search(query)
-    long_title = where("lower(title) like ?", "%#{query.downcase}%")
-    short_title = where("lower(short_title) like ?", "%#{query.downcase}%")
-    competitors = Competitor.where("lower(name) like ?", "%#{query.downcase}%")
-    tournaments_with_competitor = []
+    tournament_matches = where("LOWER(title) LIKE ?", "%#{query.downcase}%")
+    tournament_matches += where("LOWER(short_title) LIKE ?", "%#{query.downcase}%")
+    competitor_matches = Competitor.where("LOWER(name) LIKE ?", "%#{query.downcase}%")
+    competitor_matches_tournaments = competitor_matches.map {|c| c.tournaments}.flatten
 
-    competitors.each do |competitor|
-      tournaments_with_competitor += competitor.tournaments
-    end
-    (long_title + short_title + tournaments_with_competitor).uniq
+    tournament_matches + competitor_matches_tournaments
   end
 
   def is_live?
     self.start <= DateTime.now && self.end >= DateTime.now
   end
 
-   def start_time
-        self.start ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
-    end
-
-  # # deactivated
-  # def self.update_data
-  #   tournament_data = HTTParty.get("https://api.abiosgaming.com/v1/tournaments?access_token=#{ENV['ABIOS_API_KEY']}")
-  #   update_or_create(tournament_data)
-  # end
-
-  private
-
-  # # deactivated
-  # def self.update_or_create(tournaments)
-  #   p tournaments[0]
-  #   tournaments.each do |tournament|
-  #     Tournament.find_or_initialize_by(
-  #       id: tournament["id"],
-  #       title: tournament["title"],
-  #       start: DateTime.parse(tournament["start"]),
-  #       end: DateTime.parse(tournament["end"]),
-  #       image: tournament["images"]["default"]
-
-  #       ).update_attributes!(
-  #       id: tournament["id"],
-  #       title: tournament["title"],
-  #       start: DateTime.parse(tournament["start"]),
-  #       end: DateTime.parse(tournament["end"]),
-  #       image: tournament["images"]["default"]
-  #       )
-  #   end
-  # end
+  # This is needed for the calendar plugin
+  def start_time
+    self.start
+  end
 end
 

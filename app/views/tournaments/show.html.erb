@@ -24,7 +24,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="portfolio-item thumbnail">
-      
+
       <% if @tournament.image_default %>
         <img class="hidden-xs" src="<%= @tournament.image_large %>">
         <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image_default %>">
@@ -32,24 +32,23 @@
         <img class="grayscale base-prop" src="http://goo.gl/7ezbJB">
       <% end %>
 
-      <% if current_user %>
+      <% if user_signed_in? %>
         <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
-      <% end %>
-        
-      <% unless User.find(current_user.id).favorites.where(favoritable_id: @tournament.id).exists? %>
-        <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
-        <i class="fa fa-heart"></i> Follow
-        <% end %>
-      <% else %>
-        <%= button_to favorite_path(favorite_params), method: "delete", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
-        <i class="fa fa-heart"></i> Unfollow
-        <% end %>
-      <% end %>
 
-      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
-        <i class="fa fa-calendar-plus-o"></i> Subscribe
+        <% if current_user.favorites.where(favoritable_id: @tournament.id).any? %>
+          <%= button_to favorite_path(favorite_params), method: "delete", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+          <i class="fa fa-heart"></i> Unfollow
+          <% end %>
+        <% else %>
+          <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+          <i class="fa fa-heart"></i> Follow
+          <% end %>
+        <% end %>
+
+        <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+          <i class="fa fa-calendar-plus-o"></i> Subscribe
+        <% end %>
       <% end %>
-   
     </div>
 
   </div>
@@ -66,9 +65,9 @@
       <section>
         <p>  <b>Location: <%= @tournament.city %></b> – <%= @tournament.description.gsub(/(&nbsp;)/, ' ') %></p>
       </section>
-    </div>
+  </div>
 
-    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
       <section class="pad-bot-sm">
@@ -83,24 +82,23 @@
       </section>
       <% end %>
     <% else %>
-    <section>
-      <p>Stream list soon</p>
-    </section>
+      <section>
+        <p>Stream list soon</p>
+      </section>
     <% end %>
+
     <section>
-
       <% @tournament.competitors.each do |competitor| %>
-      <% if current_user %>
-      <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
+        <% if user_signed_in? %>
+          <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
+        <% end %>
+        <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default", disabled: !user_signed_in? %>
       <% end %>
-      <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default", disabled: !current_user %>
-      <% end %>
-
     </section>
 
-    </div>
+  </div>
 
-   </div>
+</div>
 
 
 
