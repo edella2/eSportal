@@ -3,6 +3,8 @@
 <% parsable = t.gsub!(" ", "T") %>
 <script>var deadline = "<%= parsable %>";</script>
 
+<% title @tournament.short_title %>
+
 <div class="row pad-bot-sm">
   <div class="col-md-12 col-sm-12">
     <div class="row">
@@ -79,7 +81,7 @@
         <p>Stream list soon</p>
       </section>
     <% end %>
-    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow :</p>
+    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow :</p><br><br>
 
     <section>
       <% @tournament.competitors.each do |competitor| %>
