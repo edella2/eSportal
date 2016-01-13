@@ -1,65 +1,45 @@
-require 'will_paginate/array'
 class TournamentsController < ApplicationController
+
   def index
     @games = Game.all
+    cookies[:welcomed] = {:value => true, :expires => Time.now + 6.months}
 
     case params[:sort_option]
     when "search"
-      @tournaments = Tournament.search(params[:search])
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      @tournaments = Search.new(params[:search]).matches
     when "year"
       @tournaments = Tournament.by_year
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+
     when "month"
       @tournaments = Tournament.by_month
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+
     when "week"
       @tournaments = Tournament.by_week
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
     when "day"
       @tournaments = Tournament.by_day
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
     when "game"
-      @tournaments = Tournament.where(game_id: params[:game_id]).to_a
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      @tournaments = Tournament.where(game_id: params[:game_id])
+      @title = Game.find(params[:game_id]).title
     else
-      @tournaments = Tournament.all.to_a
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      @tournaments = Tournament.all
+      @title = ""
+    end
+    @title ||= params[:sort_option].capitalize
+
+    @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
+    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
+    @tournaments = (@tournaments_live + @tournaments_not_live).paginate(page: params[:page], per_page: 12)
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
   def index_calendar
     @games = Game.all
     if params[:search]
-      @tournaments = Tournament.search(params[:search]).order(created_at: :desc)
+      @tournaments = Search.new(params[:search]).order(created_at: :desc).matches
     else
       case params[:sort_option]
       when "year"

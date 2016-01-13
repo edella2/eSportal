@@ -1,5 +1,4 @@
 class SubscriptionsController < ApplicationController
-
   def create
     # subscribe to an event on google calendar
     tournament = Tournament.find(favorite_params[:favoritable_id])
