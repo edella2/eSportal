@@ -4,9 +4,7 @@ class CompetitorsController < ApplicationController
   end
 
   def show
-    p params
     @competitor = Competitor.find_by(competitor_params)
-
   end
 
   private
@@ -14,5 +12,4 @@ class CompetitorsController < ApplicationController
   def competitor_params
     params.permit(:id, :name)
   end
-
 end
