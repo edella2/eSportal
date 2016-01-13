@@ -6,6 +6,7 @@
 
       <div class="input-append">
         <%= form_tag(tournaments_path, :method => "get", class: "navbar-form", id: "search-form") do %>
+        <%= hidden_field_tag :sort_option, :search %>
         <%= text_field_tag :search, params[:search], class: "form-control btn-border", placeholder: "Search Items" %>
         <span class="input-group-btn ">
           <button class="btn btn-warning btn-border" type="submit">&nbsp;search&nbsp;</button>
@@ -28,7 +29,7 @@
         </button>
         <ul class="dropdown-menu">
           <% @games.each do |game| %>
-          <li><%= link_to game.title ,game_path(game) %></li>
+          <li><%= link_to game.title, tournaments_path(sort_option: "game", game_id: game.id) %></li>
           <% end %>
         </ul>
       </div>
@@ -45,14 +46,13 @@
   </div>
 </div>
 
-
   <div id="my-tournaments">
     <%= render @tournaments %>
   </div>
 
-  <div id="infinite-scrolling">
-    <%= will_paginate %>
-  </div>
+    <div id="infinite-scrolling">
+      <%= will_paginate %>
+    </div>
 
   <script>
     $('img').hover(function () {

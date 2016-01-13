@@ -15,6 +15,22 @@ class Tournament < ActiveRecord::Base
     tournament_matches + competitor_matches_tournaments
   end
 
+  def self.by_year
+    tournament_matches = where("start > ?", "#{(DateTime.now - 365).strftime("%F")}").to_a
+  end
+
+  def self.by_month
+    tournament_matches = where("start > ?", "#{(DateTime.now - 30).strftime("%F")}").to_a
+  end
+
+  def self.by_week
+    tournament_matches = where("start > ?", "#{(DateTime.now - 7).strftime("%F")}").to_a
+  end
+
+  def self.by_day
+    tournament_matches = where("start > ?", "#{(DateTime.now - 1).strftime("%F")}").to_a
+  end
+
   def is_live?
     self.start <= DateTime.now && self.end >= DateTime.now
   end
