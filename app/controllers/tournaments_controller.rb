@@ -20,6 +20,7 @@ class TournamentsController < ApplicationController
     end
     @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
     @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
+    @games = Game.all
   end
 
   def index_calendar
@@ -43,6 +44,7 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
+    # @followers = Tournament
   end
 
   def update

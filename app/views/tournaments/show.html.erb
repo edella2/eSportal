@@ -5,7 +5,7 @@
 <script>var deadline = "<%= parsable %>";</script>
 
 
-<div class="row" style="padding-bottom:5px">
+<div class="row pad-bot-sm">
 
   <div class="col-md-12 col-sm-12">
     <div class="row">
@@ -28,7 +28,7 @@
         <img class="hidden-xs" src="<%= @tournament.image_large %>">
         <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image_default %>">
       <% else %>
-        <img class="grayscale" style="max-height:200px; width:100%" src="http://goo.gl/7ezbJB">
+        <img class="grayscale base-prop" src="http://goo.gl/7ezbJB">
       <% end %>
 
       <% if current_user %>
@@ -53,7 +53,7 @@
 <div class="row infoplus">
   <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
-      <section style="padding-bottom:10px">
+      <section class="pad-bot-sm">
         <span class="h2"><%= @tournament.title %></span>
       </section>
       <section>
@@ -64,7 +64,7 @@
     <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
-      <section style="padding-bottom:10px">
+      <section class="pad-bot-sm">
         <span class="h2"><i class="fa coolblue fa-video-camera"></i> <%= link_to "Stream", stream.url %>
 
           <span class="mon date"><%= Date::MONTHNAMES[@tournament.start.mon] %></span>
