@@ -4,6 +4,8 @@
 <% parsable = t.gsub!(" ", "T") %>
 <script>var deadline = "<%= parsable %>";</script>
 
+<%= title @tournament.short_title %>
+
 <div class="row pad-bot-sm">
 
   <div class="col-md-12 col-sm-12">
