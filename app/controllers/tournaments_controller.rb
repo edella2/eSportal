@@ -13,13 +13,11 @@ class TournamentsController < ApplicationController
       when "day"
         @tournaments = sort_tournaments_by_day
       else
-        # @tournaments_live = Tournament.all.select { |tournament| tournament.is_live? }
-        # @tournaments = Tournament.order(:start).select { |tournament| !tournament.is_live?}
         @tournaments = Tournament.order(:start)
       end
     end
     @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
-    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
+    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}.sort{|tournament_1, tournament_2| tournament_2.start <=> tournament_1.start}
     @games = Game.all
   end
 
