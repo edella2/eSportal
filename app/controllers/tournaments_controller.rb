@@ -1,8 +1,10 @@
 class TournamentsController < ApplicationController
   def index
+    @games = Game.all
     if params[:search]
       @tournaments = Tournament.search(params[:search])
     else
+
       case params[:sort_option]
       when "year"
         @tournaments = sort_tournaments_by_year
@@ -32,9 +34,11 @@ class TournamentsController < ApplicationController
     @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}.sort{|tournament_1, tournament_2| tournament_2.start <=> tournament_1.start}
     @games = Game.all
 
+       @tournaments = tournament_sort(params[:sort_option])
   end
 
   def index_calendar
+    @games = Game.all
     if params[:search]
       @tournaments = Tournament.search(params[:search]).order("created_at DESC")
     else
@@ -70,6 +74,21 @@ class TournamentsController < ApplicationController
   end
 
   private
+
+  def tournament_sort(type)
+    case type
+    when "year"
+      @tournaments = sort_tournaments_by_year
+    when "month"
+      @tournaments = sort_tournaments_by_month
+    when "week"
+      @tournaments = sort_tournaments_by_week
+    when "day"
+      @tournaments = sort_tournaments_by_day
+    else
+      @tournaments = Tournament.order(:start)
+    end
+  end
 
   def tournament_params
     params.require(:tournament).permit(:name, :start, :end, :game_id, :image)
