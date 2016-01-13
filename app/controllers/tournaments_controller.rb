@@ -1,7 +1,9 @@
 require 'will_paginate/array'
 class TournamentsController < ApplicationController
+
   def index
     @games = Game.all
+    cookies[:welcomed] = {:value => true, :expires => Time.now + 6.months}
 
     case params[:sort_option]
     when "search"

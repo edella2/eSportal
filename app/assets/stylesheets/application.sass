@@ -203,6 +203,9 @@ div.pagination
     background-color: $dark
     &:hover, &:focus
 
+  .label-primary
+    background-color: $dark
+
   .navbar-text
     color: $colDefault
 
@@ -578,3 +581,32 @@ section.container-fluid
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning
   background-image: none
+
+.label-warning
+  background-color: $esportal-color
+
+.label-warning:hover,
+.label-warning:focus
+  background-color: $esportal-secondary
+  transition: background-color 0.5s ease
+
+@keyframes liveevents
+  0%
+    transform: background-colo($esportal-color)
+  100%
+    transform: background-colo($esportal-secondary)
+
+/* The element to apply the animation to */
+.label-warning
+  width: 100px
+  height: 100px
+  animation-name: liveevents
+  animation-duration: infinite
+
+.intro
+  font-size: 30px
+  line-height: 42px
+
+.logo-detail
+  font-weight: 900
+  letter-spacing: -1px
