@@ -13,7 +13,7 @@ class TournamentsController < ApplicationController
   def index_calendar
     @games = Game.all
     if params[:search]
-      @tournaments = Tournament.search(params[:search]).order("created_at DESC")
+      @tournaments = Tournament.search(params[:search]).order(created_at: :desc)
     else
       case params[:sort_option]
       when "year"
@@ -25,13 +25,13 @@ class TournamentsController < ApplicationController
       when "day"
         @tournaments = sort_tournaments_by_day
       else
-        @tournaments = Tournament.order('created_at DESC')
+        @tournaments = Tournament.order(created_at: :desc)
       end
     end
   end
 
   def show
-    @tournament = Tournament.find(params[:id]).decorate
+    @tournament = Tournament.find(params[:id])
     # @followers = Tournament
   end
 
