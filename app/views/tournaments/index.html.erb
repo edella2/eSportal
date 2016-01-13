@@ -16,7 +16,34 @@
   <div class="col-md-6 col-lg-6 col-sm-6">
     <div class="btn pull-right">
       <div class="btn-group">
-        <button type="button" class="btn btn-warning btn-border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games
+        <button type="button" class="btn btn-warning btn-border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <% case params[:game_id] %>
+          <% when "1" %>
+            Dota 2
+          <% when "2" %>
+            LoL
+          <% when "3" %>
+            SCII
+          <% when "4" %>
+            HoN
+          <% when "5" %>
+            CS:GO
+          <% when "6" %>
+            Hearthstone
+          <% when "7" %>
+            WoW
+          <% when "8" %>
+            SMITE
+          <% when "9" %>
+            HotS
+          <% when "10" %>
+            Smash
+          <% when "11" %>
+            CoD
+          <% else %>
+            Games
+        <% end %>
+
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
