@@ -23,9 +23,7 @@ class TournamentsController < ApplicationController
         @games = Game.all
 
         @tournaments = @tournaments_live + @tournaments_not_live
-
         @tournaments = @tournaments.paginate(page: params[:page], per_page: 12)
-
         respond_to do |format|
           format.html
           format.js
