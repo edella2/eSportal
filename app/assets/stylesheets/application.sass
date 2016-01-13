@@ -7,9 +7,14 @@
 @import "bootstrap-sprockets"
 @import "bootstrap"
 
+
 $dark               : gunmetal
-$esportal-color     : purple
-$esportal-secondary : orange
+$esportal-color     : #C52F24
+$esportal-secondary : #803833
+
+$nprogress-color    : #f1f1f1
+$nprogress-height   : 10px
+$nprogress-zindex   : 10100
 $default_color      : #ffffff
 $primary_color      : #356AA0
 $success_color      : #2ecc71
@@ -322,6 +327,7 @@ div.pagination
   .day
 
   .wday-0
+
   .wday-1
   .wday-2
   .wday-3
@@ -549,3 +555,26 @@ section.container-fluid
   background: -ms-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 20%, rgba(176,43,44,1) 20%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
   background: linear-gradient(to right, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 50%, rgba(176,43,44,1) 80%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#b02b2c', GradientType=1 )
+
+.btn-warning:hover
+  color: #fff
+  background-color: white
+  border-color: $esportal-secondary
+
+.btn-warning:active,
+.btn-warning.active,
+.open > .dropdown-toggle.btn-warning
+  color: #fff
+  background-color: white
+  border-color: $esportal-secondary
+
+.btn-warning:active:hover, .btn-warning.active:hover, .open > .dropdown-toggle.btn-warning:hover, .btn-warning:active:focus,
+.btn-warning.active:focus, .open > .dropdown-toggle.btn-warning:focus, .btn-warning:active.focus, .btn-warning.active.focus, .open > .dropdown-toggle.btn-warning.focus
+  color: #fff
+  background-color: $esportal-secondary
+  border-color: $esportal-secondary
+
+.btn-warning:active,
+.btn-warning.active,
+.open > .dropdown-toggle.btn-warning
+  background-image: none
