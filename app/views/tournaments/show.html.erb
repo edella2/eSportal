@@ -45,7 +45,7 @@
           <% end %>
         <% end %>
 
-        <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+        <%= button_to subscriptions_path(favorite_params),id: 'sub_text', action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
           <i class="fa fa-calendar-plus-o"></i> Subscribe
         <% end %>
       <% end %>
@@ -101,7 +101,6 @@
 
 <script>
 $(document).ready(function(){
-  console.log(deadline)
   getTimeRemaining(deadline);
   initializeClock('clockdiv', deadline);
 });

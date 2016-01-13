@@ -20,3 +20,15 @@
 //= require google_analytics
 //= require_tree .
 //= require bootstrap
+
+
+$(document).ready(function() {
+	subscribeText();
+});
+
+function subscribeText(){
+  $('#sub_text').click(function(e) {
+    $('#sub_text').text("Subscribed");
+  })
+};
+
