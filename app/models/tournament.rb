@@ -15,13 +15,13 @@ class Tournament < ActiveRecord::Base
     tournament_matches + competitor_matches_tournaments
   end
 
+  def is_live?
+    self.start <= DateTime.now && self.end >= DateTime.now
+  end
+
   # This is needed for the calendar plugin
   def start_time
     self.start
   end
 
 end
-
-# class Tournament
-#     self.per_page = 10
-# end

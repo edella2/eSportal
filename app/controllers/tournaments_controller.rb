@@ -19,6 +19,7 @@ class TournamentsController < ApplicationController
         # @tournaments_live = Tournament.all.select { |tournament| tournament.is_live? }
         # @tournaments = Tournament.order(:start).select { |tournament| !tournament.is_live?}
         # @tournaments = Tournament.order(:start)
+        # @tournaments = @tournaments_live + @tournaments_not_live
         @tournaments = Tournament.paginate(page: params[:page], per_page: 15).order(:start)
         @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
         @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
