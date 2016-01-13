@@ -10,8 +10,14 @@
     <div class="row">
       <div class="col-md-6 col-sm-6 h1"><%= get_game_title(@tournament.game_id) %>: <span class="light-text"><%= @tournament.short_title %></span> </div>
        <div class="col-md-6 light-text hidden-xs col-sm-6 h1 text-right">
-        <span id="clockdiv">
-          <span class="days text-right"></span> <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
+          <% if @tournament.is_live? %>
+            <span class="label label-warning">LIVE!</span>
+          <% elsif @tournament.is_over? %>
+            <span class="label label-warning">Game over!</span>
+          <% else %>
+            <span id="clockdiv">
+            <span class="days text-right"></span> <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
+          <% end %>
         </span>
       </div>
     </div>
@@ -75,7 +81,7 @@
         <p>Stream list soon</p>
       </section>
     <% end %>
-    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow :</p>
+    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow :</p><br><br>
 
     <section>
       <% @tournament.competitors.each do |competitor| %>
