@@ -1,4 +1,3 @@
-
 class User < ActiveRecord::Base
   #Can favorite models that are favorable
   has_many :favorites, inverse_of: :user
@@ -7,8 +6,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
-
-
 
 	def self.from_omniauth(access_token, signed_in_resource = nil)
 	    data = access_token.info

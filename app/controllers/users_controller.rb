@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    p params
     params.permit(:id)
   end
 end
