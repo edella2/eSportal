@@ -164,7 +164,7 @@ class SeedBuilder
           country_short_name:      country_short_name,
           country_image_default:   country_image_default,
           country_image_thumbnail: country_image_thumbnail,
-          # race doesn't seed correctly for some reason (looks for race table?!)
+          # competitor_hash["race"] contains a collection of images instead of a race name
           # race:                    competitor_hash["race"],
           )
 
