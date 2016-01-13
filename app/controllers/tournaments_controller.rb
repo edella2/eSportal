@@ -6,53 +6,31 @@ class TournamentsController < ApplicationController
     case params[:sort_option]
     when "search"
       @tournaments = Tournament.search(params[:search])
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+
     when "year"
       @tournaments = Tournament.by_year
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+
     when "month"
       @tournaments = Tournament.by_month
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+
     when "week"
       @tournaments = Tournament.by_week
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+
     when "day"
       @tournaments = Tournament.by_day
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+
     when "game"
-      @tournaments = Tournament.where(game_id: params[:game_id]).to_a
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      @tournaments = Tournament.where(game_id: params[:game_id])
+
     else
-      @tournaments = Tournament.all.to_a
-      @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      @tournaments = Tournament.all
+    end
+    @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
+    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
+    @tournaments = (@tournaments_live + @tournaments_not_live).paginate(page: params[:page], per_page: 12)
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
