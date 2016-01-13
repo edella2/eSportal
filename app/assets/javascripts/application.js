@@ -33,7 +33,6 @@ function subscribeText(){
   })
 };
 
-
 document.observe("dom:loaded", function(){
   $('pagination').hide();
 });

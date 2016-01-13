@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+
   def show
     @game = Game.find(params[:id])
     @tournaments = @game.tournaments
@@ -9,7 +10,7 @@ class GamesController < ApplicationController
       if params[:calendar_sort]
         @tournaments = @tournaments.select {|tournament| tournament.game.title == params[:calendar_sort]}
         p @tournaments
-          render 'tournaments/index_calendar'
+        render 'tournaments/index_calendar'
       else
         @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
         @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}.sort{|tournament_1, tournament_2| tournament_2.start <=> tournament_1.start}
@@ -25,13 +26,13 @@ class GamesController < ApplicationController
     else
       case params[:sort_option]
       when "year"
-        @tournaments = sort_tournaments_by_year
+        @tournaments = sort_tournaments_by_year.paginate(page: params[:page], per_page: 12, total_pages: 2)
       when "month"
-        @tournaments = sort_tournaments_by_month
+        @tournaments = sort_tournaments_by_month.paginate(page: params[:page], per_page: 12, total_pages: 2)
       when "week"
-        @tournaments = sort_tournaments_by_week
+        @tournaments = sort_tournaments_by_week.paginate(page: params[:page], per_page: 12, total_pages: 2)
       when "day"
-        @tournaments = sort_tournaments_by_day
+        @tournaments = sort_tournaments_by_day.paginate(page: params[:page], per_page: 12, total_pages: 2)
       else
         @tournaments = Tournament.order(created_at: :desc)
       end
