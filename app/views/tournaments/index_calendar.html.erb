@@ -1,23 +1,6 @@
 <% title "Calendar" %>
 
 <div class="row" style="padding-bottom:15px">
-  <div class="col-md-12">
-    <div class="btn no-padding-left">
-      <div class="btn-group">
-        <button type="button" class="btn btn-warning btn-border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <% @games.each do |game| %>
-            <li><%= link_to game.title ,game_path(game, calendar_sort: game.title) %></li>
-          <% end %>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div class="row">
-
     <div id="events_calendar">
       <%= render partial: "/events/calendar", locals: {events: @tournaments} %>
     </div>
