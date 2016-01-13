@@ -20,21 +20,3 @@
 //= require google_analytics
 //= require_tree .
 //= require bootstrap
-
-
-$(document).ready(function() {
-	subscribeText();
-  paginationBarHide();
-});
-
-function subscribeText(){
-  $('#sub_text').click(function(e) {
-    $('#sub_text').text("Subscribed");
-  })
-};
-
-document.observe("dom:loaded", function(){
-  $('pagination').hide();
-});
-
-

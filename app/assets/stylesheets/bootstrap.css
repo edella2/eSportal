@@ -3302,19 +3302,19 @@ fieldset[disabled] .btn-info.focus {
 .btn-warning:focus,
 .btn-warning.focus {
   color: #fff;
-  background-color: #ec971f;
+  background-color: white;
   border-color: #356AA0;
 }
 .btn-warning:hover {
   color: #fff;
-  background-color: #ec971f;
+  background-color: white;
   border-color: #356AA0;
 }
 .btn-warning:active,
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning {
   color: #fff;
-  background-color: #ec971f;
+  background-color: white;
   border-color: #356AA0;
 }
 .btn-warning:active:hover,
@@ -4911,7 +4911,7 @@ a.label:focus {
 }
 .label-warning[href]:hover,
 .label-warning[href]:focus {
-  background-color: #ec971f;
+  background-color: white;
 }
 .label-danger {
   background-color: #d9534f;

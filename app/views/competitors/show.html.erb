@@ -2,23 +2,34 @@
   <div class="col-md-12">
     <div class="row portfolio-item thumbnail infoplus">
       <span class="h3"><%= @competitor.name %></span>
-      <% if user_signed_in? %>
+        <% if user_signed_in? %>
         <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @competitor.id, favoritable_type: "Competitor"}} %>
-      <% end %>
-<span class="pull-right">
-      <% if current_user.favorites.where(favoritable_id: @competitor.id).any? %>
+        <% end %>
+          <span class="pull-right">
+        <% if current_user.favorites.where(favoritable_id: @competitor.id).any? %>
         <%= button_to favorite_path(favorite_params), method: "delete", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
-        <i class="fa fa-heart"></i> Unfollow
+          <i class="fa fa-heart"></i> Unfollow
         <% end %>
-      <% else %>
+        <% else %>
         <%= button_to favorites_path(favorite_params), action: "create", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
-        <i class="fa fa-heart-o"></i> Follow
+          <i class="fa fa-heart-o"></i> Follow
         <% end %>
-      <% end %>
-</span>
-    <br><hr>
+        <% end %>
+      </span>
+      <br><hr>
       <span><%= @competitor.favorites.count %> followers</span>
-
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    subscribeText();
+  });
+
+  function subscribeText(){
+    $('#sub_text').click(function(e) {
+      $('#sub_text').text("Subscribed");
+    })
+  };
+</script>
