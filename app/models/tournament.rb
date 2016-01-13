@@ -6,9 +6,9 @@ class Tournament < ActiveRecord::Base
   belongs_to :game
 
   def self.search(query)
-    long_title = where("lower(title) like ?", "%#{query}%")
-    short_title = where("lower(short_title) like ?", "%#{query}%")
-    competitors = Competitor.where("lower(title) like ?", "%#{query}%")
+    long_title = where("lower(title) like ?", "%#{query.downcase}%")
+    short_title = where("lower(short_title) like ?", "%#{query.downcase}%")
+    competitors = Competitor.where("lower(name) like ?", "%#{query.downcase}%")
     tournaments_with_competitor = []
 
     competitors.each do |competitor|
