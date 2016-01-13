@@ -4,13 +4,12 @@
 <% parsable = t.gsub!(" ", "T") %>
 <script>var deadline = "<%= parsable %>";</script>
 
-
 <div class="row pad-bot-sm">
 
   <div class="col-md-12 col-sm-12">
     <div class="row">
-      <div class="col-md-6 col-sm-6 h1"><%= @tournament.short_title %></div>
-       <div class="col-md-6 col-sm-6 h1 grey text-right">
+      <div class="col-md-6 col-sm-6 h1"><%= get_game_title(@tournament.game_id) %>: <span class="light-text"><%= @tournament.short_title %></span> </div>
+       <div class="col-md-6 light-text col-sm-6 h1 text-right">
         <span id="clockdiv">
           <span class="days text-right"></span> <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
         </span>
@@ -18,8 +17,6 @@
     </div>
   </div>
 </div>
-
-<% javascript_include_tag "timer" %>
 
 <div class="row">
   <div class="col-md-12">
@@ -50,7 +47,6 @@
         <% end %>
       <% end %>
     </div>
-
   </div>
 </div>
 
@@ -58,7 +54,7 @@
   <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
       <section class="pad-bot-sm">
-        <span class="h2"><%= @tournament.title %></span>
+        <span class="h2 light-text"><%= @tournament.title %></span>
       </section>
       <section>
         <p>  <b>Location: <%= @tournament.city %></b> – <%= @tournament.description.gsub(/(&nbsp;)/, ' ') %></p>
@@ -69,7 +65,7 @@
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
       <section class="pad-bot-sm">
-        <span class="h2"><i class="fa pale-grey fa-video-camera"></i> <%= link_to "Stream", stream.url %>
+        <span class="h2"><%= link_to stream.url do %><i class="fa fa-globe"></i> Stream</i><% end %>
 
           <span class="light-text pull-right"><%= @tournament.favorites.count %> followers</span>
         </span>
@@ -81,7 +77,7 @@
         <p>Stream list soon</p>
       </section>
     <% end %>
-    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow:</p>
+    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow :</p>
 
     <section>
       <% @tournament.competitors.each do |competitor| %>
@@ -95,8 +91,6 @@
   </div>
 
 </div>
-
-
 
 
 <script>
@@ -123,6 +117,15 @@ function getTimeRemaining(endtime){
       'seconds': seconds
     };
   }
+   else {
+      return {
+      'total': t,
+      'days': 0,
+      'hours': 0,
+      'minutes': 0,
+      'seconds': 0
+    };
+   }
 }
 
 function initializeClock(id, endtime){
@@ -149,5 +152,4 @@ function initializeClock(id, endtime){
 updateClock(); // run function once at first to avoid delay
   var timeinterval = setInterval(updateClock,1000);
 }
-
 </script>
