@@ -55,6 +55,6 @@ class Tournament < ActiveRecord::Base
   # end
 end
 
-class Tournament
-    self.per_page = 10
-end
+# class Tournament
+#     self.per_page = 10
+# end

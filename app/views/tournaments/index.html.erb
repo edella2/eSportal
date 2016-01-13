@@ -27,9 +27,16 @@
   </div>
 </div>
 
+<% if @tournaments_live %>
 <div id="my-tournaments">
   <%= render @tournaments %>
 </div>
+
+<% else %>
+<div id="my-tournaments">
+  <%= render @tournaments %>
+</div>
+<% end %>
 
 <div id="infinite-scrolling">
   <%= will_paginate %>
