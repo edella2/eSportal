@@ -10,16 +10,21 @@
     </div>
   </div>
 
+
   <div class="col-md-6 col-lg-6 col-sm-6">
     <!-- Dropdown button -->
     <div class="btn pull-right">
 
-      <select name="game_id" id="game_id">
-        <% @games.each do |game| %>
-        <option><%= link_to game_path(game) %></option>
-        <% end %>
-      </select>
 
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <% @games.each do |game| %>
+            <li><%= link_to game.title ,game_path(game) %></li>
+          <% end %>
+        </ul>
+      </div>
 
     </div>
     <!-- Dropdown button end -->
