@@ -1,5 +1,4 @@
 class SubscriptionsController < ApplicationController
-  require 'chronic'
 
   def create
     # subscribe to an event on google calendar

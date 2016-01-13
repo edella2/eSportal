@@ -63,13 +63,13 @@ class TournamentsController < ApplicationController
     else
       case params[:sort_option]
       when "year"
-        @tournaments = sort_tournaments_by_year
+        @tournaments = sort_tournaments_by_year.paginate(page: params[:page], per_page: 12)
       when "month"
-        @tournaments = sort_tournaments_by_month
+        @tournaments = sort_tournaments_by_month.paginate(page: params[:page], per_page: 12)
       when "week"
-        @tournaments = sort_tournaments_by_week
+        @tournaments = sort_tournaments_by_week.paginate(page: params[:page], per_page: 12)
       when "day"
-        @tournaments = sort_tournaments_by_day
+        @tournaments = sort_tournaments_by_day.paginate(page: params[:page], per_page: 12)
       else
         @tournaments = Tournament.order(created_at: :desc)
       end
@@ -78,7 +78,6 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
-    # @followers = Tournament
   end
 
   def update

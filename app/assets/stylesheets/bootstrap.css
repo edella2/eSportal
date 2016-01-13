@@ -1588,6 +1588,13 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
+.special {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 @media (min-width: 768px) {
   .container {
     width: 750px;
@@ -1603,6 +1610,23 @@ pre code {
     width: 1170px;
   }
 }
+
+@media (min-width: 768px) {
+  .special {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .special {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .special {
+    width: 1170px;
+  }
+}
+
 .container-fluid {
   padding-right: 15px;
   padding-left: 15px;
@@ -3278,19 +3302,19 @@ fieldset[disabled] .btn-info.focus {
 .btn-warning:focus,
 .btn-warning.focus {
   color: #fff;
-  background-color: #ec971f;
+  background-color: white;
   border-color: #356AA0;
 }
 .btn-warning:hover {
   color: #fff;
-  background-color: #ec971f;
+  background-color: white;
   border-color: #356AA0;
 }
 .btn-warning:active,
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning {
   color: #fff;
-  background-color: #ec971f;
+  background-color: white;
   border-color: #356AA0;
 }
 .btn-warning:active:hover,
@@ -4887,7 +4911,7 @@ a.label:focus {
 }
 .label-warning[href]:hover,
 .label-warning[href]:focus {
-  background-color: #ec971f;
+  background-color: white;
 }
 .label-danger {
   background-color: #d9534f;
