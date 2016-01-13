@@ -3,17 +3,17 @@
     <div class="row portfolio-item thumbnail infoplus">
       <span class="h3"><%= @competitor.name %></span>
         <% if user_signed_in? %>
-        <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @competitor.id, favoritable_type: "Competitor"}} %>
+          <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @competitor.id, favoritable_type: "Competitor"}} %>
         <% end %>
-          <span class="pull-right">
+        <span class="pull-right">
         <% if current_user.favorites.where(favoritable_id: @competitor.id).any? %>
-        <%= button_to favorite_path(favorite_params), method: "delete", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
-          <i class="fa fa-heart"></i> Unfollow
-        <% end %>
+          <%= button_to favorite_path(favorite_params), method: "delete", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+            <i class="fa fa-heart"></i> Unfollow
+          <% end %>
         <% else %>
-        <%= button_to favorites_path(favorite_params), action: "create", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
-          <i class="fa fa-heart-o"></i> Follow
-        <% end %>
+          <%= button_to favorites_path(favorite_params), action: "create", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+            <i class="fa fa-heart-o"></i> Follow
+          <% end %>
         <% end %>
       </span>
       <br><hr>
