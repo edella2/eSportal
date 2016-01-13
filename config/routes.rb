@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :competitors, only: [:index, :show]
   resources :favorites, only: [:create, :destroy]
   resources :subscriptions, only: [:create]
+  resources :games, only: [:show]
 
   get 'calendar', :to => 'tournaments#index_calendar'
 

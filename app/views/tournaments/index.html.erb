@@ -13,9 +13,14 @@
   <div class="col-md-6 col-lg-6 col-sm-6">
     <!-- Dropdown button -->
     <div class="btn pull-right">
-    <% form_tag(tournaments_path, :method => "get") do %>
-      <%= select( :tournament, :index, Game.all.collect {|game| game.title}, {include_blank: 'All'}, onchange: "tournaments_path({search: game.title})") %>
-    <% end %>
+
+      <select name="game_id" id="game_id">
+        <% @games.each do |game| %>
+        <option><%= link_to game_path(game) %></option>
+        <% end %>
+      </select>
+
+
     </div>
     <!-- Dropdown button end -->
     <div class="btn-group btn pull-right" role="group" aria-label="...">
@@ -55,6 +60,8 @@ $('img').hover(function(){
     });
 });
 </script>
+
+
 
 
 

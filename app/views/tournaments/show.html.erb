@@ -25,18 +25,20 @@
   <div class="col-md-12">
     <div class="portfolio-item thumbnail">
       <% if @tournament.image_default %>
-      <img class="hidden-xs" src="<%= @tournament.image_large %>">
-      <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image_default %>">
+        <img class="hidden-xs" src="<%= @tournament.image_large %>">
+        <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image_default %>">
       <% else %>
-      <img class="grayscale base-prop" src="http://goo.gl/7ezbJB">
+        <img class="grayscale base-prop" src="http://goo.gl/7ezbJB">
       <% end %>
 
       <% if current_user %>
-      <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
+        <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
       <% end %>
+
       <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
-      <i class="fa fa-heart"></i> Follow
+        <i class="fa fa-heart"></i> Follow
       <% end %>
+
       <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
 
     </a>
@@ -48,6 +50,9 @@
 
   </div>
 </div>
+
+<span><%= @tournament.favorites.count %> followers</span>
+
 <div class="row infoplus">
   <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
