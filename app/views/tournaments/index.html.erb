@@ -1,3 +1,12 @@
+<% if display_welcome? %>
+<div class="container hidden-sm hidden-xs" >
+  <div class="alert alert-default alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p class="h1 light-text intro text-center">Welcome to <i class="logo-detail">ESPORTAL</i>&nbsp;!<br><p class="h3 light-text text-center"> Making tracking and following of esports tournaments easier </p></p>
+  </div>
+</div>
+<% end %>
+
 <% title @title %>
 <div class="row pad-bot-lg">
   <div class="col-md-6 col-lg-6 col-xs-12 hidden-xs col-sm-6">
@@ -50,7 +59,7 @@
           <% if params[:game_id] %>
             <li><%= link_to "All Games", tournaments_path %></li>
             <hr>
-          <% end %>  
+          <% end %>
           <% @games.each do |game| %>
           <li><%= link_to game.title, tournaments_path(sort_option: "game", game_id: game.id) %></li>
           <% end %>
@@ -65,6 +74,7 @@
     </div>
   </div>
 </div>
+</div>
 
 <div class="container special">
   <div id="my-tournaments">
@@ -75,3 +85,16 @@
   </div>
 </div>
 
+<script>
+$('img').hover(function () {
+  var imageId = $(this).attr("id")
+  $("#" + imageId + "-default-index-text").stop().fadeOut(200, function () {
+    $("#" + imageId + "-hover-index-text").stop().fadeIn(400);
+  });
+}, function () {
+  var imageId = $(this).attr("id")
+  $("#" + imageId + "-hover-index-text").stop().fadeOut(400, function () {
+    $("#" + imageId + "-default-index-text").stop().fadeIn(600);
+  });
+});
+</script>
