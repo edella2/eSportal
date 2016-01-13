@@ -46,7 +46,7 @@
         <% end %>
       <% end %>
 
-      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
+      <%= button_to subscriptions_path(favorite_params),id: 'sub_text', action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
         <i class="fa fa-calendar-plus-o"></i> Subscribe
       <% end %>
    
@@ -90,10 +90,11 @@
     <section>
 
       <% @tournament.competitors.each do |competitor| %>
-      <% if current_user %>
-      <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
-      <% end %>
-      <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default", disabled: !current_user %>
+        <% if current_user %>
+          <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
+        <% end %>
+        
+        <%= button_to competitor.name, favorites_path(favorite_params), action: "create", class: "btn-competitor btn btn-xs btn-default", disabled: !current_user %>
       <% end %>
 
     </section>
@@ -107,7 +108,6 @@
 
 <script>
 $(document).ready(function(){
-  console.log(deadline)
   getTimeRemaining(deadline);
   initializeClock('clockdiv', deadline);
 });

@@ -18,3 +18,14 @@
 //= require bootstrap.min
 //= require google_analytics
 //= require_tree .
+
+
+$(document).ready(function() {
+	subscribeText();
+});
+
+function subscribeText(){
+  $('#sub_text').click(function(e) {
+    $('#sub_text').text("Subscribed");
+  })
+};
