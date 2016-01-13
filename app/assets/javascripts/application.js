@@ -24,6 +24,7 @@
 
 $(document).ready(function() {
 	subscribeText();
+  paginationBarHide();
 });
 
 function subscribeText(){
@@ -31,4 +32,10 @@ function subscribeText(){
     $('#sub_text').text("Subscribed");
   })
 };
+
+
+document.observe("dom:loaded", function(){
+  $('pagination').hide();
+});
+
 
