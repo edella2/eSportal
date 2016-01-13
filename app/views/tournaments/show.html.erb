@@ -51,8 +51,6 @@
   </div>
 </div>
 
-<span><%= @tournament.favorites.count %> followers</span>
-
 <div class="row infoplus">
   <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
     <div class="hidden-sm hidden-xs" style="border-right:1px solid black"></div>
@@ -68,14 +66,11 @@
     <% if @tournament.streams.any? %>
       <% @tournament.streams.each do |stream| %>
       <section class="pad-bot-sm">
-        <span class="h2"><i class="fa coolblue fa-video-camera"></i> <%= link_to "Stream", stream.url %>
+        <span class="h2"><i class="fa pale-grey fa-video-camera"></i> <%= link_to "Stream", stream.url %>
 
-          <span class="mon date"><%= Date::MONTHNAMES[@tournament.start.mon] %></span>
-          <span class="day date"><%= @tournament.start.day %></span>
-          <div class="bdr1"></div>
-          <div class="bdr2"></div>
-
+          <span class="light-text pull-right"><%= @tournament.favorites.count %> followers</span>
         </span>
+
       </section>
       <% end %>
     <% else %>
@@ -84,6 +79,9 @@
     </section>
     <% end %>
     <section>
+
+    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow:</p>
+
 
       <% @tournament.competitors.each do |competitor| %>
       <% if current_user %>

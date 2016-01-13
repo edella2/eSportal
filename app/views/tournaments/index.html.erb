@@ -18,7 +18,7 @@
 
 
       <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games<span class="caret"></span></button>
+        <button type="button" class="btn btn-warning btn-border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games <span class="caret"></span></button>
         <ul class="dropdown-menu">
           <% @games.each do |game| %>
             <li><%= link_to game.title ,game_path(game) %></li>
