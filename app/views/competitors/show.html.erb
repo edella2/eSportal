@@ -2,18 +2,19 @@
   <div class="col-md-12">
     <div class="row portfolio-item thumbnail infoplus">
       <span class="h3"><%= @competitor.name %></span>
-      
-      <% if current_user %>
+
+      <% if user_signed_in? %>
       	<% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @competitor.id, favoritable_type: "Competitor"}} %>
       <% end %>
 
-      <% unless User.find(current_user.id).favorites.where(favoritable_id: @competitor.id).exists? %>
-        <%= button_to favorites_path(favorite_params), action: "create", class: " btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
-        <i class="fa fa-heart"></i> Follow
+
+      <% if current_user.favorites.where(favoritable_id: @competitor.id).any? %>
+        <%= button_to favorite_path(favorite_params), method: "delete", class: " btn btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+        <i class="fa fa-heart"></i> Unfollow
         <% end %>
       <% else %>
-        <%= button_to favorite_path(favorite_params), method: "delete", class: " btn btn-default", 'aria-label' => "Left Align", disabled: !current_user do %>
-        <i class="fa fa-heart"></i> Unfollow
+        <%= button_to favorites_path(favorite_params), action: "create", class: " btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+        <i class="fa fa-heart"></i> Follow
         <% end %>
       <% end %>
       <br><hr>
