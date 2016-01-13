@@ -15,7 +15,7 @@ matchups_backup    = File.expand_path('.' + '/db/api_response_backups/matchups_b
 games       = Abios.fetch_games(api_key: api_key)
 
 # temporary limit on games (must be an array)
-games = [games[4]]
+# games = [games[4]]
 
 tournaments = games.map do |game|
   Abios.fetch_tournaments_by_game_id(game_id: game['id'], api_key: api_key)
@@ -23,23 +23,23 @@ end
 tournaments.flatten!
 
 # temporary limit on tournaments (must be an array)
-tournaments = tournaments.first(8)
+# tournaments = tournaments.first(8)
 
 matches = tournaments.map do |tourn|
   Abios.fetch_matches_by_tournament_id(tournament_id: tourn['id'], api_key: api_key)
 end
 matches.flatten!
 
-# # temporary limit on matches (must be an array)
-matches = matches.first(4)
+# temporary limit on matches (must be an array)
+# matches = matches.first(4)
 
 matchups = matches.map do |match|
   Abios.fetch_matchups_by_match_id(match_id: match['id'], api_key: api_key)
 end
 matchups.flatten!
 
-# # temporary limit on matchups (must be an array)
-matchups = matchups.first(3)
+# temporary limit on matchups (must be an array)
+# matchups = matchups.first(3)
 
 File.open(games_backup, 'w+') do |f|
   games.each {|game| f.puts game.to_json}
