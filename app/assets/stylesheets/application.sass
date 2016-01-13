@@ -5,7 +5,7 @@
  */
 
 // @import "bootstrap-sprockets"
-// @import "bootstrap"
+@import "bootstrap"
 
 $default_color  : #ffffff
 $primary_color  : #356AA0
@@ -17,6 +17,7 @@ $colDefault     : #e3e3e3
 $colHighlight   : #ffffff
 $dropDown       : false
 $coolblue       : #356AA0
+$height-footer  : 60px
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic)
 
@@ -24,9 +25,24 @@ $coolblue       : #356AA0
   background: $color
   background: rgba($color, $opacity)
 
+html
+  min-height: 100%
+  position: relative
+
 body
+  margin-bottom: $height-footer
   font-family: Open Sans, sans-serif
   background-color: #F1F1F1
+
+  #footer
+    bottom: 0
+    width: 100%
+    position: absolute
+    height: $height-footer
+    background-color: white
+
+  .footer-block
+    margin: 20px 0
 
 a
   transition: color 0.5s ease
@@ -38,6 +54,7 @@ a:hover
   color: #356AA0
   font-weight: italic
 
+/* Pauls Helpers */
 .appzicon
   font-size: 20px
 
@@ -47,6 +64,13 @@ a:hover
 
 .coolblue
   color: $coolblue
+
+.pale-grey
+  color: silver
+
+.pale-grey:hover
+  color: $warning_color
+  transition: color .3s linear, background-color .3s linear
 
 .grey
   color: grey
@@ -61,6 +85,38 @@ a:hover
 
 .white
   color: white
+
+.esportal-nav
+  color: blue
+  height: 54px
+
+.no-padding-right
+  padding-right: 0px !important
+
+.pad-top
+  padding-top: 30px
+
+.pad-top-sm
+  padding-top: 15px
+
+.pad-top-xs
+  padding-top: 7px
+
+.pad-bot-lg
+  padding-bottom: 15px
+
+.pad-bot-md
+  padding-bottom: 10px
+
+.pad-bot-sm
+  padding-bottom: 5px
+
+.base-prop
+  max-height: 200px
+  width: 100%
+
+.light-text
+  font-weight: 300
 
 .miniinfo
   -webkit-box-shadow: 0 10px 6px -6px #777
@@ -91,30 +147,6 @@ a:hover
 .titling
   font-size: 2rem
 
-$height-footer: 60px
-
-html
-  min-height: 100%
-  position: relative
-
-body
-  margin-bottom: $height-footer
-
-  #footer
-    bottom: 0
-    width: 100%
-    position: absolute
-    height: $height-footer
-    background-color: white
-
-  .footer-block
-    margin: 20px 0
-
-#img_container
-  position: relative
-  display: inline-block
-  text-align: center
-
 .buttonz
   position: absolute
   bottom: 30px
@@ -133,6 +165,12 @@ body
   position: absolute
   top: 10px
   left: 10px
+
+
+#img_container
+  position: relative
+  display: inline-block
+  text-align: center
 
 .navbar-default
   background-color: $warning_color
@@ -491,28 +529,3 @@ section.container-fluid
   background: -ms-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 20%, rgba(176,43,44,1) 20%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
   background: linear-gradient(to right, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 50%, rgba(176,43,44,1) 80%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#b02b2c', GradientType=1 )
-
-.no-padding-right
-  padding-right: 0px !important
-
-.pad-top
-  padding-top: 30px
-
-.pad-top-sm
-  padding-top: 15px
-
-.pad-top-xs
-  padding-top: 7px
-
-.pad-bot-lg
-  padding-bottom: 15px
-
-.pad-bot-md
-  padding-bottom: 10px
-
-.pad-bot-sm
-  padding-bottom: 5px
-
-.base-prop
-  max-height: 200px
-  width: 100%

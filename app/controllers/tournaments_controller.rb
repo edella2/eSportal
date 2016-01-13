@@ -1,13 +1,37 @@
+require 'will_paginate/array'
 class TournamentsController < ApplicationController
   def index
     @games = Game.all
     if params[:search]
       @tournaments = Tournament.search(params[:search])
     else
-      @tournaments = tournament_sort(params[:sort_option])
+
+      case params[:sort_option]
+      when "year"
+        @tournaments = sort_tournaments_by_year
+      when "month"
+        @tournaments = sort_tournaments_by_month
+      when "week"
+        @tournaments = sort_tournaments_by_week
+      when "day"
+        @tournaments = sort_tournaments_by_day
+      else
+        require 'will_paginate/array'
+        @tournaments = Tournament.all
+        @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
+        @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
+        @games = Game.all
+
+        @tournaments = @tournaments_live + @tournaments_not_live
+
+        @tournaments = @tournaments.paginate(page: params[:page], per_page: 12, total_pages: 2)
+
+        respond_to do |format|
+          format.html
+          format.js
+        end
+      end
     end
-    @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
-    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}.sort{|tournament_1, tournament_2| tournament_2.start <=> tournament_1.start}
   end
 
   def index_calendar

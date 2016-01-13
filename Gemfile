@@ -31,11 +31,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "simple_calendar", "~> 2.0"
 gem 'httparty'
 gem 'devise'
-
+gem 'will_paginate', '~> 3.0.5'
+gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'google-api-client', :require => 'google/api_client'
 gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-google-oauth2'
-gem 'chronic'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

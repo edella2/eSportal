@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
@@ -18,6 +19,7 @@
 //= require bootstrap.min
 //= require google_analytics
 //= require_tree .
+//= require bootstrap
 
 
 $(document).ready(function() {
@@ -29,3 +31,4 @@ function subscribeText(){
     $('#sub_text').text("Subscribed");
   })
 };
+

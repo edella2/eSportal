@@ -3279,19 +3279,19 @@ fieldset[disabled] .btn-info.focus {
 .btn-warning.focus {
   color: #fff;
   background-color: #ec971f;
-  border-color: #985f0d;
+  border-color: #356AA0;
 }
 .btn-warning:hover {
   color: #fff;
   background-color: #ec971f;
-  border-color: #d58512;
+  border-color: #356AA0;
 }
 .btn-warning:active,
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning {
   color: #fff;
   background-color: #ec971f;
-  border-color: #d58512;
+  border-color: #356AA0;
 }
 .btn-warning:active:hover,
 .btn-warning.active:hover,
@@ -3303,8 +3303,8 @@ fieldset[disabled] .btn-info.focus {
 .btn-warning.active.focus,
 .open > .dropdown-toggle.btn-warning.focus {
   color: #fff;
-  background-color: #d58512;
-  border-color: #985f0d;
+  background-color: #356AA0;
+  border-color: #356AA0;
 }
 .btn-warning:active,
 .btn-warning.active,
@@ -4176,7 +4176,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
 }
 .navbar-collapse.in {
-  overflow-y: auto;
+/*  overflow-y: auto;*/
 }
 @media (min-width: 768px) {
   .navbar-collapse {
@@ -4355,7 +4355,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 10px 15px;
   margin-top: 8px;
   margin-right: -15px;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
   margin-left: -15px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;

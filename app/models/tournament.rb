@@ -23,5 +23,5 @@ class Tournament < ActiveRecord::Base
   def start_time
     self.start
   end
-end
 
+end
