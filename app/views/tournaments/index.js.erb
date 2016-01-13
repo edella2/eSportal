@@ -1,0 +1,7 @@
+$('#my-tournaments').append('<%= j render @tournaments %>');
+<% if @tournaments.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @tournaments %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

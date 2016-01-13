@@ -15,12 +15,18 @@ class TournamentsController < ApplicationController
       else
         # @tournaments_live = Tournament.all.select { |tournament| tournament.is_live? }
         # @tournaments = Tournament.order(:start).select { |tournament| !tournament.is_live?}
-        @tournaments = Tournament.order(:start)
+        # @tournaments = Tournament.order(:start)
+        @tournaments = Tournament.paginate(page: params[:page], per_page: 15).order(:start)
+        @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
+        @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
+        @games = Game.all
+
+        respond_to do |format|
+          format.html
+          format.js
+        end
       end
     end
-    @tournaments_live = @tournaments.select {|tournament| tournament.is_live?}
-    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
-    @games = Game.all
   end
 
   def index_calendar

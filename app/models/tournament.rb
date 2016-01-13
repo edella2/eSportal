@@ -21,9 +21,9 @@ class Tournament < ActiveRecord::Base
     self.start <= DateTime.now && self.end >= DateTime.now
   end
 
-   def start_time
-        self.start ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
-    end
+  def start_time
+    self.start ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+  end
 
   # # deactivated
   # def self.update_data
@@ -55,3 +55,6 @@ class Tournament < ActiveRecord::Base
   # end
 end
 
+class Tournament
+    self.per_page = 10
+end
