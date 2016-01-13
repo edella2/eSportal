@@ -3,31 +3,29 @@
     <div class="input-group" style="padding-top:2px">
       <div class="input-append">
         <%= form_tag(tournaments_path, :method => "get", class: "navbar-form", id: "search-form") do %>
-          <%= text_field_tag :search, params[:search], class: "form-control btn-border", placeholder: "Search Items" %>
-          <span class="input-group-btn "><button class="btn btn-warning btn-border" type="submit">&nbsp;search&nbsp;</button></span>
+        <%= text_field_tag :search, params[:search], class: "form-control btn-border", placeholder: "Search Items" %>
+        <span class="input-group-btn ">
+          <button class="btn btn-warning btn-border" type="submit">&nbsp;search&nbsp;</button>
+        </span>
         <% end %>
       </div>
     </div>
   </div>
 
-
   <div class="col-md-6 col-lg-6 col-sm-6">
 
-    <!-- Dropdown button -->
     <div class="btn pull-right">
-
       <div class="btn-group">
-        <button type="button" class="btn btn-warning btn-border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games <span class="caret"></span></button>
+        <button type="button" class="btn btn-warning btn-border dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games
+          <span class="caret"></span>
+        </button>
         <ul class="dropdown-menu">
           <% @games.each do |game| %>
-            <li><%= link_to game.title ,game_path(game) %></li>
+          <li><%= link_to game.title ,game_path(game) %></li>
           <% end %>
         </ul>
       </div>
-
     </div>
-
-    <!-- Dropdown button end -->
 
     <div class="btn-group btn pull-right" role="group" aria-label="...">
       <%= link_to "Year", tournaments_path(sort_option: "year"), class: "btn btn-border btn-warning" %>
@@ -36,40 +34,29 @@
       <%= link_to "Day", tournaments_path(sort_option: "day"), class: "btn btn-border btn-warning" %>
     </div>
   </div>
+</div>
+</div>
+
+<div class="container special">
   <div id="my-tournaments">
-  <%= render @tournaments %>
-</div>
+    <%= render @tournaments %>
+  </div>
 
-</div>
-
-
-<div id="infinite-scrolling">
-  <%= will_paginate %>
-
+  <div id="infinite-scrolling">
+    <%= will_paginate %>
+  </div>
 </div>
 
 <script>
-$('img').hover(function(){
+  $('img').hover(function () {
     var imageId = $(this).attr("id")
-    $("#"+imageId+"-default-index-text").stop().fadeOut(200, function(){
-      $("#"+imageId+"-hover-index-text").stop().fadeIn(400);
+    $("#" + imageId + "-default-index-text").stop().fadeOut(200, function () {
+      $("#" + imageId + "-hover-index-text").stop().fadeIn(400);
     });
-},function(){
+  }, function () {
     var imageId = $(this).attr("id")
-    $("#"+imageId+"-hover-index-text").stop().fadeOut(400, function() {
-      $("#"+imageId+"-default-index-text").stop().fadeIn(600);
+    $("#" + imageId + "-hover-index-text").stop().fadeOut(400, function () {
+      $("#" + imageId + "-default-index-text").stop().fadeIn(600);
     });
-});
+  });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-

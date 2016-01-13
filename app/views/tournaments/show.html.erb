@@ -4,7 +4,6 @@
 <% parsable = t.gsub!(" ", "T") %>
 <script>var deadline = "<%= parsable %>";</script>
 
-
 <div class="row pad-bot-sm">
 
   <div class="col-md-12 col-sm-12">
@@ -18,8 +17,6 @@
     </div>
   </div>
 </div>
-
-<% javascript_include_tag "timer" %>
 
 <div class="row">
   <div class="col-md-12">
@@ -50,7 +47,6 @@
         <% end %>
       <% end %>
     </div>
-
   </div>
 </div>
 
@@ -81,7 +77,7 @@
         <p>Stream list soon</p>
       </section>
     <% end %>
-    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow:</p>
+    <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start.mon] %><i class="day date"> <%= @tournament.start.day %></b></i>. Competitors to follow :</p>
 
     <section>
       <% @tournament.competitors.each do |competitor| %>
@@ -95,8 +91,6 @@
   </div>
 
 </div>
-
-
 
 
 <script>
@@ -123,6 +117,15 @@ function getTimeRemaining(endtime){
       'seconds': seconds
     };
   }
+   else {
+      return {
+      'total': t,
+      'days': 0,
+      'hours': 0,
+      'minutes': 0,
+      'seconds': 0
+    };
+   }
 }
 
 function initializeClock(id, endtime){
@@ -149,5 +152,4 @@ function initializeClock(id, endtime){
 updateClock(); // run function once at first to avoid delay
   var timeinterval = setInterval(updateClock,1000);
 }
-
 </script>
