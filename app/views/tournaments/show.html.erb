@@ -24,6 +24,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="portfolio-item thumbnail">
+
       <% if @tournament.image_default %>
         <img class="hidden-xs" src="<%= @tournament.image_large %>">
         <img class="hidden-lg hidden-sm hidden-md" src="<%= @tournament.image_default %>">
@@ -33,16 +34,20 @@
 
       <% if user_signed_in? %>
         <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: @tournament.id, favoritable_type: "Tournament"}} %>
-      <% end %>
 
-      <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
-        <i class="fa fa-heart"></i> Follow
-      <% end %>
+        <% if current_user.favorites.where(favoritable_id: @tournament.id).any? %>
+          <%= button_to favorite_path(favorite_params), method: "delete", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+          <i class="fa fa-heart"></i> Unfollow
+          <% end %>
+        <% else %>
+          <%= button_to favorites_path(favorite_params), action: "create", class: "buttonz btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+          <i class="fa fa-heart"></i> Follow
+          <% end %>
+        <% end %>
 
-      <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
-
-      <%#= button_to favorites_path(favorite_params), action: "create", class: "buttony btn btn-default", 'aria-label' => "Left Align" do %>
-      <i class="fa fa-calendar-plus-o"></i> Subscribe
+        <%= button_to subscriptions_path(favorite_params), action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+          <i class="fa fa-calendar-plus-o"></i> Subscribe
+        <% end %>
       <% end %>
     </div>
 
@@ -94,6 +99,8 @@
   </div>
 
 </div>
+
+
 
 
 <script>
