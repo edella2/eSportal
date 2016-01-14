@@ -1,52 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe Competitor, type: :model do
-  let(:created_competitor) { Competitor.create(
-      name:                    "HungryBear",
-      country_name:            "United States",
-      country_short_name:      "USA",
-      country_image_default:   Faker::Internet.url,
-      country_image_thumbnail: Faker::Internet.url,
-      race:                    nil
-    )
-  }
-  let(:built_competitor)   { Competitor.build(
-      name:                    "ThirstyBear",
-      country_name:            "United States",
-      country_short_name:      "USA",
-      country_image_default:   Faker::Internet.url,
-      country_image_thumbnail: Faker::Internet.url,
-      race:                    nil
-    )
-  }
-
   it 'has a valid factory' do
-    expect(FactoryGirl.create(:competitor)).to be_valid
+    expect(FactoryGirl.create(:competitor, name: generate(:name))).to be_valid
   end
 
   describe '#save/create' do
-    it 'does not allow anonymous competitors' do
+    it 'does not allow anonymous records' do
       nameless_guy = FactoryGirl.build(:competitor, name: nil)
-      expect(nameless_guy.save).not_to be_valid
+      expect(nameless_guy).not_to be_valid
     end
 
-    it 'does not allow duplicate entries' do
-      duplicate_competitor = created_competitor.dup
-      expect(duplicate_competitor.save).not_to be_valid
+    it 'does not allow duplicate names' do
+      duplicate_competitor = FactoryGirl.build(:competitor, name: created_competitor.name)
+      expect(duplicate_competitor).not_to be_valid
     end
   end
 
   describe '#tournaments' do
-    pending 'lists all tournaments in which it participated' do
-      #
+    it 'lists all tournaments in which it participated' do
+      competitor = FactoryGirl.create(:competitor, name: generate(:name))
+      5.times {competitor.tournaments << FactoryGirl.create(:tournament)}
+      expect(competitor.tournaments.all?{|c| c.class == Competitor}).to eq true
     end
   end
 
-  describe '#favorites' do
-    pending 'lists all favorite tournaments' do
-    end
+  # describe '#favorites' do
+  #   pending 'lists all favorite tournaments' do
+  #   end
 
-    pending 'lists all favorite competitors' do
-    end
-  end
+  #   pending 'lists all favorite competitors' do
+  #   end
+  # end
 end
