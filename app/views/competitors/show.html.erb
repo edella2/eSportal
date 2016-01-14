@@ -8,7 +8,7 @@
         <span class="pull-right">
         <% if current_user.favorites.where(favoritable_id: @competitor.id).any? %>
           <%= button_to favorite_path(favorite_params), method: "delete", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
-            <i class="fa fa-heart"></i> Unfollow
+            <i class="fa fa-heart-o"></i> Unfollow
           <% end %>
         <% else %>
           <%= button_to favorites_path(favorite_params), action: "create", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
@@ -22,14 +22,3 @@
   </div>
 </div>
 
-<script>
-  $(document).ready(function() {
-    subscribeText();
-  });
-
-  function subscribeText(){
-    $('#sub_text').click(function(e) {
-      $('#sub_text').text("Subscribed");
-    })
-  };
-</script>
