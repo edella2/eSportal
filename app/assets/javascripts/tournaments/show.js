@@ -11,6 +11,8 @@ function subscribeText(){
   })
 };
 
+var deadline = deadline
+
 function getTimeRemaining(endtime){
   var t = Date.parse(endtime) - Date.parse(new Date());
   var seconds = Math.floor( (t/1000) % 60 );
@@ -39,6 +41,13 @@ function getTimeRemaining(endtime){
 }
 
 function initializeClock(id, endtime){
+  var today = Date.now();
+  var end = Date.parse(endtime)
+
+  if (end <= today) {
+    return;
+  }
+
   var clock = document.getElementById(id);
   var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
