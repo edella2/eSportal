@@ -1,12 +1,15 @@
 /*
- *
  *= require_tree .
  *= require_self
  */
 
 @import "bootstrap-sprockets"
 @import "bootstrap"
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic)
 
+@mixin background-opacity($color, $opacity: 0.3)
+  background: $color
+  background: rgba($color, $opacity)
 
 $dark               : gunmetal
 $esportal-color     : #C52F24
@@ -22,14 +25,21 @@ $info_color         : #81cfe0
 $danger_color       : #c0392b
 $colDefault         : #e3e3e3
 $colHighlight       : #ffffff
+$bg-grey            : #F1F1F1
 $dropDown           : false
 $height-footer      : 60px
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic)
+$animation-name: colors
 
-@mixin background-opacity($color, $opacity: 0.3)
-  background: $color
-  background: rgba($color, $opacity)
+$stops: 0% $esportal-secondary, 25% $esportal-color, 50% $esportal-secondary, 75% $dark, 100% $esportal-secondary
+
+@mixin keyframe-generator($map, $name)
+  @keyframes #{$name}
+    @each $key, $value in $map
+      #{$key}
+        background: $value
+
+@include keyframe-generator($stops, $animation-name)
 
 html
   min-height: 100%
@@ -39,7 +49,9 @@ html
 body
   margin-bottom: $height-footer
   font-family: Open Sans, sans-serif
-  background-color: #F1F1F1
+  width: 100%
+  height: 100vh
+  background: #F1F1F1
 
   #footer
     bottom: 0
@@ -63,9 +75,6 @@ a:hover
 
 div.pagination
   display: none
-
-
-/* Pauls Helpers */
 
 .appzicon
   font-size: 20px
@@ -327,27 +336,8 @@ div.pagination
       @include background-opacity($esportal-color, $opacity: 0.6)
       transition: color .3s linear, background-color .3s linear
 
-  .day
-
-  .wday-0
-
-  .wday-1
-  .wday-2
-  .wday-3
-  .wday-4
-  .wday-5
-  .wday-6
-
   .today > div.dailyinfo
     background-color: $esportal-color
-
-  .today
-
-  .past
-
-  .future
-
-  .start-date
 
   .prev-month
     background: #DDD
@@ -356,8 +346,6 @@ div.pagination
   .next-month
     background: #DDD
     border-radius: 20px
-
-  .current-month
 
   .has-events
 
@@ -550,7 +538,6 @@ svg image:hover
 form
   display: inline-block !important
 
-
 section.container-fluid
   background: -webkit-gradient(left top, right top, color-stop(0%, rgba(53,106,160,1)), color-stop(20%, rgba(53,106,160,1)), color-stop(20%, rgba(176,43,44,1)), color-stop(24%, rgba(176,43,44,1)), color-stop(100%, rgba(176,43,44,1)))
   background: -webkit-linear-gradient(left, rgba(53,106,160,1) 0%, rgba(53,106,160,1) 20%, rgba(176,43,44,1) 20%, rgba(176,43,44,1) 24%, rgba(176,43,44,1) 100%)
@@ -587,21 +574,15 @@ section.container-fluid
 
 .label-warning:hover,
 .label-warning:focus
-  background-color: $esportal-secondary
+  background-color: $esportal-color
   transition: background-color 0.5s ease
 
-@keyframes liveevents
-  0%
-    transform: background-colo($esportal-color)
-  100%
-    transform: background-colo($esportal-secondary)
-
-/* The element to apply the animation to */
 .label-warning
   width: 100px
   height: 100px
-  animation-name: liveevents
-  animation-duration: infinite
+  background: #ccc
+  animation: $animation-name 4s linear infinite
+  transition: background-color 0.5s ease
 
 .intro
   font-size: 30px
