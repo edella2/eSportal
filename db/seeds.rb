@@ -87,19 +87,18 @@ class SeedBuilder
     end
   end
 
-  # populate tournaments and call methods to populate streams/competitors and build game-tourn association
+  # populate tournaments and call methods to populate
+  #   streams/competitors and build game-tournament associations
   def populate_tournaments(array_of_tourn_objects)
     array_of_tourn_objects.each do |tournament_hash|
       if tournament_hash
-        # tournaments
         puts "  adding tournament to database: #{tournament_hash['title']}"
-
         tournament = Tournament.find_or_create_by(
           id:                tournament_hash["id"],
           title:             tournament_hash["title"],
           short_title:       tournament_hash["short_title"],
-          start:             tournament_hash["start"],
-          end:               tournament_hash["end"],
+          start_time:        tournament_hash["start"],
+          end_time:          tournament_hash["end"],
           city:              tournament_hash["city"],
           description:       tournament_hash["description"],
           short_description: tournament_hash["short_description"],
