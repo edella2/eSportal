@@ -61,7 +61,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
   gem 'dotenv-rails', :require => 'dotenv/rails-now'
 end
 
@@ -72,5 +71,3 @@ group :test do
   gem 'factory_girl_rails'
   gem 'faker'
 end
-
-gem 'nprogress-rails'
