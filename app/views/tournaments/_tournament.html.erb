@@ -18,7 +18,7 @@
           <%= tournament.title%></span><br>
         <span id="<%= tournament.id %>-default-index-text" class="">
           <p class="pad-top-xs">
-            <b><%= tournament.city %></b>–<%= tournament.start %></p>
+            <b><%= tournament.city %></b>–<%= tournament.start.strftime('%a %d %b %Y') %></p>
         </span>
         <span id="<%= tournament.id %>-hover-index-text" style="display:none">
           <p class="pad-top-xs"><%= raw(tournament.description[0..180] + "...") %></p>
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-<% else %>
+  <% else %>
 
   <div class="col-md-4 col-sm-6 col-lg-3 col-xs-12 portfolio-item">
     <% if tournament.image_default %>
@@ -45,13 +45,12 @@
         <span id="<%= tournament.id %>-default-index-text" class="">
           <b><%= tournament.city %></b>
           –
-          <%= tournament.start %>
+          <%= tournament.start.strftime('%a %d %b %Y') %>
         </span>
         <span id="<%= tournament.id %>-hover-index-text" style="display:none">
           <p><%= raw(tournament.description[0..40]) %></p>
         </span>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 </div>
