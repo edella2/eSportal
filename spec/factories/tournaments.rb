@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :tournament do
-    # sequence(:title)   {|n| "tournament #{n}"}
-    # sequence(:short_title) {|n| "tourney #{n}"}
+    sequence(:title)       {|n| "tournament #{n}"}
+    sequence(:short_title) {|n| "tourney #{n}"}
     # image             Faker::Avatar.image
     # thumbnail         Faker::Avatar.image
     # large             Faker::Avatar.image
