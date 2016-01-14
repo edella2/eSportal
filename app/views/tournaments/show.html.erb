@@ -8,21 +8,21 @@
 <div class="row pad-bot-sm">
   <div class="col-md-12 col-sm-12">
     <div class="row">
-      <div class="col-md-6 col-sm-6 h1"><%= get_game_title(@tournament.game_id) %>: <span class="light-text"><%= @tournament.short_title %></span> </div>
-       <div class="col-md-6 light-text hidden-xs col-sm-6 h1 text-right">
+      <div class="col-md-12 col-sm-12 h1"><%= get_game_title(@tournament.game_id) %>: <span class="light-text"><%= @tournament.short_title %>
+
           <% if @tournament.is_live? %>
-            <span class="label label-warning">LIVE!</span>
+            <span class="h3 light-text red">(LIVE)</span>
           <% elsif @tournament.is_over? %>
-            <span class="label label-warning">Game Over!</span>
+            <span class="h3 light-text red">(OVER)</span>
           <% else %>
             <span id="clockdiv">
-            <span class="days text-right"></span> <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
+            <span class="h3 light-text red">Starts in </span><span class="days red h3 light-text text-right"></span> <span class="light-text red h3 hours"></span><span class="light-text red h3 minutes"></span><span class="light-text h3 red seconds"></span>
           <% end %>
         </span>
+       </div>
       </div>
     </div>
   </div>
-</div>
 
 <div class="row">
   <div class="col-md-12">
@@ -48,7 +48,7 @@
           <% end %>
         <% end %>
 
-        <%= button_to subscriptions_path(favorite_params),id: 'sub_text', action: "create", class: "buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
+        <%= button_to subscriptions_path(favorite_params),id: 'sub_text', action: "create", class: "calendar-submit buttony btn btn-border white btn-default", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
           <i class="fa fa-calendar-plus-o"></i> Subscribe
         <% end %>
       <% end %>
@@ -94,63 +94,4 @@
   </div>
 </div>
 
-<script>
-$(document).ready(function(){
-  getTimeRemaining(deadline);
-  initializeClock('clockdiv', deadline);
-});
 
-var deadline = deadline;
-
-function getTimeRemaining(endtime){
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor( (t/1000) % 60 );
-  var minutes = Math.floor( (t/1000/60) % 60 );
-  var hours = Math.floor( (t/(1000*60*60)) % 24 );
-  var days = Math.floor( t/(1000*60*60*24) );
-
-  if (days > -1 ) {
-      return {
-      'total': t,
-      'days': days,
-      'hours': hours,
-      'minutes': minutes,
-      'seconds': seconds
-    };
-  }
-   else {
-      return {
-      'total': t,
-      'days': 0,
-      'hours': 0,
-      'minutes': 0,
-      'seconds': 0
-    };
-   }
-}
-
-function initializeClock(id, endtime){
-  var clock = document.getElementById(id);
-  var daysSpan = clock.querySelector('.days');
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
-
-
-  function updateClock(){
-    var t = getTimeRemaining(endtime);
-
-    daysSpan.innerHTML = ('0' + t.days).slice(-2) + ' days';
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2) + ':';
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2) + ':';
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2) ;
-
-    if(t.total<=0){
-      clearInterval(timeinterval);
-    }
-  }
-
-updateClock(); // run function once at first to avoid delay
-  var timeinterval = setInterval(updateClock,1000);
-}
-</script>
