@@ -4,7 +4,12 @@
   <div class="col-md-12">
     <div class="row portfolio-item thumbnail infoplus">
       <span class="h2"><%= @user.name %></span><br><hr>
-      <p>Signed in as <a target="_blank" href="http://www.gmail.com"><%= @user.email %></a><br>Check <a target="_blank" href="https://calendar.google.com/">your calendar</a></p>
+
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+      <!-- Place this tag where you want the widget to render. -->
+      <div class="g-page" data-width="273" data-href="//plus.google.com/u/0/112779008100890553111" data-layout="landscape" data-rel="publisher" ></div><br>
+
+      <p>Signed in as <a href="http://www.gmail.com"><%= @user.email %></a><br>Check <a href="https://calendar.google.com/">your calendar</a></p>
     </div>
   </div>
 </div>
