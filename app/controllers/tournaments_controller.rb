@@ -25,9 +25,8 @@ class TournamentsController < ApplicationController
 
     @title ||= params[:sort_option].capitalize
 
-    @tournaments_live     = @tournaments.select {|tournament| tournament.is_live?}
-    @tournaments_not_live = @tournaments.select {|tournament| !tournament.is_live?}
-    @tournaments          = @tournaments.paginate(page: params[:page], per_page: 12)
+    @tournaments = @tournaments.partition {|tournament| tournament.is_live?}.flatten
+    @tournaments = @tournaments.paginate(page: params[:page], per_page: 12)
 
     respond_to do |format|
       format.html
@@ -37,7 +36,6 @@ class TournamentsController < ApplicationController
 
   def index_calendar
     @games = Game.all
-
     if params[:search]
       @tournaments = Search.new(params[:search]).order(created_at: :desc).matches
     else
@@ -63,7 +61,6 @@ class TournamentsController < ApplicationController
   def update
     @tournament = Tournament.find(params[:id])
     @tournament.find_or_initialize_by(tournament_params)
-
     if @tournament.save
       redirect_to tournament_path(@tournament)
     else
