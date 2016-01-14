@@ -12,7 +12,7 @@
 
           <% if @tournament.is_live? %>
             <span class="h3 light-text red">(LIVE)</span>
-          <% elsif @tournament.is_over? %>
+          <% elsif @tournament.is_over? && @tournament.end > @tournament.start %>
             <span class="h3 light-text red">(OVER)</span>
           <% else %>
             <span id="clockdiv">
