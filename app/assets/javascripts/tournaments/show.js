@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  subscribeCalendar();
   getTimeRemaining(deadline);
   initializeClock('clockdiv', deadline);
   subscribeText();
@@ -63,5 +64,20 @@ function initializeClock(id, endtime){
 
 updateClock(); // run function once at first to avoid delay
   var timeinterval = setInterval(updateClock,1000);
+}
+
+
+function subscribeCalendar(){
+  $("button.calendar-submit").click(function(e){
+    e.preventDefault();
+    var route = $(this).parent().attr('action');
+    $.ajax({
+      url: route,
+      method: 'post',
+      dataType: 'json'
+    }).done(function(response){
+      $('#sub_text').text(response['subscribed'])
+    })
+  })
 }
 
