@@ -8,21 +8,21 @@
 <div class="row pad-bot-sm">
   <div class="col-md-12 col-sm-12">
     <div class="row">
-      <div class="col-md-6 col-sm-6 h1"><%= get_game_title(@tournament.game_id) %>: <span class="light-text"><%= @tournament.short_title %></span> </div>
-       <div class="col-md-6 light-text hidden-xs col-sm-6 h1 text-right">
+      <div class="col-md-12 col-sm-12 h1"><%= get_game_title(@tournament.game_id) %>: <span class="light-text"><%= @tournament.short_title %>
+
           <% if @tournament.is_live? %>
-            <span class="label label-warning">LIVE!</span>
+            <span class="h3 light-text red">(LIVE)</span>
           <% elsif @tournament.is_over? %>
-            <span class="label label-warning">Game Over!</span>
+            <span class="h3 light-text red">(OVER)</span>
           <% else %>
             <span id="clockdiv">
-            <span class="days text-right"></span> <span class="hours"></span><span class="minutes"></span><span class="seconds"></span>
+            <span class="h3 light-text red">Starts in </span><span class="days red h3 light-text text-right"></span> <span class="light-text red h3 hours"></span><span class="light-text red h3 minutes"></span><span class="light-text h3 red seconds">)</span>
           <% end %>
         </span>
+       </div>
       </div>
     </div>
   </div>
-</div>
 
 <div class="row">
   <div class="col-md-12">
