@@ -1,6 +1,8 @@
 $(document).ready(function(){
-  getTimeRemaining(deadline);
-  initializeClock('clockdiv', deadline);
+  if ($('#clockdiv').length) {
+    getTimeRemaining(deadline);
+    initializeClock('clockdiv', deadline);
+  }
   subscribeCalendar();
 });
 
