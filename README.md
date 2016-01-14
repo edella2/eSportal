@@ -1,5 +1,5 @@
 # E-Sportal
-A web application to make E-Sports easier to follow! See more on [Heroku live version](http://www.esportal.herokuapp.com/) !
+A web application to make E-Sports easier to follow! See more on [Heroku live version](http://esportal.herokuapp.com/) !
 
 ### Tech
  * Rails – [http://rubyonrails.org](rubyonrails.org/)
@@ -37,7 +37,7 @@ We want to get better and expand our knowledge in Rails. We want a product that 
 
 ### Hours
 9-8 weekday /
-10-9 Weekend
+10-9 weekend
 
 ## Checkin
 * Checkin 3x a day(Morning 9:00 am, Lunch meeting, After dinner)
