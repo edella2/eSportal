@@ -9,19 +9,17 @@ class TournamentsController < ApplicationController
       @tournaments = Search.new(params[:search]).matches
     when "year"
       @tournaments = Tournament.by_year
-
     when "month"
       @tournaments = Tournament.by_month
-
     when "week"
       @tournaments = Tournament.by_week
     when "day"
       @tournaments = Tournament.by_day
     when "game"
-      @tournaments = Tournament.where(game_id: params[:game_id])
+      @tournaments = Tournament.where(game_id: params[:game_id]).order('start DESC')
       @title = Game.find(params[:game_id]).title
     else
-      @tournaments = Tournament.all
+      @tournaments = Tournament.all.order('start DESC')
       @title = ""
     end
     @title ||= params[:sort_option].capitalize
