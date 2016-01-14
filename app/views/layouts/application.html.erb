@@ -6,56 +6,53 @@
   <script src="https://code.jquery.com/jquery-git2.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-      <%= csrf_meta_tags %>
-        <%= favicon_link_tag 'favicon.ico' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
 </head>
 
 <body>
 
   <nav class="navbar navbar-default">
-
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a style="solid blue" class="navbar-brand" href="/tournaments">
-            <i>ESPORTAL</i>
-           <!--  snowcone #image_tag("esportal.png", :alt => "rss feed") snowcone -->
-          </a>
-        </div>
-        <div class="collapse navbar-collapse pull-right" id="myNavbar">
-          <ul class="nav navbar-nav">
-              <li><a href="/tournaments" class="text-right"><i style="padding-top:2px" class="appzicon fa fa-th"></i></a></li>
-              <li><a href="/calendar" class="text-right"><i class="appzicon text-right fa fa-calendar-o"></i></a></li>
-            <% if user_signed_in? %>
-              <li><a href="/users/<%= current_user.id %>"><i style="padding-top:0px; font-size:22px" class="text-right appzicon fa fa-user"></i></a></li>
-              <li><%= link_to('Log out', destroy_user_session_path, :method => :delete, class: "no-padding-right text-right") %></li>
-            <% else %>
-              <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), class: "no-padding-right text-right") %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a style="solid blue" class="navbar-brand" href="/tournaments">
+          <i>ESPORTAL</i>
+        </a>
       </div>
-   </section>
+      <div class="collapse navbar-collapse pull-right" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="/tournaments" class="text-right"><i style="padding-top:2px" class="appzicon fa fa-th"></i></a></li>
+          <li><a href="/calendar" class="text-right"><i class="appzicon text-right fa fa-calendar-o"></i></a></li>
+          <% if user_signed_in? %>
+          <li><a href="/users/<%= current_user.id %>"><i style="padding-top:0px; font-size:22px" class="text-right appzicon fa fa-user"></i></a></li>
+          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete, class: "no-padding-right text-right") %></li>
+          <% else %>
+          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), class: "no-padding-right text-right") %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </nav>
 
-  <div class="container" style="padding-top:0px">
-    <%= yield %>
-  </div>
+<div class="container" style="padding-top:0px">
+  <%= yield %>
+</div>
 
-  <div id="footer">
-    <div class="container">
-      <p class="footer-block">
-        <span class="small pull-left">
-          <b class "black">eSportal</b> has been handcrafted with <i class="fa small p fa-heart red"></i> by <a href="https://github.com/maniaguana">Armani</a>, <a href="https://github.com/edella2">Eric</a>, <a href="https://github.com/peterwiebe">Peter</a>, <a href="https://github.com/gastongouron">Paul</a> and <a href="https://github.com/stevula">Steven</a>.
-        </span>
-      </p>
-    </div>
+<div id="footer" class="hidden-xs">
+  <div class="container">
+    <p class="footer-block">
+      <span class="small pull-left">
+        <b class "black">eSportal</b> has been handcrafted with <i class="fa small p fa-heart red"></i> by <a href="https://github.com/maniaguana">Armani</a>, <a href="https://github.com/edella2">Eric</a>, <a href="https://github.com/peterwiebe">Peter</a>, <a href="https://github.com/gastongouron">Paul</a> and <a href="https://github.com/stevula">Steven</a>.
+      </span>
+    </p>
   </div>
+</div>
 </body>
 </html>
