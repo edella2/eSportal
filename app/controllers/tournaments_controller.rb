@@ -1,6 +1,6 @@
 class TournamentsController < ApplicationController
   def index
-    @games = Game.all
+    @games = Game.order(:title)
     cookies[:welcomed] = {:value => true, :expires => Time.now + 6.months}
 
     if params[:sort_option] == "search"
