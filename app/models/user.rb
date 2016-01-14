@@ -11,10 +11,13 @@ class User < ActiveRecord::Base
 	    data = access_token.info
 	    user = User.where(:email => data["email"]).first
 
+      p access_token.info.image
+
       if user
         user.provider = access_token.provider
         user.uid = access_token.uid
         user.token = access_token.credentials.token
+        user.image = access_token.info.image
         user.save
 	    else
 	      user = User.create(
@@ -23,7 +26,8 @@ class User < ActiveRecord::Base
       	  password: Devise.friendly_token[0,20],
           uid:      access_token.uid,
           provider: access_token.provider,
-          token:    access_token.credentials.token
+          token:    access_token.credentials.token,
+          image:    data["image"]
 	      )
 	    end
 	    user
