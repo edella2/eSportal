@@ -1,13 +1,13 @@
 FactoryGirl.define do
   factory :tournament do
-    # sequence(:title)   {|n| "tournament #{n}"}
-    # sequence(:short_title) {|n| "tourney #{n}"}
-    # image             Faker::Avatar.image
-    # thumbnail         Faker::Avatar.image
-    # large             Faker::Avatar.image
-    # description       Faker::Hacker.say_something_smart
-    # short_description Faker::Hacker.say_something_smart
-    # city              Faker::Address.city
+    sequence(:title)       {|n| "tournament #{n}"}
+    sequence(:short_title) {|n| "tourney #{n}"}
+    image             Faker::Avatar.image
+    thumbnail         Faker::Avatar.image
+    large             Faker::Avatar.image
+    description       Faker::Hacker.say_something_smart
+    short_description Faker::Hacker.say_something_smart
+    city              Faker::Address.city
 
     trait :past do
       start_time        {DateTime.now - 5}
