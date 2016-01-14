@@ -6,19 +6,19 @@ class Tournament < ActiveRecord::Base
   belongs_to :game
 
   def self.by_year
-    tournament_matches = where("start > ?", "#{(DateTime.now - 365).strftime("%F")}").to_a
+    where("start > ?", "#{(DateTime.now - 365).strftime("%F")}").order('start DESC')
   end
 
   def self.by_month
-    tournament_matches = where("start > ?", "#{(DateTime.now - 30).strftime("%F")}").to_a
+    where("start > ?", "#{(DateTime.now - 30).strftime("%F")}").order('start DESC')
   end
 
   def self.by_week
-    tournament_matches = where("start > ?", "#{(DateTime.now - 7).strftime("%F")}").to_a
+    where("start > ?", "#{(DateTime.now - 7).strftime("%F")}").order('start DESC')
   end
 
   def self.by_day
-    tournament_matches = where("start > ?", "#{(DateTime.now - 1).strftime("%F")}").to_a
+    where("start > ?", "#{(DateTime.now - 1).strftime("%F")}").order('start DESC')
   end
 
   def is_live?
