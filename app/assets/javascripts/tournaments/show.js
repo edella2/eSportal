@@ -6,12 +6,9 @@ $(document).ready(function(){
 
 function subscribeText(){
   $('#sub_text').click(function() {
-      console.log('hello')
-      $('#sub_text').text("Subscribed");
+    $('#sub_text').text("Subscribed");
   })
 };
-
-var deadline = deadline;
 
 function getTimeRemaining(endtime){
   var t = Date.parse(endtime) - Date.parse(new Date());

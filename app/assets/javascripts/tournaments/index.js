@@ -2,7 +2,6 @@ $(document).ready(function(){
   hoverDescription();
 });
 
-
 function hoverDescription(endtime){
 	$('img').hover(function () {
 	  var imageId = $(this).attr("id")
