@@ -36,22 +36,7 @@ class TournamentsController < ApplicationController
 
   def index_calendar
     @games = Game.all
-    if params[:search]
-      @tournaments = Search.new(params[:search]).order(created_at: :desc).matches
-    else
-      case params[:sort_option]
-      when "year"
-        @tournaments = sort_tournaments_by_year.paginate(page: params[:page], per_page: 12)
-      when "month"
-        @tournaments = sort_tournaments_by_month.paginate(page: params[:page], per_page: 12)
-      when "week"
-        @tournaments = sort_tournaments_by_week.paginate(page: params[:page], per_page: 12)
-      when "day"
-        @tournaments = sort_tournaments_by_day.paginate(page: params[:page], per_page: 12)
-      else
-        @tournaments = Tournament.order(created_at: :desc)
-      end
-    end
+    @tournaments = Tournament.order(created_at: :desc)
   end
 
   def show
@@ -70,21 +55,6 @@ class TournamentsController < ApplicationController
   end
 
   private
-
-  def tournament_sort(type)
-    case type
-    when "year"
-      @tournaments = sort_tournaments_by_year
-    when "month"
-      @tournaments = sort_tournaments_by_month
-    when "week"
-      @tournaments = sort_tournaments_by_week
-    when "day"
-      @tournaments = sort_tournaments_by_day
-    else
-      @tournaments = Tournament.order(:start)
-    end
-  end
 
   def tournament_params
     params.require(:tournament).permit(:name, :start, :end, :game_id, :image, :page)
