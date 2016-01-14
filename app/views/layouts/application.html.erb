@@ -9,6 +9,41 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
+
+
+    <script>
+      function onKonamiCode(fn) {
+          var codes = (function(){
+                  var c = [38,38,40,40,37,39,37,39,66,65];
+                  onKonamiCode.requireEnterKey && c.push(13);
+                  return c;
+              })(),
+              expecting = function(){
+                  expecting.codes = expecting.codes || Array.apply({}, codes);
+                  expecting.reset = function() { expecting.codes = null; };
+                  return expecting.codes;
+              },
+              handler = function(e) {
+                  if (expecting()[0] == (e||window.event).keyCode) {
+                      expecting().shift();
+                      if (!expecting().length) {
+                          expecting.reset();
+                          fn();
+                      }
+                  } else { expecting.reset(); }
+              };
+          window.addEventListener ?
+              window.addEventListener('keydown', handler, false)
+              : document.attachEvent('onkeydown', handler);
+      }
+
+      onKonamiCode.requireEnterKey = false; // True/false
+      onKonamiCode(function(){
+        alert("KONAMI CODE!\nHere's a game made by a CSS wizard" );
+        window.location = "http://gastongouron.github.io/game/index.html"
+      });
+    </script>
+
 </head>
 
 <body>
@@ -49,7 +84,7 @@
   <div class="container">
     <p class="footer-block">
       <span class="small pull-left">
-        <b class "black">eSportal</b> has been handcrafted with <i class="fa small p fa-heart red"></i> by <a href="https://github.com/maniaguana">Armani</a>, <a href="https://github.com/edella2">Eric</a>, <a href="https://github.com/peterwiebe">Peter</a>, <a href="https://github.com/gastongouron">Paul</a> and <a href="https://github.com/stevula">Steven</a>.
+        <b class "black">eSportal</b> has been handcrafted with <i class="fa small p fa-heart red"></i> by <a href="https://github.com/manisaguana" target="_blank">Armani</a>, <a href="https://github.com/edella2" target="_blank">Eric</a>, <a href="https://github.com/peterwiebe" target="_blank">Peter</a>, <a href="https://github.com/gastongouron" target="_blank">Paul</a> and <a href="https://github.com/stevula" target="_blank">Steven</a>.
       </span>
     </p>
   </div>
