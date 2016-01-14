@@ -11,8 +11,6 @@ class User < ActiveRecord::Base
 	    data = access_token.info
 	    user = User.where(:email => data["email"]).first
 
-      p access_token.info.image
-
       if user
         user.provider = access_token.provider
         user.uid = access_token.uid

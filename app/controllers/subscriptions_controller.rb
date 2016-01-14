@@ -7,8 +7,8 @@ class SubscriptionsController < ApplicationController
       'summary' => tournament.title,
       'description' => tournament.description.gsub("&nbsp;", " ") + " \n\n " + tournament_url(tournament),
       'location' => tournament.city,
-      'start' => { 'dateTime' => DateTime.parse("#{tournament.start}") },
-      'end' => { 'dateTime' => DateTime.parse("#{tournament.end}") },
+      'start' => { 'dateTime' => DateTime.parse("#{tournament.start_time}") },
+      'end' => { 'dateTime' => DateTime.parse("#{tournament.end_time}") },
       'reminders' => {'useDefault' => true} }
 
     client = Google::APIClient.new

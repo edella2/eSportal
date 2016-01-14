@@ -1,6 +1,7 @@
 $(document).ready(function(){
   getTimeRemaining(deadline);
   initializeClock('clockdiv', deadline);
+  subscribeCalendar();
 });
 
 var deadline = deadline;
@@ -56,3 +57,4 @@ function initializeClock(id, endtime){
 updateClock(); // run function once at first to avoid delay
   var timeinterval = setInterval(updateClock,1000);
 }
+
