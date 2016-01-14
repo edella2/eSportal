@@ -2,7 +2,15 @@ $(document).ready(function(){
   subscribeCalendar();
   getTimeRemaining(deadline);
   initializeClock('clockdiv', deadline);
+  subscribeText();
 });
+
+function subscribeText(){
+  $('#sub_text').click(function() {
+      console.log('hello')
+      $('#sub_text').text("Subscribed");
+  })
+};
 
 var deadline = deadline;
 
@@ -72,3 +80,4 @@ function subscribeCalendar(){
     })
   })
 }
+
