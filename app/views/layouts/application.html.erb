@@ -9,6 +9,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
       <%= csrf_meta_tags %>
         <%= favicon_link_tag 'favicon.ico' %>
+
+    <script type="text/javascript" src="konami.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(window).konami(function(){
+          window.location.href = "http://gastongouron.github.io/game/index.html";
+        });
+      });
+    </script>      
 </head>
 
 <body>
