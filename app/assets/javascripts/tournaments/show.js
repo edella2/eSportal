@@ -49,6 +49,9 @@ function initializeClock(id, endtime){
   }
 
   var clock = document.getElementById(id);
+  if (clock === null) {
+    return;
+  }
   var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
   var minutesSpan = clock.querySelector('.minutes');
