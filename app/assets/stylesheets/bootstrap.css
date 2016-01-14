@@ -4878,13 +4878,6 @@ a.label:focus {
 .label-info[href]:focus {
   background-color: #31b0d5;
 }
-.label-warning {
-  background-color: #f0ad4e;
-}
-.label-warning[href]:hover,
-.label-warning[href]:focus {
-  background-color: white;
-}
 .label-danger {
   background-color: #d9534f;
 }
