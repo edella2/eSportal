@@ -1,7 +1,7 @@
 <% t = @tournament.start_time.to_s  %>
 <% t.gsub!(" UTC", "") %>
 <% parsable = t.gsub!(" ", "T") %>
-<script>var deadline = "<%= parsable %>";</script>
+<script>var deadline = "<%= parsable %>"</script>
 
 <% title @tournament.short_title %>
 
