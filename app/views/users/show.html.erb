@@ -1,13 +1,20 @@
 <% title @user.name %>
 
 <div class="row pad-top-sm">
-  <div class="col-md-12">
+
+  <div class="col-md-2">
     <div class="row portfolio-item thumbnail infoplus">
+      <img style="" src=<%= @user.image %><br>
+    </div>
+  </div>
+
+  <div class="col-md-10">
+    <div class="row portfolio-item infoplus" style="height:165px">
       <span class="h2"><%= @user.name %></span><br><hr>
-      <img style="width: 10%;" src=<%= @user.image %><br>
       <p>Signed in as <a target="_blank" href="http://www.gmail.com"><%= @user.email %></a><br>Check <a target="_blank" href="https://calendar.google.com/">your calendar</a></p>
     </div>
   </div>
+
 </div>
 
 

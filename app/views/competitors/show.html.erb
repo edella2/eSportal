@@ -17,7 +17,13 @@
         <% end %>
       </span>
       <br><hr>
-      <span><%= @competitor.favorites.count %> followers</span>
+      <span class="h3 light-text">
+        <% if @competitor.favorites.count > 1 %>
+        <%= @competitor.favorites.count %> followers
+        <% else %>
+        <%= @competitor.favorites.count %> follower
+        <% end %>
+      </span>
     </div>
   </div>
 </div>
