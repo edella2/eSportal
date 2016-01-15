@@ -12,12 +12,18 @@
           <% end %>
         <% else %>
           <%= button_to favorites_path(favorite_params), action: "create", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
-            <i class="fa fa-heart-o"></i> Follow
+            <i class="fa fa-heart"></i> Follow
           <% end %>
         <% end %>
       </span>
       <br><hr>
-      <span><%= @competitor.favorites.count %> followers</span>
+      <span class="h3 light-text">
+        <% if @competitor.favorites.count > 1 %>
+        <%= @competitor.favorites.count %> followers
+        <% else %>
+        <%= @competitor.favorites.count %> follower
+        <% end %>
+      </span>
     </div>
   </div>
 </div>
