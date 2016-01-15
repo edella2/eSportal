@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112194530) do
+ActiveRecord::Schema.define(version: 20160114193744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20160112194530) do
 
   create_table "tournaments", force: :cascade do |t|
     t.string   "title"
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string   "image_thumbnail"
     t.string   "image_large"
     t.string   "description"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20160112194530) do
     t.string   "uid"
     t.string   "name"
     t.string   "token"
+    t.string   "image"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

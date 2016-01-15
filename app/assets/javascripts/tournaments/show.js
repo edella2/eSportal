@@ -1,17 +1,12 @@
 $(document).ready(function(){
+  if ($('#clockdiv').length) {
+    getTimeRemaining(deadline);
+    initializeClock('clockdiv', deadline);
+  }
   subscribeCalendar();
-  getTimeRemaining(deadline);
-  initializeClock('clockdiv', deadline);
-  subscribeText();
 });
 
-function subscribeText(){
-  $('#sub_text').click(function() {
-    $('#sub_text').text("Subscribed");
-  })
-};
-
-var deadline = deadline
+var deadline = deadline;
 
 function getTimeRemaining(endtime){
   var t = Date.parse(endtime) - Date.parse(new Date());
@@ -41,17 +36,7 @@ function getTimeRemaining(endtime){
 }
 
 function initializeClock(id, endtime){
-  var today = Date.now();
-  var end = Date.parse(endtime)
-
-  if (end <= today) {
-    return;
-  }
-
   var clock = document.getElementById(id);
-  if (clock === null) {
-    return;
-  }
   var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
   var minutesSpan = clock.querySelector('.minutes');
@@ -75,7 +60,6 @@ updateClock(); // run function once at first to avoid delay
   var timeinterval = setInterval(updateClock,1000);
 }
 
-
 function subscribeCalendar(){
   $("button.calendar-submit").click(function(e){
     e.preventDefault();
@@ -89,4 +73,5 @@ function subscribeCalendar(){
     })
   })
 }
+
 

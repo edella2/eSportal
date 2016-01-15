@@ -6,12 +6,12 @@ class TournamentsController < ApplicationController
     if params[:sort_option] == "search"
       @tournaments = Search.new(params[:search]).matches
     elsif params[:sort_option] == "game"
-      @tournaments = Tournament.where(game_id: params[:game_id]).order(start: :desc)
+      @tournaments = Tournament.where(game_id: params[:game_id]).order(start_time: :desc)
       @title = Game.find(params[:game_id]).title
     elsif params[:sort_option].in? ["year", "month", "week", "day"]
       @tournaments = Tournament.send("by_" + params[:sort_option])
     else
-      @tournaments = Tournament.all.order(start: :desc)
+      @tournaments = Tournament.order(start_time: :desc)
       @title = ""
     end
 
@@ -38,6 +38,6 @@ class TournamentsController < ApplicationController
   private
 
   def tournament_params
-    params.require(:tournament).permit(:name, :start, :end, :game_id, :image, :page)
+    params.require(:tournament).permit(:name, :start_time, :end_time, :game_id, :image, :page)
   end
 end

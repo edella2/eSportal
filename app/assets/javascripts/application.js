@@ -20,3 +20,35 @@
 //= require google_analytics
 //= require_tree .
 //= require bootstrap
+
+
+function onKonamiCode(fn) {
+  var codes = (function(){
+          var c = [38,38,40,40,37,39,37,39,66,65];
+          onKonamiCode.requireEnterKey && c.push(13);
+          return c;
+      })(),
+      expecting = function(){
+          expecting.codes = expecting.codes || Array.apply({}, codes);
+          expecting.reset = function() { expecting.codes = null; };
+          return expecting.codes;
+      },
+      handler = function(e) {
+          if (expecting()[0] == (e||window.event).keyCode) {
+              expecting().shift();
+              if (!expecting().length) {
+                  expecting.reset();
+                  fn();
+              }
+          } else { expecting.reset(); }
+      };
+  window.addEventListener ?
+      window.addEventListener('keydown', handler, false)
+      : document.attachEvent('onkeydown', handler);
+}
+
+onKonamiCode.requireEnterKey = false; // True/false
+onKonamiCode(function(){
+alert("KONAMI CODE!\nHere's a game made by a CSS wizard" );
+window.location = "http://gastongouron.github.io/game/index.html"
+});

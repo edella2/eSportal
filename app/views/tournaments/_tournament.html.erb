@@ -1,4 +1,4 @@
-
+<div id="my-tournaments">
   <% if tournament.is_live? %>
   <div class="col-md-12 col-sm-12 col-xs-12 portfolio-item">
     <% if tournament.image_default %>
@@ -11,7 +11,6 @@
         <img class="grayscale" style="max-height:200px; width:100%" id="<%= tournament.id%>" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
       </a>
     <% end %>
-
     <div class="info" id="<%= tournament.id %>">
       <div id="<%= tournament.id %>">
         <span class="h4">
@@ -19,7 +18,7 @@
           <%= tournament.title%></span><br>
         <span id="<%= tournament.id %>-default-index-text" class="">
           <p class="pad-top-xs">
-            <b><%= tournament.city %></b>–<%= tournament.start.strftime('%a %d %b %Y') %></p>
+            <b><%= tournament.city %></b>–<%= tournament.start_time.strftime('%a %d %b %Y') %></p>
         </span>
         <span id="<%= tournament.id %>-hover-index-text" style="display:none">
           <p class="pad-top-xs"><%= raw(tournament.description[0..180] + "...") %></p>
@@ -29,28 +28,30 @@
   </div>
 
   <% else %>
-  <div class="col-md-4 col-sm-6 col-lg-3 col-xs-12 portfolio-item">
-    <% if tournament.image_default %>
-      <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
-        <img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image_default %>">
-      </a>
-    <% else %>
-      <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
-        <img class="grayscale" style="max-height:200px; width:100%" id="<%= tournament.id%>" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
-      </a>
-    <% end %>
-    <div class="info" id="<%= tournament.id %>">
-      <div id="<%= tournament.id %>">
-        <span class="h4"><%= tournament.short_title%></span><br>
-        <span id="<%= tournament.id %>-default-index-text" class="">
-          <b><%= tournament.city %></b>
-          –
-          <%= tournament.start.strftime('%a %d %b %Y') %>
-        </span>
-        <span id="<%= tournament.id %>-hover-index-text" style="display:none">
-          <p><%= raw(tournament.description[0..40]) %></p>
-        </span>
+
+    <div class="col-md-4 col-sm-6 col-lg-3 col-xs-12 portfolio-item">
+      <% if tournament.image_default %>
+        <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
+          <img class="grayscale" id="<%= tournament.id%>" src="<%= tournament.image_default %>">
+        </a>
+      <% else %>
+        <a href="/tournaments/<%=tournament.id%>" class="thumbnail">
+          <img class="grayscale" style="max-height:200px; width:100%" id="<%= tournament.id%>" src="http://www.download-free-wallpaper.com/img50/svwyzdhmpisjaqkbykpz.png">
+        </a>
+      <% end %>
+      <div class="info" id="<%= tournament.id %>">
+        <div id="<%= tournament.id %>">
+          <span class="h4"><%= tournament.short_title%></span><br>
+          <span id="<%= tournament.id %>-default-index-text" class="">
+            <b><%= tournament.city %></b>
+            –
+            <%= tournament.start_time.strftime('%a %d %b %Y') %>
+          </span>
+          <span id="<%= tournament.id %>-hover-index-text" style="display:none">
+            <p><%= raw(tournament.description[0..40]) %></p>
+          </span>
+        </div>
       </div>
     </div>
-  </div>
   <% end %>
+</div>
