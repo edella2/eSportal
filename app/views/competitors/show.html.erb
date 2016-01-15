@@ -12,7 +12,7 @@
           <% end %>
         <% else %>
           <%= button_to favorites_path(favorite_params), action: "create", class: " btn btn-warning btn-border", 'aria-label' => "Left Align", disabled: !user_signed_in? do %>
-            <i class="fa fa-heart-o"></i> Follow
+            <i class="fa fa-heart"></i> Follow
           <% end %>
         <% end %>
       </span>
