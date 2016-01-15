@@ -83,7 +83,7 @@
     <p class="mon"><b>Starts on <%= Date::MONTHNAMES[@tournament.start_time.mon] %><i class="day date"> <%= @tournament.start_time.day %></b></i>. Competitors to follow :</p><br><br>
 
     <section>
-      <% @tournament.competitors.each do |competitor| %>
+      <% @tournament.competitors.order(:name).each do |competitor| %>
         <% if user_signed_in? %>
           <% favorite_params = {favorite: {user_id: current_user.id, favoritable_id: competitor.id, favoritable_type: "Competitor"}} %>
         <% end %>

@@ -3,5 +3,5 @@ class Competitor < ActiveRecord::Base
   has_many :favorites, as: :favoritable
   has_and_belongs_to_many :tournaments
 
-  validates :name, presence: true, uniqueness: true
+  # validates :name, presence: true, uniqueness: true
 end

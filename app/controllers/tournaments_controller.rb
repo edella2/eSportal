@@ -11,7 +11,7 @@ class TournamentsController < ApplicationController
     elsif params[:sort_option].in? ["year", "month", "week", "day"]
       @tournaments = Tournament.send("by_" + params[:sort_option])
     else
-      @tournaments = Tournament.all.order(start_time: :desc)
+      @tournaments = Tournament.order(start_time: :desc)
       @title = ""
     end
 
