@@ -30,10 +30,10 @@
           <li><a href="/tournaments" class="text-right"><i style="padding-top:2px" class="appzicon fa fa-th"></i></a></li>
           <li><a href="/calendar" class="text-right"><i class="appzicon text-right fa fa-calendar-o"></i></a></li>
           <% if user_signed_in? %>
-          <li><a href="/users/<%= current_user.id %>"><i style="padding-top:0px; font-size:22px" class="text-right appzicon fa fa-user"></i></a></li>
-          <li><%= link_to('Log out', destroy_user_session_path, :method => :delete, class: "no-padding-right text-right") %></li>
+          <li class="text-right"><a href="/users/<%= current_user.id %>"><i style="padding-top:0px; font-size:22px" class="text-right appzicon fa fa-user"></i></a></li>
+          <li class="text-right"><%= link_to('Log out', destroy_user_session_path, :method => :delete, class: "no-padding-right text-right") %></li>
           <% else %>
-          <li><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), class: "no-padding-right text-right") %>
+          <li class="text-right"><%= link_to('log in', user_omniauth_authorize_path(:google_oauth2), class: "no-padding-right text-right") %>
           </li>
           <% end %>
         </ul>
